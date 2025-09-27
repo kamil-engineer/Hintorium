@@ -1,3 +1,22 @@
+:root {
+  --tooltip-padding-y: 0.375rem; /* 6px */
+  --tooltip-padding-x: 0.75rem; /* 12px */
+  --tooltip-font-size: 0.8125rem; /* 13px */
+  --tooltip-font-weight: 500;
+  --tooltip-border-radius: 0.375rem; /* 6px */
+  --tooltip-offset: 0.375rem; /* 6px */
+  --tooltip-transition: 0.25s ease;
+  --tooltip-light-bg: #ffffff;
+  --tooltip-light-color: #111111;
+  --tooltip-light-border: #ddd;
+  --tooltip-dark-bg: #1e1e1e;
+  --tooltip-dark-color: #f0f0f0;
+  --tooltip-dark-border: #333;
+  --tooltip-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
+  --tooltip-z-index: 1000;
+  --tooltip-arrow-size: 0.5rem; /* 8px */
+}
+
 #app {
   min-height: 100vh;
   display: flex;
@@ -5,46 +24,74 @@
   justify-content: center;
 }
 
+/* ---------- Tooltip Base ---------- */
 .hintorium-tooltip {
   position: absolute;
-  background: black;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
+  padding: var(--tooltip-padding-y) var(--tooltip-padding-x);
+  border-radius: var(--tooltip-border-radius);
+  font-size: var(--tooltip-font-size);
+  font-weight: var(--tooltip-font-weight);
   pointer-events: none;
   opacity: 0;
-  transform: translateY(-5px);
-  transition: opacity 0.2s, transform 0.2s;
-  z-index: 1000;
+  transform: translateY(-0.375rem);
+  transition: opacity var(--tooltip-transition),
+    transform var(--tooltip-transition);
+  white-space: nowrap;
+  z-index: var(--tooltip-z-index);
+  box-shadow: var(--tooltip-shadow);
+  font-family: system-ui, sans-serif;
 }
 
-.hintorium-tooltip {
-  position: absolute;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 12px;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(-5px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  z-index: 1000;
-}
-
-/* Default theme (light) */
+/* ---------- Themes ---------- */
 .hintorium-tooltip.light {
-  background: #fff;
-  color: #000;
-  border: 1px solid #ccc;
+  background-color: var(--tooltip-light-bg);
+  color: var(--tooltip-light-color);
+  border: 1px solid var(--tooltip-light-border);
 }
 
-/* Dark theme */
 .hintorium-tooltip.dark {
-  background: #000;
-  color: #fff;
+  background-color: var(--tooltip-dark-bg);
+  color: var(--tooltip-dark-color);
+  border: 1px solid var(--tooltip-dark-border);
 }
 
+/* ---------- Fade-in / Fade-out ---------- */
 .hintorium-tooltip.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ---------- Arrow ---------- */
+.hintorium-tooltip::after {
+  content: "";
+  position: absolute;
+  width: var(--tooltip-arrow-size);
+  height: var(--tooltip-arrow-size);
+  background-color: inherit;
+  z-index: 0;
+}
+
+/* ---------- Arrow Positions ---------- */
+.hintorium-tooltip[data-tooltip-pos="top"]::after {
+  bottom: calc(-1 * var(--tooltip-arrow-size) / 2);
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.hintorium-tooltip[data-tooltip-pos="bottom"]::after {
+  top: calc(-1 * var(--tooltip-arrow-size) / 2);
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.hintorium-tooltip[data-tooltip-pos="left"]::after {
+  right: calc(-1 * var(--tooltip-arrow-size) / 2);
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.hintorium-tooltip[data-tooltip-pos="right"]::after {
+  left: calc(-1 * var(--tooltip-arrow-size) / 2);
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
 }

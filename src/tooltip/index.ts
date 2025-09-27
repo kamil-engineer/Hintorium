@@ -26,6 +26,8 @@ export function initTooltip(options: TooltipOptions = {}) {
       const positionAttr = el.getAttribute(
         "data-tooltip-pos"
       ) as TooltipOptions["position"];
+
+      tooltipEl.setAttribute("data-tooltip-pos", positionAttr ?? "top");
       positionTooltip(tooltipEl, el, { ...options, position: positionAttr });
 
       requestAnimationFrame(() => tooltipEl.classList.add("show"));
