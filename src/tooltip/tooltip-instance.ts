@@ -1,3 +1,4 @@
+import { AccessibilityManager } from "./accessibility";
 import { TOOLTIP_CONSTANTS } from "./constants";
 import { SmartPositioning } from "./positioning";
 import type { TooltipInstance, TooltipOptions, TooltipPosition } from "./types";
@@ -26,6 +27,7 @@ export class TooltipInstanceImpl implements TooltipInstance {
 
     this.initializeContent(content);
     this.setupEventListeners();
+    this.setupAccessibility();
   }
 
   private generateId(): string {
@@ -51,6 +53,10 @@ export class TooltipInstanceImpl implements TooltipInstance {
         case "hover":
           this.target.addEventListener("mouseenter", () => this.show());
           this.target.addEventListener("mouseleave", () => this.hide());
+          break;
+        case "focus":
+          this.target.addEventListener("focus", () => this.show());
+          this.target.addEventListener("blur", () => this.hide());
           break;
       }
     });
@@ -92,6 +98,14 @@ export class TooltipInstanceImpl implements TooltipInstance {
     this.element.innerHTML = content;
   }
 
+  private setupAccessibility(): void {
+    AccessibilityManager.setupTooltipAccessibility(
+      this.element,
+      this.target,
+      this.options
+    );
+  }
+
   private normalizeOptions(options: TooltipOptions): Required<TooltipOptions> {
     return {
       position: TooltipValidator.validatePosition(
@@ -113,6 +127,11 @@ export class TooltipInstanceImpl implements TooltipInstance {
       ],
       boundary: options.boundary || "viewport",
       offset: options.offset || 5,
+      a11y: {
+        keyboard: options.a11y?.keyboard ?? true,
+        announceOnShow: options.a11y?.announceOnShow ?? false,
+        focusable: options.a11y?.focusable ?? true,
+      },
     };
   }
 }

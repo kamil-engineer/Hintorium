@@ -22,6 +22,17 @@ export const TOOLTIP_CONSTANTS = {
     POSITION_RIGHT: "pos-right",
   },
 
+  ARIA: {
+    ROLE_TOOLTIP: "tooltip",
+  },
+
+  KEYS: {
+    ESCAPE: "Escape",
+    ENTER: "Enter",
+    SPACE: " ",
+    TAB: "Tab",
+  },
+
   DEFAULTS: {
     POSITION: "top" as const,
     THEME: "light" as const,

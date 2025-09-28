@@ -1,6 +1,6 @@
 export type TooltipPosition = "top" | "bottom" | "left" | "right" | "auto";
 export type TooltipTheme = "light" | "dark";
-export type TooltipTrigger = "hover";
+export type TooltipTrigger = "hover" | "focus";
 
 export type TooltipOptions = {
   readonly position?: TooltipPosition;
@@ -9,6 +9,11 @@ export type TooltipOptions = {
   readonly offset?: number;
   readonly boundary?: HTMLElement | "viewport";
   readonly fallbackPlacements?: TooltipPosition[];
+  readonly a11y?: {
+    readonly keyboard?: boolean;
+    readonly announceOnShow?: boolean;
+    readonly focusable?: boolean;
+  };
 };
 
 export type TooltipInstance = {

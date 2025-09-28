@@ -26,7 +26,7 @@ The most important things to make the library ready for use in real projects.
 - [ ] 📱 Mobile support:
 - [ ] Tap / long-press support
 - [ ] Responsive screen adaptation
-- [ ] 🧭 Smart positioning (auto-reposition when the tooltip moves outside the viewport)
+- [x] 🧭 Smart positioning (auto-reposition when the tooltip moves outside the viewport)
 - [ ] ⚙️ Configuration API (initTooltip({ delay, theme, position }))
 - [ ] 🛠️ Basic testing (e.g., Playwright/Jest for DOM)
 

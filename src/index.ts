@@ -6,5 +6,7 @@ export { initTooltip };
 if (import.meta.env.DEV) {
   console.log("Hintorium dev mode");
 
-  initTooltip();
+  initTooltip({
+    trigger: ["focus", "hover"],
+  });
 }
