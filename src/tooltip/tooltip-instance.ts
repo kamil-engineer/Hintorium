@@ -1,5 +1,6 @@
 import { TOOLTIP_CONSTANTS } from "./constants";
-import type { TooltipInstance, TooltipOptions } from "./types";
+import { SmartPositioning } from "./positioning";
+import type { TooltipInstance, TooltipOptions, TooltipPosition } from "./types";
 import { TooltipValidator } from "./validator";
 
 export class TooltipInstanceImpl implements TooltipInstance {
@@ -8,6 +9,7 @@ export class TooltipInstanceImpl implements TooltipInstance {
   public readonly target: HTMLElement;
   public readonly options: Required<TooltipOptions>;
 
+  private currentPosition: TooltipPosition;
   private isVisible = false;
 
   constructor(
@@ -19,6 +21,8 @@ export class TooltipInstanceImpl implements TooltipInstance {
     this.options = this.normalizeOptions(options);
     this.target = target;
     this.element = this.createElement();
+
+    this.currentPosition = this.options.position;
 
     this.initializeContent(content);
     this.setupEventListeners();
@@ -46,14 +50,28 @@ export class TooltipInstanceImpl implements TooltipInstance {
     });
   }
 
-  show(): void {
-    console.log("hi");
+  reposition() {
+    if (!this.isVisible) return;
 
+    const newPosition = SmartPositioning.positionTooltip(
+      this.element,
+      this.target,
+      this.options
+    );
+
+    if (newPosition !== this.currentPosition) {
+      this.currentPosition = newPosition;
+    }
+  }
+
+  show(): void {
     if (this.isVisible) return;
 
     document.body.appendChild(this.element);
 
     this.isVisible = true;
+
+    this.reposition();
   }
 
   hide(): void {
@@ -81,6 +99,14 @@ export class TooltipInstanceImpl implements TooltipInstance {
       trigger: Array.isArray(options.trigger)
         ? options.trigger
         : [options.trigger || "hover"],
+      fallbackPlacements: options.fallbackPlacements || [
+        "top",
+        "bottom",
+        "left",
+        "right",
+      ],
+      boundary: options.boundary || "viewport",
+      offset: options.offset || 5,
     };
   }
 }

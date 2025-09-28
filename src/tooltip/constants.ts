@@ -25,6 +25,9 @@ export const TOOLTIP_CONSTANTS = {
   DEFAULTS: {
     POSITION: "top" as const,
     THEME: "light" as const,
+    BOUNDARY_PADDING: 10,
+    OFFSET: 5,
+    ID_PREFIX: "hintorium-tooltip-",
   },
 } as const;
 

@@ -6,6 +6,9 @@ export type TooltipOptions = {
   readonly position?: TooltipPosition;
   readonly theme?: TooltipTheme;
   readonly trigger?: TooltipTrigger | TooltipTrigger[];
+  readonly offset?: number;
+  readonly boundary?: HTMLElement | "viewport";
+  readonly fallbackPlacements?: TooltipPosition[];
 };
 
 export type TooltipInstance = {

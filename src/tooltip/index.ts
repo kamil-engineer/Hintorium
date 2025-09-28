@@ -45,8 +45,6 @@ export class TooltipManager {
 
     const tooltip = new TooltipInstanceImpl(element, content, elementOptions);
     this.tooltipMap.set(element, tooltip);
-
-    console.log(this.tooltipMap);
   }
 
   private getElementInfo(element: HTMLElement): string {

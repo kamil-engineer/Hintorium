@@ -531,3 +531,18 @@
 .hintorium-tooltip.debug::after {
   border-color: #ff0000 !important;
 }
+
+/* UTILS */
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
