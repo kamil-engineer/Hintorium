@@ -17,7 +17,7 @@ export class TooltipInstanceImpl implements TooltipInstance {
     content: string,
     options: TooltipOptions = {}
   ) {
-    this.id = "";
+    this.id = this.generateId();
     this.options = this.normalizeOptions(options);
     this.target = target;
     this.element = this.createElement();
@@ -26,6 +26,12 @@ export class TooltipInstanceImpl implements TooltipInstance {
 
     this.initializeContent(content);
     this.setupEventListeners();
+  }
+
+  private generateId(): string {
+    return `${TOOLTIP_CONSTANTS.DEFAULTS.ID_PREFIX}${Date.now()}-${Math.random()
+      .toString(36)
+      .slice(2, 9)}`;
   }
 
   private createElement(): HTMLDivElement {
