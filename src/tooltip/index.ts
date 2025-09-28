@@ -1,47 +1,98 @@
-import {
-  createTooltipElement,
-  positionTooltip,
-  type TooltipOptions,
-} from "./core";
+import { TOOLTIP_CONSTANTS, TOOLTIP_MESSAGES } from "./constants";
+import { TooltipInstanceImpl } from "./tooltip-instance";
+import type { TooltipOptions } from "./types";
+import { TooltipValidator } from "./validator";
 
-const tooltipMap = new WeakMap<HTMLElement, HTMLDivElement>();
+export class TooltipManager {
+  private readonly tooltipMap = new WeakMap<HTMLElement, TooltipInstanceImpl>();
+  private readonly options: TooltipOptions;
 
-export function initTooltip(options: TooltipOptions = {}) {
-  const elements = document.querySelectorAll<HTMLElement>("[data-tooltip]");
+  constructor(options: TooltipOptions = {}) {
+    this.options = options;
+  }
 
-  elements.forEach((el) => {
-    el.addEventListener("mouseenter", () => {
-      const text = el.getAttribute("data-tooltip");
-      if (!text) return;
+  init() {
+    const elements = document.querySelectorAll<HTMLElement>(
+      `[${TOOLTIP_CONSTANTS.ATTRIBUTES.DATA_TOOLTIP}]`
+    );
 
-      const tooltipEl = createTooltipElement(text);
+    if (elements.length === 0) {
+      console.info(TOOLTIP_MESSAGES.INFO.EMPTY_TOOLTIP_ELEMENTS);
+    }
 
-      const themeAttr = el.getAttribute("data-tooltip-theme") as
-        | "light"
-        | "dark";
-      tooltipEl.classList.add(themeAttr || "light");
-
-      tooltipMap.set(el, tooltipEl);
-
-      const positionAttr = el.getAttribute(
-        "data-tooltip-pos"
-      ) as TooltipOptions["position"];
-
-      tooltipEl.setAttribute("data-tooltip-pos", positionAttr ?? "top");
-      positionTooltip(tooltipEl, el, { ...options, position: positionAttr });
-
-      requestAnimationFrame(() => tooltipEl.classList.add("show"));
-    });
-
-    el.addEventListener("mouseleave", () => {
-      const tooltipEl = tooltipMap.get(el);
-      if (tooltipEl) {
-        tooltipEl.classList.remove("show");
-        setTimeout(() => {
-          tooltipEl.remove();
-          tooltipMap.delete(el);
-        }, 200);
+    elements.forEach((element, index) => {
+      try {
+        this.initializeElementTooltip(element);
+      } catch (error) {
+        console.error(
+          `❌ Tooltip: Failed to initialize tooltip for element ${index + 1}:`,
+          error
+        );
       }
     });
-  });
+
+    return this;
+  }
+
+  private initializeElementTooltip(element: HTMLElement): void {
+    const text = element.getAttribute(
+      TOOLTIP_CONSTANTS.ATTRIBUTES.DATA_TOOLTIP
+    );
+    if (!text) return;
+
+    const elementOptions = this.extractElementOptions(element);
+    const content = this.extractElementContent(element, text);
+
+    const tooltip = new TooltipInstanceImpl(element, content, elementOptions);
+    this.tooltipMap.set(element, tooltip);
+
+    console.log(this.tooltipMap);
+  }
+
+  private getElementInfo(element: HTMLElement): string {
+    const tagName = element.tagName.toLowerCase();
+    const id = element.id ? `#${element.id}` : "";
+    const classes = element.className
+      ? `.${element.className.split(" ").join(".")}`
+      : "";
+    return ` for element: <${tagName}${id}${classes}>`;
+  }
+
+  private extractElementContent(element: HTMLElement, text: string) {
+    const htmlAttr = element.getAttribute(
+      TOOLTIP_CONSTANTS.ATTRIBUTES.DATA_TOOLTIP_HTML
+    );
+
+    return text;
+  }
+
+  private extractElementOptions(element: HTMLElement) {
+    const positionAttr = element.getAttribute(
+      TOOLTIP_CONSTANTS.ATTRIBUTES.DATA_TOOLTIP_POS
+    );
+    const themeAttr = element.getAttribute(
+      TOOLTIP_CONSTANTS.ATTRIBUTES.DATA_TOOLTIP_THEME
+    );
+
+    const elementInfo = this.getElementInfo(element);
+
+    return {
+      ...this.options,
+      position: TooltipValidator.validatePosition(
+        positionAttr,
+        "attribute",
+        elementInfo
+      ),
+      theme: TooltipValidator.validateTheme(
+        themeAttr,
+        "attribute",
+        elementInfo
+      ),
+    };
+  }
+}
+
+export function initTooltip(options: TooltipOptions = {}): TooltipManager {
+  const manager = new TooltipManager(options);
+  return manager.init();
 }

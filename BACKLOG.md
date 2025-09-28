@@ -7,13 +7,13 @@ Roadmap for the development of the tooltip library.
 ## 🎯 Phase 1 – MVP (Minimum Viable Product)
 Basic features to make the library usable.
 
-- [ ] Tooltip on hover (\`data-tooltip\`)
-- [ ] Positions (\`top\`, \`right\`, \`bottom\`, \`left\`)
-- [ ] Themes (\`dark\`, \`light\`)
-- [ ] Fade-in / fade-out animation
-- [ ] TypeScript configuration (\`tsconfig.json\`)
-- [ ] Compilation to \`dist/\`
-- [ ] HTML demo with simple usage
+- [x] Tooltip on hover (\`data-tooltip\`)
+- [x] Positions (\`top\`, \`right\`, \`bottom\`, \`left\`)
+- [x] Themes (\`dark\`, \`light\`)
+- [x] Fade-in / fade-out animation
+- [x] TypeScript configuration (\`tsconfig.json\`)
+- [x] Compilation to \`dist/\`
+- [x] HTML demo with simple usage
 
 ---
 
