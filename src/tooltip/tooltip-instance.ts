@@ -1,5 +1,6 @@
 import { AccessibilityManager } from "./accessibility";
 import { TOOLTIP_CONSTANTS } from "./constants";
+import { MobileManager } from "./mobile";
 import { SmartPositioning } from "./positioning";
 import type { TooltipInstance, TooltipOptions, TooltipPosition } from "./types";
 import { TooltipValidator } from "./validator";
@@ -10,6 +11,8 @@ export class TooltipInstanceImpl implements TooltipInstance {
   public readonly target: HTMLElement;
   public readonly options: Required<TooltipOptions>;
 
+  private showTimer: number | null = null;
+  private hideTimer: number | null = null;
   private currentPosition: TooltipPosition;
   private isVisible = false;
 
@@ -76,22 +79,74 @@ export class TooltipInstanceImpl implements TooltipInstance {
     }
   }
 
-  show(): void {
+  async show(): Promise<void> {
+    if (this.isVisible) return;
+
+    this.clearTimers();
+
+    if (this.options.showDelay > 0) {
+      return new Promise((resolve) => {
+        this.showTimer = window.setTimeout(async () => {
+          await this.performShow();
+          resolve();
+        }, this.options.showDelay);
+      });
+    }
+
+    await this.performShow();
+  }
+
+  async hide(): Promise<void> {
+    if (!this.isVisible) return;
+
+    this.clearTimers();
+
+    if (this.options.hideDelay > 0) {
+      return new Promise((resolve) => {
+        this.hideTimer = window.setTimeout(async () => {
+          await this.performHide();
+          resolve();
+        }, this.options.hideDelay);
+      });
+    }
+
+    await this.performHide();
+  }
+
+  private async performShow(): Promise<void> {
     if (this.isVisible) return;
 
     document.body.appendChild(this.element);
+    this.reposition();
 
     this.isVisible = true;
 
-    this.reposition();
+    if (this.options.a11y.announceOnShow) {
+      AccessibilityManager.announceToScreenReader(
+        `Tooltip shown: ${this.element.textContent}`
+      );
+    }
   }
 
-  hide(): void {
+  private async performHide(): Promise<void> {
     if (!this.isVisible) return;
+
     if (this.element.parentNode) {
       this.element.parentNode.removeChild(this.element);
     }
+
     this.isVisible = false;
+  }
+
+  private clearTimers(): void {
+    if (this.showTimer) {
+      clearTimeout(this.showTimer);
+      this.showTimer = null;
+    }
+    if (this.hideTimer) {
+      clearTimeout(this.hideTimer);
+      this.hideTimer = null;
+    }
   }
 
   private async initializeContent(content: string) {
@@ -125,12 +180,25 @@ export class TooltipInstanceImpl implements TooltipInstance {
         "left",
         "right",
       ],
+      showDelay: TooltipValidator.validateDelay(
+        options.showDelay,
+        "constructor options.showDelay"
+      ),
+      hideDelay: TooltipValidator.validateDelay(
+        options.hideDelay,
+        "constructor options.hideDelay"
+      ),
       boundary: options.boundary || "viewport",
       offset: options.offset || 5,
       a11y: {
         keyboard: options.a11y?.keyboard ?? true,
         announceOnShow: options.a11y?.announceOnShow ?? false,
         focusable: options.a11y?.focusable ?? true,
+      },
+      mobile: {
+        enabled: options.mobile?.enabled ?? MobileManager.isMobile(),
+        longPress: options.mobile?.longPress ?? true,
+        touchDelay: TOOLTIP_CONSTANTS.DEFAULTS.TOUCH_DELAY,
       },
     };
   }

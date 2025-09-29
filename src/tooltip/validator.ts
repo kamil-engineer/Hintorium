@@ -50,6 +50,58 @@ export class TooltipValidator {
     return normalizedPosition as TooltipPosition;
   }
 
+  static validateDelay(
+    delay: unknown,
+    context = "option",
+    elementInfo = ""
+  ): number {
+    if (delay === null || delay === undefined) {
+      return TOOLTIP_CONSTANTS.DEFAULTS.SHOW_DELAY;
+    }
+
+    if (typeof delay === "string") {
+      const parsedDelay = parseInt(delay, 10);
+      if (!isNaN(parsedDelay)) {
+        console.warn(
+          `⚠️ Tooltip: Delay ${context} provided as string "${delay}"${elementInfo}. ` +
+            `Converting to number: ${parsedDelay}.`
+        );
+        delay = parsedDelay;
+      } else {
+        console.warn(
+          `⚠️ Tooltip: Delay "${delay}" cannot be converted to number${elementInfo}. ` +
+            `Using default: ${TOOLTIP_CONSTANTS.DEFAULTS.SHOW_DELAY}.`
+        );
+        return TOOLTIP_CONSTANTS.DEFAULTS.SHOW_DELAY;
+      }
+    }
+
+    if (typeof delay !== "number" || !Number.isFinite(delay)) {
+      console.warn(
+        `⚠️ Tooltip: Delay ${context} must be a finite number, received: ${typeof delay}${elementInfo}. ` +
+          `Using default: ${TOOLTIP_CONSTANTS.DEFAULTS.SHOW_DELAY}.`
+      );
+      return TOOLTIP_CONSTANTS.DEFAULTS.SHOW_DELAY;
+    }
+
+    if (delay < 0) {
+      console.warn(
+        `⚠️ Tooltip: Delay ${context} should be non-negative, received: ${delay}${elementInfo}. ` +
+          `Using absolute value: ${Math.abs(delay)}.`
+      );
+      return Math.abs(delay);
+    }
+
+    if (delay > 10000) {
+      console.warn(
+        `⚠️ Tooltip: Delay ${context} is very long (${delay}ms)${elementInfo}. ` +
+          `This may cause poor user experience.`
+      );
+    }
+
+    return delay;
+  }
+
   static validateTheme(
     theme: unknown,
     context = "option",

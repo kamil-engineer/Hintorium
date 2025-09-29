@@ -42,6 +42,8 @@ export const TOOLTIP_CONSTANTS = {
     BOUNDARY_PADDING: 10,
     OFFSET: 5,
     ID_PREFIX: "hintorium-tooltip-",
+    SHOW_DELAY: 0,
+    HIDE_DELAY: 0,
     MOBILE_BREAKPOINT: 768,
     LONG_PRESS_DURATION: 500,
     KEYBOARD_DELAY: 100,

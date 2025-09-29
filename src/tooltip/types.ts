@@ -9,6 +9,8 @@ export type TooltipOptions = {
   readonly offset?: number;
   readonly boundary?: HTMLElement | "viewport";
   readonly fallbackPlacements?: TooltipPosition[];
+  readonly showDelay?: number;
+  readonly hideDelay?: number;
   readonly a11y?: {
     readonly keyboard?: boolean;
     readonly announceOnShow?: boolean;

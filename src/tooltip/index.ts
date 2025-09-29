@@ -61,6 +61,8 @@ export class TooltipManager {
       TOOLTIP_CONSTANTS.ATTRIBUTES.DATA_TOOLTIP_HTML
     );
 
+    console.log(htmlAttr);
+
     return text;
   }
 
