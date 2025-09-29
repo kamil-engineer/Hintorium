@@ -5,6 +5,7 @@ Roadmap for the development of the tooltip library.
 --
 
 ## 🎯 Phase 1 – MVP (Minimum Viable Product)
+
 Basic features to make the library usable.
 
 - [x] Tooltip on hover (\`data-tooltip\`)
@@ -18,21 +19,23 @@ Basic features to make the library usable.
 ---
 
 ## 🚀 Phase 2 – v1.0 "Production Ready"
+
 The most important things to make the library ready for use in real projects.
 
-- [ ] ♿ Accessibility (A11y):
-- [ ] Focus support (keyboard)
-- [ ] ARIA (aria-describedby)
+- [x] ♿ Accessibility (A11y):
+- [x] Focus support (keyboard)
+- [x] ARIA (aria-describedby)
 - [ ] 📱 Mobile support:
 - [ ] Tap / long-press support
-- [ ] Responsive screen adaptation
+- [x] Responsive screen adaptation
 - [x] 🧭 Smart positioning (auto-reposition when the tooltip moves outside the viewport)
-- [ ] ⚙️ Configuration API (initTooltip({ delay, theme, position }))
+- [x] ⚙️ Configuration API (initTooltip({ delay, theme, position }))
 - [ ] 🛠️ Basic testing (e.g., Playwright/Jest for DOM)
 
 ---
 
 ## 🌱 Phase 3 – v1.5 "Usability and Style"
+
 Features that distinguish the library and increase the user experience.
 
 - [ ] 🎨 Additional themes (glass, pastel, neon, gradients)
@@ -45,6 +48,7 @@ Features that distinguish the library and increase the user experience.
 ---
 
 ## 🌍 Phase 4 – v2.0 "Tooltip System"
+
 Going beyond classic tooltips → greater value for the community.
 
 - [ ] 🗺️ Onboarding / guided tours (step-by-step tooltips)
@@ -57,6 +61,7 @@ Going beyond classic tooltips → greater value for the community.
 ---
 
 ## 🛡️ Bonus options
+
 Additional ideas that can be implemented later.
 
 - [ ] Lazy rendering (tooltip created only when needed)
