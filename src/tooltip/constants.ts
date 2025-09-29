@@ -20,6 +20,9 @@ export const TOOLTIP_CONSTANTS = {
     POSITION_BOTTOM: "pos-bottom",
     POSITION_LEFT: "pos-left",
     POSITION_RIGHT: "pos-right",
+
+    MOBILE: "mobile",
+    KEYBOARD_FOCUS: "keyboard-focus",
   },
 
   ARIA: {
@@ -39,6 +42,23 @@ export const TOOLTIP_CONSTANTS = {
     BOUNDARY_PADDING: 10,
     OFFSET: 5,
     ID_PREFIX: "hintorium-tooltip-",
+    MOBILE_BREAKPOINT: 768,
+    LONG_PRESS_DURATION: 500,
+    KEYBOARD_DELAY: 100,
+    TOUCH_DELAY: 500,
+  },
+
+  EVENTS: {
+    MOUSE_ENTER: "mouseenter",
+    MOUSE_LEAVE: "mouseleave",
+    FOCUS: "focus",
+    BLUR: "blur",
+    KEYDOWN: "keydown",
+    TOUCH_START: "touchstart",
+    TOUCH_END: "touchend",
+    TOUCH_CANCEL: "touchcancel",
+    RESIZE: "resize",
+    SCROLL: "scroll",
   },
 } as const;
 

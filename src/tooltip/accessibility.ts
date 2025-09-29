@@ -2,8 +2,8 @@ import { TOOLTIP_CONSTANTS } from "./constants";
 import type { TooltipOptions } from "./types";
 
 export class AccessibilityManager {
-  private static readonly FOCUS_VISIBLE_CLASS = "focus-visible";
-  private static isKeyboardUser = false;
+  protected static readonly FOCUS_VISIBLE_CLASS = "focus-visible";
+  protected static isKeyboardUser = false;
 
   static init(): void {
     this.setupKeyboardDetection();

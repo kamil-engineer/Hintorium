@@ -1,6 +1,6 @@
 export type TooltipPosition = "top" | "bottom" | "left" | "right" | "auto";
 export type TooltipTheme = "light" | "dark";
-export type TooltipTrigger = "hover" | "focus";
+export type TooltipTrigger = "hover" | "focus" | "click" | "manual" | "touch";
 
 export type TooltipOptions = {
   readonly position?: TooltipPosition;
@@ -14,6 +14,12 @@ export type TooltipOptions = {
     readonly announceOnShow?: boolean;
     readonly focusable?: boolean;
   };
+
+  readonly mobile?: {
+    readonly enabled?: boolean;
+    readonly longPress?: boolean;
+    readonly touchDelay?: number;
+  };
 };
 
 export type TooltipInstance = {
@@ -21,4 +27,7 @@ export type TooltipInstance = {
   readonly element: HTMLDivElement;
   readonly target: HTMLElement;
   readonly options: Required<TooltipOptions>;
+
+  show(): Promise<void>;
+  hide(): Promise<void>;
 };
