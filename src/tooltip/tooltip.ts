@@ -9,6 +9,9 @@ export class Tooltip {
     this.setupListeners();
   }
 
+  private handleMouseEnter = () => this.show();
+  private handleMouseLeave = () => this.hide();
+
   private createElement(): HTMLDivElement {
     const tooltip = document.createElement("div");
 
@@ -18,8 +21,8 @@ export class Tooltip {
   }
 
   private setupListeners(): void {
-    this.element.addEventListener("mouseenter", () => this.show());
-    this.element.addEventListener("mouseleave", () => this.hide());
+    this.element.addEventListener("mouseenter", this.handleMouseEnter);
+    this.element.addEventListener("mouseleave", this.handleMouseLeave);
   }
 
   private show(): void {
@@ -39,7 +42,7 @@ export class Tooltip {
 
   destroy(): void {
     this.hide();
-    this.element.removeEventListener("mouseenter", () => this.show());
-    this.element.removeEventListener("mouseleave", () => this.hide());
+    this.element.removeEventListener("mouseenter", this.handleMouseEnter);
+    this.element.removeEventListener("mouseleave", this.handleMouseLeave);
   }
 }
