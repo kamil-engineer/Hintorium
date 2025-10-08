@@ -1,3 +1,6 @@
+import { AnimationManager } from "./animation";
+import { TOOLTIP_CONSTANTS } from "./constants";
+
 export class Tooltip {
   private element: HTMLElement;
   private content: string;
@@ -15,6 +18,8 @@ export class Tooltip {
   private createElement(): HTMLDivElement {
     const tooltip = document.createElement("div");
 
+    tooltip.classList.add(TOOLTIP_CONSTANTS.CSS_CLASSES.BASE);
+
     tooltip.textContent = `${this.content}`;
 
     return tooltip;
@@ -25,16 +30,20 @@ export class Tooltip {
     this.element.addEventListener("mouseleave", this.handleMouseLeave);
   }
 
-  private show(): void {
+  private async show() {
     if (this.tooltipEl) return;
 
     this.tooltipEl = this.createElement();
 
     document.body.appendChild(this.tooltipEl);
+
+    await AnimationManager.show(this.tooltipEl);
   }
 
-  private hide(): void {
+  private async hide() {
     if (!this.tooltipEl) return;
+
+    await AnimationManager.hide(this.tooltipEl);
 
     document.body.removeChild(this.tooltipEl);
     this.tooltipEl = null;
