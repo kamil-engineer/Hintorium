@@ -27,6 +27,9 @@ export class Tooltip {
     const tooltip = document.createElement("div");
 
     tooltip.classList.add(TOOLTIP_CONSTANTS.CSS_CLASSES.BASE);
+    tooltip.classList.add(
+      this.options.theme || TOOLTIP_CONSTANTS.DEFAULT.THEME
+    );
 
     tooltip.textContent = `${this.content}`;
 

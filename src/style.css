@@ -34,3 +34,17 @@
   transform: scale(0.8);
   pointer-events: none;
 }
+
+.hintorium-tooltip.light {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #e1e5e9;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hintorium-tooltip.dark {
+  background-color: #2d3748;
+  color: #f7fafc;
+  border: 1px solid #4a5568;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}

@@ -1,6 +1,6 @@
 import { TOOLTIP_CONSTANTS } from "./constants";
 import { Tooltip } from "./tooltip";
-import type { TooltipOptions, TooltipPosition } from "./types";
+import type { TooltipOptions, TooltipPosition, TooltipTheme } from "./types";
 import { TooltipValidator } from "./validator";
 
 export class TooltipManager {
@@ -10,7 +10,6 @@ export class TooltipManager {
 
   constructor(options?: TooltipOptions) {
     this.options = {
-      ...this.options,
       ...options,
     };
   }
@@ -47,7 +46,14 @@ export class TooltipManager {
       this.remove(element);
     }
 
-    const tooltip = new Tooltip(element, content, options);
+    const mergedOptions: TooltipOptions = {
+      ...this.options,
+      ...options,
+    };
+
+    console.log(mergedOptions, this.options, options);
+
+    const tooltip = new Tooltip(element, content, mergedOptions);
 
     this.tooltips.set(element, tooltip);
 
@@ -68,13 +74,27 @@ export class TooltipManager {
       TOOLTIP_CONSTANTS.ATTRIBUTES.TOOLTIP_POSITION
     );
 
-    const validatedPosition = TooltipValidator.validatePosition(rawPosition)
-      ? (rawPosition as TooltipPosition)
-      : TOOLTIP_CONSTANTS.DEFAULT.POSITION;
+    const rawTheme = element.getAttribute(
+      TOOLTIP_CONSTANTS.ATTRIBUTES.TOOLTIP_THEME
+    );
+
+    const options: TooltipOptions = {};
+
+    if (
+      rawPosition !== null &&
+      TooltipValidator.validatePosition(rawPosition)
+    ) {
+      options.position = rawPosition as TooltipPosition;
+    }
+
+    if (rawTheme !== null && TooltipValidator.validateTheme(rawTheme)) {
+      options.theme = rawTheme as TooltipTheme;
+    }
 
     return {
+      ...TOOLTIP_CONSTANTS.DEFAULT,
       ...this.options,
-      position: validatedPosition,
+      ...options,
     };
   }
 

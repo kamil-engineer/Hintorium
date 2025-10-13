@@ -1,5 +1,5 @@
 import { VALID_TOOLTIP_POSITIONS } from "./constants";
-import type { TooltipPosition } from "./types";
+import type { TooltipPosition, TooltipTheme } from "./types";
 
 export class TooltipValidator {
   static isValidTooltipElements(elements: NodeListOf<HTMLElement>): boolean {
@@ -11,6 +11,21 @@ export class TooltipValidator {
       );
     }
     return valid;
+  }
+
+  static validateTheme(theme: string | null): theme is TooltipTheme {
+    const validThemes: TooltipTheme[] = ["light", "dark"];
+    const isValid = validThemes.includes(theme as TooltipTheme);
+
+    if (!isValid) {
+      console.warn(
+        `⚠️ Invalid tooltip theme: "${theme}". Valid themes are: ${validThemes.join(
+          ", "
+        )}.`
+      );
+    }
+
+    return isValid;
   }
 
   static validatePosition(
