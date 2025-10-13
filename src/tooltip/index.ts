@@ -1,9 +1,10 @@
 import { TooltipManager } from "./manager";
+import type { TooltipOptions } from "./types";
 
-export function initTooltip(): TooltipManager {
+export function initTooltip(options?: TooltipOptions): TooltipManager {
   console.info("🎨 Hintorium Tooltip Library Loaded!");
 
-  const manager = new TooltipManager();
+  const manager = new TooltipManager(options);
 
   return manager.init();
 }

@@ -1,13 +1,21 @@
 import { AnimationManager } from "./animation";
 import { TOOLTIP_CONSTANTS } from "./constants";
+import { SmartPositioning } from "./positoning";
+import type { TooltipOptions } from "./types";
 
 export class Tooltip {
   private element: HTMLElement;
   private content: string;
   private tooltipEl: HTMLDivElement | null = null;
-  constructor(element: HTMLElement, content: string) {
+  private options: TooltipOptions = {};
+
+  constructor(element: HTMLElement, content: string, options?: TooltipOptions) {
     this.element = element;
     this.content = content;
+
+    if (options) {
+      this.options = options;
+    }
 
     this.setupListeners();
   }
@@ -36,6 +44,12 @@ export class Tooltip {
     this.tooltipEl = this.createElement();
 
     document.body.appendChild(this.tooltipEl);
+
+    SmartPositioning.position(
+      this.element,
+      this.tooltipEl,
+      this.options.position
+    );
 
     await AnimationManager.show(this.tooltipEl);
   }

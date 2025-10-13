@@ -8,12 +8,12 @@ Roadmap for the tooltip library development.
 
 Basic features to make the library usable.
 
-- [ ] Tooltip on hover (`data-tooltip`)
+- [x] Tooltip on hover (`data-tooltip`)
 - [ ] Positions (`top`, `right`, `bottom`, `left`)
 - [ ] Themes (`dark`, `light`)
-- [ ] Fade-in / fade-out animation
-- [ ] TypeScript configuration (`tsconfig.json`)
-- [ ] Compilation to `dist/`
+- [x] Fade-in / fade-out animation
+- [x] TypeScript configuration (`tsconfig.json`)
+- [x] Compilation to `dist/`
 - [ ] HTML demo with simple usage
 
 ---
