@@ -69,3 +69,88 @@
   border: var(--tooltip-border);
   box-shadow: var(--tooltip-shadow);
 }
+
+.hintorium-tooltip.glass {
+  --tooltip-bg: rgba(255, 255, 255, 0.2);
+  --tooltip-color: #111;
+  --tooltip-border: 1px solid rgba(255, 255, 255, 0.3);
+  --tooltip-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+  --tooltip-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-color);
+  border: var(--tooltip-border);
+  box-shadow: var(--tooltip-shadow);
+  text-shadow: var(--tooltip-text-shadow);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.hintorium-tooltip.pastel {
+  --tooltip-bg: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  --tooltip-color: #333;
+  --tooltip-border: none;
+  --tooltip-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+
+  background: var(--tooltip-bg);
+  color: var(--tooltip-color);
+  border: var(--tooltip-border);
+  box-shadow: var(--tooltip-shadow);
+  border-radius: 12px;
+}
+
+.hintorium-tooltip.neon {
+  --tooltip-bg: #000;
+  --tooltip-color: #00ff88;
+  --tooltip-border: 1px solid #00ff88;
+  --tooltip-shadow: 0 0 10px #00ff88, inset 0 0 10px rgba(0, 255, 136, 0.1);
+  --tooltip-text-shadow: 0 0 5px #00ff88;
+
+  background-color: var(--tooltip-bg);
+  color: var(--tooltip-color);
+  border: var(--tooltip-border);
+  box-shadow: var(--tooltip-shadow);
+  text-shadow: var(--tooltip-text-shadow);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  border-radius: 4px;
+}
+
+.hintorium-tooltip.gradient {
+  --tooltip-bg: linear-gradient(
+    45deg,
+    #ff6b6b,
+    #4ecdc4,
+    #45b7d1,
+    #f7b731,
+    #5f27cd
+  );
+  --tooltip-color: #fff;
+  --tooltip-border: none;
+  --tooltip-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --tooltip-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+  background: var(--tooltip-bg);
+  background-size: 300% 300%;
+  animation: gradientShift 3s ease infinite;
+  color: var(--tooltip-color);
+  border: var(--tooltip-border);
+  box-shadow: var(--tooltip-shadow);
+  text-shadow: var(--tooltip-text-shadow);
+  font-weight: 500;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

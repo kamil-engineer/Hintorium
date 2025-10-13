@@ -14,7 +14,14 @@ export class TooltipValidator {
   }
 
   static validateTheme(theme: string | null): theme is TooltipTheme {
-    const validThemes: TooltipTheme[] = ["light", "dark"];
+    const validThemes: TooltipTheme[] = [
+      "light",
+      "dark",
+      "glass",
+      "pastel",
+      "neon",
+      "gradient",
+    ];
     const isValid = validThemes.includes(theme as TooltipTheme);
 
     if (!isValid) {
