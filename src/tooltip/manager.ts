@@ -1,6 +1,11 @@
 import { TOOLTIP_CONSTANTS } from "./constants";
 import { Tooltip } from "./tooltip";
-import type { TooltipOptions, TooltipPosition, TooltipTheme } from "./types";
+import type {
+  TooltipAnimation,
+  TooltipOptions,
+  TooltipPosition,
+  TooltipTheme,
+} from "./types";
 import { TooltipValidator } from "./validator";
 
 export class TooltipManager {
@@ -51,8 +56,6 @@ export class TooltipManager {
       ...options,
     };
 
-    console.log(mergedOptions, this.options, options);
-
     const tooltip = new Tooltip(element, content, mergedOptions);
 
     this.tooltips.set(element, tooltip);
@@ -78,6 +81,10 @@ export class TooltipManager {
       TOOLTIP_CONSTANTS.ATTRIBUTES.TOOLTIP_THEME
     );
 
+    const rawAnimation = element.getAttribute(
+      TOOLTIP_CONSTANTS.ATTRIBUTES.TOOLTIP_ANIMATION
+    );
+
     const options: TooltipOptions = {};
 
     if (
@@ -89,6 +96,13 @@ export class TooltipManager {
 
     if (rawTheme !== null && TooltipValidator.validateTheme(rawTheme)) {
       options.theme = rawTheme as TooltipTheme;
+    }
+
+    if (
+      rawAnimation !== null &&
+      TooltipValidator.validateAnimation(rawAnimation)
+    ) {
+      options.animation = rawAnimation as TooltipAnimation;
     }
 
     return {

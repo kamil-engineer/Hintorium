@@ -38,8 +38,8 @@ The most important things to make the library ready for use in real projects.
 
 Features that distinguish the library and increase the user experience.
 
-- [ ] 🎨 Additional themes (glass, pastel, neon, gradients)
-- [ ] ✨ Additional animations (slide, zoom, bounce)
+- [x] 🎨 Additional themes (glass, pastel, neon, gradients)
+- [x] ✨ Additional animations (slide, zoom, bounce)
 - [ ] ⏱️ Delay option (`data-tooltip-delay="300"`)
 - [ ] 🔗 Tooltips with HTML (e.g., `<img>`, `<a>`)
 - [ ] 🔄 Dynamic content (callback or async load)

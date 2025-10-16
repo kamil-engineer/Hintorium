@@ -54,7 +54,7 @@ export class Tooltip {
       this.options.position
     );
 
-    await AnimationManager.show(this.tooltipEl);
+    await AnimationManager.show(this.tooltipEl, this.options.animation);
   }
 
   private async hide() {
