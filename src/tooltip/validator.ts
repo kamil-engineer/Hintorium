@@ -13,6 +13,19 @@ export class TooltipValidator {
     return valid;
   }
 
+  static validateAnimation(animation: string | null): animation is string {
+    const validAnimations: string[] = ["fade", "slide", "zoom", "bounce"];
+    const isValid = validAnimations.includes(animation || "");
+    if (!isValid) {
+      console.warn(
+        `⚠️ Invalid tooltip animation: "${animation}". Valid animations are: ${validAnimations.join(
+          ", "
+        )}.`
+      );
+    }
+    return isValid;
+  }
+
   static validateTheme(theme: string | null): theme is TooltipTheme {
     const validThemes: TooltipTheme[] = [
       "light",

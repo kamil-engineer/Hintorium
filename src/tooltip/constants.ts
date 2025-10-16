@@ -10,6 +10,7 @@ export const TOOLTIP_CONSTANTS = {
     TOOLTIP: "data-hintorium-tooltip",
     TOOLTIP_POSITION: "data-hintorium-tooltip-position",
     TOOLTIP_THEME: "data-hintorium-tooltip-theme",
+    TOOLTIP_ANIMATION: "data-hintorium-tooltip-animation",
   },
 
   CSS_CLASSES: {
@@ -20,10 +21,17 @@ export const TOOLTIP_CONSTANTS = {
     // THEME
     THEME_LIGHT: "theme-light",
     THEME_DARK: "theme-dark",
+
+    // ANIMATION
+    ANIMATION_FADE: "fade",
+    ANIMATION_SLIDE: "slide",
+    ANIMATION_ZOOM: "zoom",
+    ANIMATION_BOUNCE: "bounce",
   },
 
   DEFAULT: {
     POSITION: "top" as const,
     THEME: "dark" as const,
+    ANIMATION: "fade" as const,
   },
 };

@@ -11,6 +11,7 @@
   --hint-tooltip-transition: all 0.2s ease-out;
 }
 
+/* ========== BASE TOOLTIP ========== */
 .hintorium-tooltip {
   position: fixed;
   z-index: var(--hint-tooltip-z-index);
@@ -29,23 +30,21 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 
   opacity: 0;
-  transform: scale(0.8);
   pointer-events: none;
-
   transition: var(--hint-tooltip-transition);
 }
+
+/* Show / Hidden */
 .hintorium-tooltip.show {
   opacity: 1;
-  transform: scale(1);
   pointer-events: auto;
 }
-
 .hintorium-tooltip.hidden {
   opacity: 0;
-  transform: scale(0.8);
   pointer-events: none;
 }
 
+/* ========== THEMES ========== */
 .hintorium-tooltip.light {
   --tooltip-bg: #fff;
   --tooltip-color: #333;
@@ -153,4 +152,89 @@
   100% {
     background-position: 0% 50%;
   }
+}
+
+/* ========== ANIMATIONS ========== */
+/* Fade (default) */
+.hintorium-tooltip.anim-fade {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.hintorium-tooltip.anim-fade.show {
+  opacity: 1;
+  transform: scale(1);
+}
+.hintorium-tooltip.anim-fade.hidden {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Slide */
+.hintorium-tooltip.anim-slide {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.hintorium-tooltip.anim-slide.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hintorium-tooltip.anim-slide.hidden {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* Zoom */
+.hintorium-tooltip.anim-zoom {
+  opacity: 0;
+  transform: scale(0.6);
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+}
+.hintorium-tooltip.anim-zoom.show {
+  opacity: 1;
+  transform: scale(1);
+}
+.hintorium-tooltip.anim-zoom.hidden {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+/* Bounce */
+.hintorium-tooltip.anim-bounce {
+  opacity: 0;
+  transform: scale(0.3);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.hintorium-tooltip.anim-bounce.show {
+  opacity: 1;
+  transform: scale(1);
+  animation: tooltipBounce 0.45s ease-out;
+}
+.hintorium-tooltip.anim-bounce.hidden {
+  opacity: 0;
+  transform: scale(0.3);
+}
+
+@keyframes tooltipBounce {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(0.95);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#app {
+  padding: 40px;
 }
