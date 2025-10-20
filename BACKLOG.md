@@ -22,9 +22,9 @@ Basic features to make the library usable.
 
 The most important things to make the library ready for use in real projects.
 
-- [ ] ♿ Accessibility (A11y):
-- [ ] Focus support (keyboard)
-- [ ] ARIA (`aria-describedby`)
+- [x] ♿ Accessibility (A11y):
+- [x] Focus support (keyboard)
+- [x] ARIA (`aria-describedby`)
 - [ ] 📱 Mobile support:
 - [ ] Tap / long-press support
 - [ ] Responsive screen adaptation
