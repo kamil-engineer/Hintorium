@@ -2,8 +2,8 @@ import { TOOLTIP_CONSTANTS } from "./constants";
 import type { TooltipOptions } from "./types";
 
 export class AccessibilityManager {
-  private static readonly FOCUS_VISIBLE_CLASS = "focus-visible";
-  private static isKeyboardUser = false;
+  protected static readonly FOCUS_VISIBLE_CLASS = "focus-visible";
+  protected static isKeyboardUser = false;
 
   static init() {
     this.setupKeyboardDetection();
@@ -95,6 +95,42 @@ export class AccessibilityManager {
 
     target.addEventListener("keydown", handleKeyDown);
     target.setAttribute("data-has-keyboard-support", "true");
+  }
+
+  static removeTooltipAccessibility(
+    tooltip: HTMLDivElement,
+    target: HTMLElement
+  ): void {
+    const describedBy = target.getAttribute("aria-describedby");
+    if (describedBy) {
+      const ids = describedBy.split(" ").filter((id) => id !== tooltip.id);
+      if (ids.length > 0) {
+        target.setAttribute("aria-describedby", ids.join(" "));
+      } else {
+        target.removeAttribute("aria-describedby");
+      }
+    }
+  }
+
+  static announceToScreenReader(message: string): void {
+    const announcer = document.createElement("div");
+    announcer.setAttribute("aria-live", "polite");
+    announcer.setAttribute("aria-atomic", "true");
+    announcer.className = "sr-only";
+    announcer.style.cssText = `
+      position: absolute !important;
+      left: -10000px !important;
+      width: 1px !important;
+      height: 1px !important;
+      overflow: hidden !important;
+    `;
+
+    document.body.appendChild(announcer);
+    announcer.textContent = message;
+
+    setTimeout(() => {
+      document.body.removeChild(announcer);
+    }, 1000);
   }
 
   static ensureFocusable(target: HTMLElement, options: TooltipOptions): void {
