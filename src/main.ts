@@ -2,4 +2,9 @@ import "./style.css";
 
 import { initTooltip } from "./tooltip";
 
-initTooltip();
+initTooltip({
+  a11y: {
+    focusable: true,
+    keyboard: true,
+  },
+});

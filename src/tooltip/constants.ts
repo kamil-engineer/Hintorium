@@ -29,9 +29,21 @@ export const TOOLTIP_CONSTANTS = {
     ANIMATION_BOUNCE: "bounce",
   },
 
+  ARIA: {
+    ROLE_TOOLTIP: "tooltip",
+  },
+
+  KEYS: {
+    ESCAPE: "Escape",
+    ENTER: "Enter",
+    SPACE: " ",
+    TAB: "Tab",
+  },
+
   DEFAULT: {
     POSITION: "top" as const,
     THEME: "dark" as const,
     ANIMATION: "fade" as const,
+    ID_PREFIX: "hintorium-tooltip-",
   },
 };

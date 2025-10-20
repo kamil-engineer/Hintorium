@@ -14,4 +14,9 @@ export type TooltipOptions = {
   position?: TooltipPosition;
   theme?: TooltipTheme;
   animation?: TooltipAnimation;
+  readonly a11y?: {
+    readonly keyboard?: boolean;
+    readonly announceOnShow?: boolean;
+    readonly focusable?: boolean;
+  };
 };
