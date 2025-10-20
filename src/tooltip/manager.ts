@@ -1,3 +1,4 @@
+import { AccessibilityManager } from "./accessibility";
 import { TOOLTIP_CONSTANTS } from "./constants";
 import { Tooltip } from "./tooltip";
 import type {
@@ -17,6 +18,8 @@ export class TooltipManager {
     this.options = {
       ...options,
     };
+
+    AccessibilityManager.init();
   }
 
   init(): TooltipManager {
