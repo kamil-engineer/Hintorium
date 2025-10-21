@@ -25,12 +25,11 @@ The most important things to make the library ready for use in real projects.
 - [x] ♿ Accessibility (A11y):
 - [x] Focus support (keyboard)
 - [x] ARIA (`aria-describedby`)
-- [ ] 📱 Mobile support:
-- [ ] Tap / long-press support
+- [x] 📱 Mobile support:
+- [x] Tap / long-press support
 - [ ] Responsive screen adaptation
 - [ ] 🧭 Smart positioning (auto-reposition when the tooltip moves outside the viewport)
 - [ ] ⚙️ Configuration API (`initTooltip({ delay, theme, position })`)
-- [ ] 🛠️ Basic testing (e.g., Playwright/Jest for DOM)
 
 ---
 
