@@ -19,4 +19,9 @@ export type TooltipOptions = {
     readonly announceOnShow?: boolean;
     readonly focusable?: boolean;
   };
+  mobile?: {
+    readonly enabled?: boolean;
+    readonly longPress?: boolean;
+    readonly touchDelay?: number;
+  };
 };
