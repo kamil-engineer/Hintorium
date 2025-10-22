@@ -1,5 +1,6 @@
 import { AccessibilityManager } from "./accessibility";
 import { TOOLTIP_CONSTANTS } from "./constants";
+import { MobileManager } from "./mobile";
 import { Tooltip } from "./tooltip";
 import type {
   TooltipAnimation,
@@ -33,6 +34,16 @@ export class TooltipManager {
 
     tooltipElements.forEach((tooltip) => {
       this.initializeTooltip(tooltip);
+    });
+
+    document.addEventListener("touchstart", (e) => {
+      if (!(e.target instanceof HTMLElement)) return;
+      const tooltipElements = Array.from(this.tooltips.values()).map(
+        (t) => t.element
+      );
+      if (!tooltipElements.includes(e.target)) {
+        MobileManager.hideMobileTooltips();
+      }
     });
 
     return this;
@@ -71,6 +82,7 @@ export class TooltipManager {
 
     if (tooltip) {
       tooltip.destroy();
+      MobileManager.cleanup(element);
       this.tooltips.delete(element);
     }
   }
@@ -107,6 +119,13 @@ export class TooltipManager {
     ) {
       options.animation = rawAnimation as TooltipAnimation;
     }
+
+    const userMobileOption = this.options.mobile?.enabled;
+    const mobileEnabled = userMobileOption ?? MobileManager.isMobile();
+    options.mobile = {
+      ...(this.options.mobile || {}),
+      enabled: mobileEnabled,
+    };
 
     return {
       ...TOOLTIP_CONSTANTS.DEFAULT,

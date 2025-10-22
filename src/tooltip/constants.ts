@@ -27,6 +27,8 @@ export const TOOLTIP_CONSTANTS = {
     ANIMATION_SLIDE: "slide",
     ANIMATION_ZOOM: "zoom",
     ANIMATION_BOUNCE: "bounce",
+
+    MOBILE: "mobile",
   },
 
   ARIA: {
@@ -40,10 +42,25 @@ export const TOOLTIP_CONSTANTS = {
     TAB: "Tab",
   },
 
+  EVENTS: {
+    MOUSE_ENTER: "mouseenter",
+    MOUSE_LEAVE: "mouseleave",
+    FOCUS: "focus",
+    BLUR: "blur",
+    KEYDOWN: "keydown",
+    TOUCH_START: "touchstart",
+    TOUCH_END: "touchend",
+    TOUCH_CANCEL: "touchcancel",
+    RESIZE: "resize",
+    SCROLL: "scroll",
+  },
+
   DEFAULT: {
     POSITION: "top" as const,
     THEME: "dark" as const,
     ANIMATION: "fade" as const,
     ID_PREFIX: "hintorium-tooltip-",
+    MOBILE_BREAKPOINT: 768,
+    TOUCH_DELAY: 500,
   },
 };

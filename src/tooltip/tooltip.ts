@@ -1,11 +1,12 @@
 import { AccessibilityManager } from "./accessibility";
 import { AnimationManager } from "./animation";
 import { TOOLTIP_CONSTANTS } from "./constants";
+import { MobileManager } from "./mobile";
 import { SmartPositioning } from "./positoning";
 import type { TooltipOptions } from "./types";
 
 export class Tooltip {
-  private element: HTMLElement;
+  public element: HTMLElement;
   private content: string;
   private tooltipEl: HTMLDivElement | null = null;
   private options: TooltipOptions = {};
@@ -22,6 +23,7 @@ export class Tooltip {
     }
 
     AccessibilityManager.ensureFocusable(this.element, this.options);
+    MobileManager.setupMobileSupport(this, this.element, this.options);
 
     this.setupListeners();
   }
@@ -33,7 +35,6 @@ export class Tooltip {
   private handleMouseEnter = () => this.show();
   private handleMouseLeave = () => this.hide();
 
-  // --- Element creation ---
   private createElement(): HTMLDivElement {
     const tooltip = document.createElement("div");
     tooltip.id = this.id;
@@ -85,11 +86,12 @@ export class Tooltip {
     this.listeners.clear();
   }
 
-  private async show() {
+  async show() {
     if (this.tooltipEl) return;
 
     this.tooltipEl = this.createElement();
     this.setupAccessibility();
+
     document.body.appendChild(this.tooltipEl);
 
     SmartPositioning.position(
@@ -107,7 +109,7 @@ export class Tooltip {
     await AnimationManager.show(this.tooltipEl, this.options.animation);
   }
 
-  private async hide() {
+  async hide() {
     if (!this.tooltipEl) return;
 
     await AnimationManager.hide(this.tooltipEl);
