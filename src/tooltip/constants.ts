@@ -35,6 +35,13 @@ export const TOOLTIP_CONSTANTS = {
     ROLE_TOOLTIP: "tooltip",
   },
 
+  KEYS: {
+    ESCAPE: "Escape",
+    ENTER: "Enter",
+    SPACE: " ",
+    TAB: "Tab",
+  },
+
   EVENTS: {
     MOUSE_ENTER: "mouseenter",
     MOUSE_LEAVE: "mouseleave",
