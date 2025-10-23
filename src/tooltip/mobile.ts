@@ -15,6 +15,27 @@ export class MobileManager {
     );
   }
 
+  /**
+   * Resolves mobile configuration for tooltip behavior.
+   * Decides whether mobile support should be enabled based on user options and environment.
+   *
+   * @param globalOptions - The global tooltip options provided by the user.
+   * @returns A normalized mobile options object.
+   */
+  static resolveMobileOptions(globalOptions?: TooltipOptions["mobile"]) {
+    const enabled =
+      globalOptions?.enabled !== undefined
+        ? globalOptions.enabled
+        : MobileManager.isMobile();
+
+    return {
+      enabled,
+      longPress: globalOptions?.longPress ?? true,
+      touchDelay:
+        globalOptions?.touchDelay ?? TOOLTIP_CONSTANTS.DEFAULT.TOUCH_DELAY,
+    };
+  }
+
   static setupMobileSupport(
     tooltip: Tooltip,
     target: HTMLElement,
