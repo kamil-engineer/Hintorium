@@ -60,6 +60,7 @@ export const TOOLTIP_CONSTANTS = {
     THEME: "dark" as const,
     ANIMATION: "fade" as const,
     ID_PREFIX: "hintorium-tooltip-",
+    ANIMATION_PREFIX: "anim-",
     MOBILE_BREAKPOINT: 768,
     TOUCH_DELAY: 500,
   },
