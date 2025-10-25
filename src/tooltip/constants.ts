@@ -45,9 +45,10 @@ export const TOOLTIP_CONSTANTS = {
   EVENTS: {
     MOUSE_ENTER: "mouseenter",
     MOUSE_LEAVE: "mouseleave",
+    MOUSE_DOWN: "mousedown" as const,
     FOCUS: "focus",
     BLUR: "blur",
-    KEYDOWN: "keydown",
+    KEYDOWN: "keydown" as const,
     TOUCH_START: "touchstart",
     TOUCH_END: "touchend",
     TOUCH_CANCEL: "touchcancel",

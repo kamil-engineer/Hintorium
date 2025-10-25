@@ -235,6 +235,31 @@
   }
 }
 
+/* ======= HELPERS ======= */
+
+.keyboard-focus {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+  border-radius: 9px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hintorium-tooltip {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.sr-only {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  white-space: nowrap !important;
+}
+
 #app {
   padding: 40px;
 }
