@@ -1,32 +1,92 @@
-import { VALID_TOOLTIP_POSITIONS } from "./constants";
-import type { TooltipPosition, TooltipTheme } from "./types";
+import { TOOLTIP_CONSTANTS, VALID_TOOLTIP_POSITIONS } from "./constants";
+import type { TooltipAnimation, TooltipPosition, TooltipTheme } from "./types";
 
 export class TooltipValidator {
+  /**
+   * Checks if the provided NodeList contains at least one valid tooltip element.
+   * @param elements - List of elements to validate.
+   * @returns True if at least one element exists, false otherwise.
+   */
+
   static isValidTooltipElements(elements: NodeListOf<HTMLElement>): boolean {
     const valid = elements.length > 0;
 
     if (!valid) {
       console.warn(
-        "⚠️ No valid tooltip elements found. Please ensure elements have the correct data attributes."
+        `⚠️ No valid tooltip elements found. Please ensure elements have the correct data attribute to initialize tooltip - (${TOOLTIP_CONSTANTS.ATTRIBUTES.TOOLTIP}).`
       );
     }
     return valid;
   }
 
-  static validateAnimation(animation: string | null): animation is string {
-    const validAnimations: string[] = ["fade", "slide", "zoom", "bounce"];
-    const isValid = validAnimations.includes(animation || "");
+  /**
+   * Validates that the element has tooltip content.
+   * @param element - The HTML element to check.
+   * @returns True if the element has non-empty tooltip content, false otherwise.
+   */
+  static hasValidTooltipContent(
+    element: HTMLElement,
+    content: string | null
+  ): boolean {
+    const valid = !!content && content.trim().length > 0;
+
+    if (!valid) {
+      console.warn(
+        `⚠️ Tooltip element missing content: `,
+        element,
+        `Please provide a non-empty ${TOOLTIP_CONSTANTS.ATTRIBUTES.TOOLTIP} attribute.`
+      );
+    }
+
+    return valid;
+  }
+
+  /**
+   * Validates whether the provided animation string is a supported tooltip animation.
+   *
+   * Logs a console warning if the animation is invalid or unsupported.
+   *
+   * @param theme - The raw animation string to validate.
+   * @param element - The HTML element associated with the tooltip, used for contextual logging.
+   * @returns {theme is TooltipAnimation} `true` if the animation is valid, otherwise `false`.
+   */
+
+  static validateAnimation(
+    animation: string | null,
+    element: HTMLElement
+  ): animation is string {
+    const validAnimations: TooltipAnimation[] = [
+      "fade",
+      "slide",
+      "zoom",
+      "bounce",
+    ];
+    const isValid = validAnimations.includes(animation as TooltipAnimation);
+
     if (!isValid) {
       console.warn(
-        `⚠️ Invalid tooltip animation: "${animation}". Valid animations are: ${validAnimations.join(
-          ", "
-        )}.`
+        `⚠️ Invalid tooltip animation: "${animation}" for element`,
+        element,
+        `\n Valid animations are: ${validAnimations.join(", ")}.`
       );
     }
     return isValid;
   }
 
-  static validateTheme(theme: string | null): theme is TooltipTheme {
+  /**
+   * Validates whether the provided theme string is a supported tooltip theme.
+   *
+   * Logs a console warning if the theme is invalid or unsupported.
+   *
+   * @param theme - The raw theme string to validate (e.g. "light", "dark").
+   * @param element - The HTML element associated with the tooltip, used for contextual logging.
+   * @returns {theme is TooltipTheme} `true` if the theme is valid, otherwise `false`.
+   */
+
+  static validateTheme(
+    theme: string | null,
+    element: HTMLElement
+  ): theme is TooltipTheme {
     const validThemes: TooltipTheme[] = [
       "light",
       "dark",
@@ -39,17 +99,26 @@ export class TooltipValidator {
 
     if (!isValid) {
       console.warn(
-        `⚠️ Invalid tooltip theme: "${theme}". Valid themes are: ${validThemes.join(
-          ", "
-        )}.`
+        `⚠️ Invalid tooltip theme: "${theme}" for element`,
+        element,
+        `\n Valid themes are: ${validThemes.join(", ")}.`
       );
     }
 
     return isValid;
   }
 
+  /**
+   * Checks if a given position string is a valid TooltipPosition.
+   * Logs a warning if invalid.
+   *
+   * @param position - Raw position string to validate.
+   * @returns True if position is valid, false otherwise.
+   */
+
   static validatePosition(
-    position: string | null
+    position: string | null,
+    element: HTMLElement
   ): position is TooltipPosition {
     if (!position) return false;
 
@@ -59,12 +128,69 @@ export class TooltipValidator {
 
     if (!isValid) {
       console.warn(
-        `⚠️ Invalid tooltip position: "${position}". Valid positions are: ${VALID_TOOLTIP_POSITIONS.join(
-          ", "
-        )}.`
+        `Invalid tooltip position : ${position} for element`,
+        element,
+        `\n Valid positions are : ${VALID_TOOLTIP_POSITIONS.join(", ")}`
       );
     }
 
     return isValid;
+  }
+
+  /**
+   * Returns a valid tooltip position, falling back to default if invalid.
+   *
+   * @param raw - Raw position string.
+   * @param element - The HTML element to check.
+   * @param defaultPosition - Default position to use if raw is invalid.
+   * @returns Valid TooltipPosition.
+   */
+
+  static getValidPosition(
+    raw: string | null,
+    element: HTMLElement,
+    defaultPosition: TooltipPosition = "top"
+  ): TooltipPosition {
+    return raw && this.validatePosition(raw, element)
+      ? (raw as TooltipPosition)
+      : defaultPosition;
+  }
+
+  /**
+   * Returns a valid tooltip theme, falling back to default if invalid.
+   *
+   * @param raw - Raw theme string.
+   * @param element - The HTML element to check.
+   * @param defaultPosition - Default theme to use if raw is invalid.
+   * @returns Valid TooltipTheme.
+   */
+
+  static getValidTheme(
+    raw: string | null,
+    element: HTMLElement,
+    defaultTheme: TooltipTheme = "dark"
+  ): TooltipTheme {
+    return raw && this.validateTheme(raw, element)
+      ? (raw as TooltipTheme)
+      : defaultTheme;
+  }
+
+  /**
+   * Returns a valid tooltip animation, falling back to default if invalid.
+   *
+   * @param raw - Raw animation string.
+   * @param element - The HTML element to check.
+   * @param defaultAnimation - Default animation to use if raw is invalid.
+   * @returns Valid TooltipAnimation.
+   */
+
+  static getValidAnimation(
+    raw: string | null,
+    element: HTMLElement,
+    defaultAnimation: TooltipAnimation = "fade"
+  ): TooltipAnimation {
+    return raw && this.validateAnimation(raw, element)
+      ? (raw as TooltipAnimation)
+      : defaultAnimation;
   }
 }

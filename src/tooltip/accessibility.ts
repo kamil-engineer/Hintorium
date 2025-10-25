@@ -1,20 +1,44 @@
 import { TOOLTIP_CONSTANTS } from "./constants";
 import type { TooltipOptions } from "./types";
 
+/**
+ * @class AccessibilityManager
+ * @description
+ * Class responsible for accessibility management (a11y) for Hintorium tooltips.
+ *
+ * Supports:
+ * - assigning ARIA roles and relationships (`aria-describedby`, `role="tooltip"`),
+ * - keyboard support (ESC, Enter, Space),
+ * - ensuring focusability of target elements,
+ * - messages for screen readers (aria-live),
+ * - detecting interaction mode (keyboard/mouse),
+ * - adding global accessibility styles (e.g., `.sr-only`).
+ *
+ * The class is static, so it does not require an instance.
+ */
+
 export class AccessibilityManager {
-  protected static readonly FOCUS_VISIBLE_CLASS = "focus-visible";
+  /** CSS class added when keyboard focus is applied. */
+  protected static readonly FOCUS_VISIBLE_CLASS = `keyboard-focus`;
+  /** Flag indicating whether the user is currently using the keyboard. */
   protected static isKeyboardUser = false;
 
   static init() {
+    if (typeof document === "undefined") return;
+
     this.setupKeyboardDetection();
-    this.addGlobalStyles();
+    this.setupFocusListeners();
   }
+
+  /**
+   * Detects whether the user is using the keyboard (e.g., Tab vs. Mouse).
+   */
 
   private static setupKeyboardDetection(): void {
     document.addEventListener(
-      "keydown",
-      (e: KeyboardEvent) => {
-        if (e.key === "Tab") {
+      TOOLTIP_CONSTANTS.EVENTS.KEYDOWN,
+      (ev) => {
+        if (ev.key === TOOLTIP_CONSTANTS.KEYS.TAB) {
           this.isKeyboardUser = true;
         }
       },
@@ -22,13 +46,25 @@ export class AccessibilityManager {
     );
 
     document.addEventListener(
-      "mousedown",
+      TOOLTIP_CONSTANTS.EVENTS.MOUSE_DOWN,
       () => {
         this.isKeyboardUser = false;
       },
       true
     );
   }
+
+  /**
+   * Returns whether the user is currently using the keyboard.
+   */
+  static isKeyboardMode(): boolean {
+    return this.isKeyboardUser;
+  }
+
+  /**
+   * Checks whether a given element can be focused.
+   * @param element - the element to check
+   */
 
   private static isFocusable(element: HTMLElement): boolean {
     const focusableSelectors = [
@@ -48,6 +84,13 @@ export class AccessibilityManager {
     );
   }
 
+  /**
+   * Configures the ARIA relationship between the tooltip and the target element.
+   * @param tooltip - the tooltip element
+   * @param target - the element to which the tooltip is assigned
+   * @param options - tooltip options (from section a11y)
+   */
+
   static setupTooltipAccessibility(
     tooltip: HTMLDivElement,
     target: HTMLElement,
@@ -64,14 +107,41 @@ export class AccessibilityManager {
     }
 
     if (options.a11y?.keyboard !== false) {
-      this.addKeyboardSupport(tooltip, target);
+      this.addKeyboardSupport(target);
     }
+
+    this.ensureFocusable(target, options);
   }
 
-  private static addKeyboardSupport(
-    _: HTMLDivElement,
-    target: HTMLElement
-  ): void {
+  /**
+   * Sets a global focus event listener for the document,
+   * to add and remove the visual focus class (`.keyboard-focus`)
+   * only when the user is using the keyboard (e.g., pressing Tab).
+   */
+
+  private static setupFocusListeners(): void {
+    if (typeof document === "undefined") return;
+
+    document.addEventListener("focusin", (e: FocusEvent) => {
+      const el = e.target as HTMLElement;
+      if (!el) return;
+      if (this.isKeyboardUser) el.classList.add(this.FOCUS_VISIBLE_CLASS);
+    });
+
+    document.addEventListener("focusout", (e: FocusEvent) => {
+      const el = e.target as HTMLElement;
+      if (!el) return;
+      el.classList.remove(this.FOCUS_VISIBLE_CLASS);
+    });
+  }
+
+  /**
+   * Adds keyboard support to the tooltip's target element.
+   * Responds to the following keys: ESC (close), Enter / Space (toggle).
+   * @param target - the element to which the tooltip is assigned
+   */
+
+  private static addKeyboardSupport(target: HTMLElement): void {
     if (target.getAttribute("data-has-keyboard-support") === "true") return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -97,6 +167,12 @@ export class AccessibilityManager {
     target.setAttribute("data-has-keyboard-support", "true");
   }
 
+  /**
+   * Removes ARIA relationships after the tooltip is destroyed.
+   * @param tooltip - tooltip element
+   * @param target - target element
+   */
+
   static removeTooltipAccessibility(
     tooltip: HTMLDivElement,
     target: HTMLElement
@@ -112,61 +188,32 @@ export class AccessibilityManager {
     }
   }
 
+  /**
+   * Sends a message to the screen reader (aria-live).
+   * @param message - the message content to be announced
+   */
+
   static announceToScreenReader(message: string): void {
     const announcer = document.createElement("div");
     announcer.setAttribute("aria-live", "polite");
     announcer.setAttribute("aria-atomic", "true");
     announcer.className = "sr-only";
-    announcer.style.cssText = `
-      position: absolute !important;
-      left: -10000px !important;
-      width: 1px !important;
-      height: 1px !important;
-      overflow: hidden !important;
-    `;
 
-    document.body.appendChild(announcer);
     announcer.textContent = message;
+    document.body.appendChild(announcer);
 
-    setTimeout(() => {
-      document.body.removeChild(announcer);
-    }, 1000);
+    setTimeout(() => announcer.remove(), 1000);
   }
+
+  /**
+   * Ensures that the tooltip target is focusable.
+   * @param target - tooltip target
+   * @param options - tooltip options
+   */
 
   static ensureFocusable(target: HTMLElement, options: TooltipOptions): void {
     if (!this.isFocusable(target) && options.a11y?.focusable !== false) {
       target.setAttribute("tabindex", "0");
     }
-  }
-
-  private static addGlobalStyles(): void {
-    if (document.getElementById("hintorium-a11y-styles")) return;
-
-    const style = document.createElement("style");
-    style.id = "hintorium-a11y-styles";
-    style.textContent = `
-      .sr-only {
-        position: absolute !important;
-        left: -10000px !important;
-        width: 1px !important;
-        height: 1px !important;
-        overflow: hidden !important;
-        clip: rect(1px, 1px, 1px, 1px) !important;
-        white-space: nowrap !important;
-      }
-      
-      .hintorium-tooltip.keyboard-focus {
-        outline: 2px solid #4A90E2;
-        outline-offset: 2px;
-      }
-      
-      @media (prefers-reduced-motion: reduce) {
-        .hintorium-tooltip {
-          transition: none !important;
-          animation: none !important;
-        }
-      }
-    `;
-    document.head.appendChild(style);
   }
 }
