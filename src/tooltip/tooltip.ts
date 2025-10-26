@@ -2,7 +2,7 @@ import { AccessibilityManager } from "./accessibility";
 import { AnimationManager } from "./animation";
 import { TOOLTIP_CONSTANTS } from "./constants";
 import { MobileManager } from "./mobile";
-import { SmartPositioning } from "./positoning";
+import { SmartPositioning } from "./positioning";
 import type { TooltipOptions } from "./types";
 
 export class Tooltip {
@@ -43,6 +43,9 @@ export class Tooltip {
       this.options.theme || TOOLTIP_CONSTANTS.DEFAULT.THEME
     );
     tooltip.textContent = this.content;
+
+    tooltip.setAttribute("data-position", this.options.position || "top");
+
     return tooltip;
   }
 

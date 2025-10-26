@@ -27,9 +27,9 @@ The most important things to make the library ready for use in real projects.
 - [x] ARIA (`aria-describedby`)
 - [x] 📱 Mobile support:
 - [x] Tap / long-press support
-- [ ] Responsive screen adaptation
-- [ ] 🧭 Smart positioning (auto-reposition when the tooltip moves outside the viewport)
-- [ ] ⚙️ Configuration API (`initTooltip({ delay, theme, position })`)
+- [x] Responsive screen adaptation
+- [x] 🧭 Smart positioning (auto-reposition when the tooltip moves outside the viewport)
+- [x] ⚙️ Configuration API (`initTooltip({ delay, theme, position })`)
 
 ---
 

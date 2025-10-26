@@ -6,7 +6,9 @@
   --hint-tooltip-radius: 6px;
   --hint-tooltip-padding-vertical: 8px;
   --hint-tooltip-padding-horizontal: 12px;
-  --hint-tooltip-max-width: 300px;
+  --hint-tooltip-max-width: calc(
+    300px - 2 * var(--hint-tooltip-padding-horizontal)
+  );
   --hint-tooltip-z-index: 10000;
   --hint-tooltip-transition: all 0.2s ease-out;
 }
@@ -16,6 +18,7 @@
   position: fixed;
   z-index: var(--hint-tooltip-z-index);
   max-width: var(--hint-tooltip-max-width);
+  width: max-content;
   padding: var(--hint-tooltip-padding-vertical)
     var(--hint-tooltip-padding-horizontal);
 
@@ -32,6 +35,40 @@
   opacity: 0;
   pointer-events: none;
   transition: var(--hint-tooltip-transition);
+}
+
+.hintorium-tooltip::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+.hintorium-tooltip[data-position="top"]::after {
+  bottom: -5px;
+  left: var(--arrow-offset-x, 50%);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.hintorium-tooltip[data-position="bottom"]::after {
+  top: -5px;
+  left: var(--arrow-offset-x, 50%);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.hintorium-tooltip[data-position="left"]::after {
+  top: var(--arrow-offset-y, 50%);
+  right: -5px;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.hintorium-tooltip[data-position="right"]::after {
+  top: var(--arrow-offset-y, 50%);
+  left: -5px;
+  transform: translateY(-50%) rotate(45deg);
 }
 
 /* Show / Hidden */
@@ -258,8 +295,4 @@
   overflow: hidden !important;
   clip: rect(1px, 1px, 1px, 1px) !important;
   white-space: nowrap !important;
-}
-
-#app {
-  padding: 40px;
 }
