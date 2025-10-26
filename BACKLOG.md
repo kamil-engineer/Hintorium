@@ -40,8 +40,8 @@ Features that distinguish the library and increase the user experience.
 - [x] 🎨 Additional themes (glass, pastel, neon, gradients)
 - [x] ✨ Additional animations (slide, zoom, bounce)
 - [x] ⏱️ Delay option (`data-tooltip-delay="300"`)
-- [ ] 🔗 Tooltips with HTML (e.g., `<img>`, `<a>`)
-- [ ] 🔄 Dynamic content (callback or async load)
+- [x] 🔗 Tooltips with HTML (e.g., `<img>`, `<a>`)
+- [x] 🔄 Dynamic content (callback or async load)
 - [ ] 📦 Wrappers for React/Vue/Svelte (`@hintorium/react`)
 
 ---
