@@ -11,6 +11,11 @@
   );
   --hint-tooltip-z-index: 10000;
   --hint-tooltip-transition: all 0.2s ease-out;
+
+  --hint-tooltip-loading-color: rgba(0, 0, 0, 0.6);
+  --hint-tooltip-error-color: #d63031;
+  --hint-tooltip-loading-font-style: italic;
+  --hint-tooltip-error-font-weight: 500;
 }
 
 /* ========== BASE TOOLTIP ========== */
@@ -81,12 +86,31 @@
   pointer-events: none;
 }
 
+/* ============================= */
+/* 🌀 Loading / ⚠️ Error Styles  */
+/* ============================= */
+
+.hintorium-loading {
+  display: inline-block;
+  color: var(--hint-tooltip-loading-color);
+  font-style: var(--hint-tooltip-loading-font-style);
+  transition: opacity 0.2s ease;
+}
+
+.hintorium-error {
+  color: var(--hint-tooltip-error-color);
+  font-weight: var(--hint-tooltip-error-font-weight);
+  transition: color 0.2s ease;
+}
+
 /* ========== THEMES ========== */
 .hintorium-tooltip.light {
   --tooltip-bg: #fff;
   --tooltip-color: #333;
   --tooltip-border: 1px solid #e1e5e9;
   --tooltip-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  --hint-tooltip-loading-color: rgba(0, 0, 0, 0.55);
+  --hint-tooltip-error-color: #d63031;
 
   background-color: var(--tooltip-bg);
   color: var(--tooltip-color);
@@ -99,6 +123,8 @@
   --tooltip-color: #f7fafc;
   --tooltip-border: 1px solid #4a5568;
   --tooltip-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --hint-tooltip-loading-color: rgba(255, 255, 255, 0.75);
+  --hint-tooltip-error-color: #ff6b6b;
 
   background-color: var(--tooltip-bg);
   color: var(--tooltip-color);
@@ -112,6 +138,8 @@
   --tooltip-border: 1px solid rgba(255, 255, 255, 0.3);
   --tooltip-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
   --tooltip-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --hint-tooltip-loading-color: rgba(17, 17, 17, 0.75);
+  --hint-tooltip-error-color: #c0392b;
 
   background-color: var(--tooltip-bg);
   color: var(--tooltip-color);
@@ -130,6 +158,8 @@
   --tooltip-color: #333;
   --tooltip-border: none;
   --tooltip-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  --hint-tooltip-loading-color: rgba(51, 51, 51, 0.75);
+  --hint-tooltip-error-color: #a83279;
 
   background: var(--tooltip-bg);
   color: var(--tooltip-color);
@@ -144,6 +174,8 @@
   --tooltip-border: 1px solid #00ff88;
   --tooltip-shadow: 0 0 10px #00ff88, inset 0 0 10px rgba(0, 255, 136, 0.1);
   --tooltip-text-shadow: 0 0 5px #00ff88;
+  --hint-tooltip-loading-color: #00ff88;
+  --hint-tooltip-error-color: #ff0055;
 
   background-color: var(--tooltip-bg);
   color: var(--tooltip-color);
@@ -168,6 +200,8 @@
   --tooltip-border: none;
   --tooltip-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   --tooltip-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --hint-tooltip-loading-color: #ffffff;
+  --hint-tooltip-error-color: #ffcc00;
 
   background: var(--tooltip-bg);
   background-size: 300% 300%;

@@ -1,13 +1,14 @@
 import { AccessibilityManager } from "./accessibility";
 import { AnimationManager } from "./animation";
 import { TOOLTIP_CONSTANTS } from "./constants";
+import { TooltipContent, type TooltipContentSource } from "./content";
 import { MobileManager } from "./mobile";
 import { SmartPositioning } from "./positioning";
 import type { TooltipOptions } from "./types";
 
 export class Tooltip {
   public element: HTMLElement;
-  private content: string;
+  private contentManager: TooltipContent;
   private tooltipEl: HTMLDivElement | null = null;
   private options: TooltipOptions = {};
   private readonly id: string;
@@ -15,9 +16,13 @@ export class Tooltip {
 
   private showTimeout: number | null = null;
 
-  constructor(element: HTMLElement, content: string, options?: TooltipOptions) {
+  constructor(
+    element: HTMLElement,
+    content: TooltipContentSource,
+    options?: TooltipOptions
+  ) {
     this.element = element;
-    this.content = content;
+    this.contentManager = new TooltipContent(content);
     this.id = this.generateId();
 
     if (options) {
@@ -37,15 +42,21 @@ export class Tooltip {
   private handleMouseEnter = () => this.show();
   private handleMouseLeave = () => this.hide();
 
-  private createElement(): HTMLDivElement {
+  private async createElement(): Promise<HTMLDivElement> {
     const tooltip = document.createElement("div");
     tooltip.id = this.id;
     tooltip.classList.add(TOOLTIP_CONSTANTS.CSS_CLASSES.BASE);
     tooltip.classList.add(
       this.options.theme || TOOLTIP_CONSTANTS.DEFAULT.THEME
     );
-    tooltip.textContent = this.content;
 
+    const contentNode = await this.contentManager.render();
+
+    if (typeof contentNode === "string") {
+      tooltip.innerHTML = contentNode;
+    } else {
+      tooltip.appendChild(contentNode);
+    }
     tooltip.setAttribute("data-position", this.options.position || "top");
 
     return tooltip;
@@ -107,7 +118,7 @@ export class Tooltip {
   }
 
   private async showTooltip() {
-    this.tooltipEl = this.createElement();
+    this.tooltipEl = await this.createElement();
     this.setupAccessibility();
     document.body.appendChild(this.tooltipEl);
 
