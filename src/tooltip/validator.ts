@@ -74,6 +74,36 @@ export class TooltipValidator {
   }
 
   /**
+   * Validates the delay value for a tooltip.
+   * Ensures that the provided value is a finite number and non-negative.
+   *
+   * Logs a console warning if the value is invalid.
+   *
+   * @param delay - The raw delay value (string from data attribute or number from options).
+   * @param element - The HTML element associated with the tooltip, used for logging.
+   * @returns A valid number delay (>= 0). Falls back to 0 if invalid.
+   */
+  static validateDelay(
+    delay: string | number | null,
+    element: HTMLElement
+  ): number {
+    if (delay === null || delay === undefined) return 0;
+
+    const parsed = typeof delay === "number" ? delay : Number(delay);
+
+    if (Number.isNaN(parsed) || parsed < 0) {
+      console.warn(
+        `⚠️ Invalid tooltip delay "${delay}" on element`,
+        element,
+        "\nDelay must be a non-negative number in milliseconds. Falling back to 0."
+      );
+      return 0;
+    }
+
+    return parsed;
+  }
+
+  /**
    * Validates whether the provided theme string is a supported tooltip theme.
    *
    * Logs a console warning if the theme is invalid or unsupported.

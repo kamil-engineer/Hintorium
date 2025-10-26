@@ -14,6 +14,7 @@ export type TooltipOptions = {
   position?: TooltipPosition;
   theme?: TooltipTheme;
   animation?: TooltipAnimation;
+  delay?: number;
   readonly a11y?: {
     readonly keyboard?: boolean;
     readonly announceOnShow?: boolean;

@@ -170,11 +170,16 @@ export class TooltipManager {
       TOOLTIP_CONSTANTS.ATTRIBUTES.TOOLTIP_ANIMATION
     );
 
+    const rawDelay = element.getAttribute(
+      TOOLTIP_CONSTANTS.ATTRIBUTES.TOOLTIP_DELAY
+    );
+
     const options: TooltipOptions = {
       position: TooltipValidator.getValidPosition(rawPosition, element),
       theme: TooltipValidator.getValidTheme(rawTheme, element),
       animation: TooltipValidator.getValidAnimation(rawAnimation, element),
       mobile: MobileManager.resolveMobileOptions(this.options.mobile),
+      delay: TooltipValidator.validateDelay(rawDelay, element),
     };
 
     return {
