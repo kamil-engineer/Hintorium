@@ -13,6 +13,8 @@ export class Tooltip {
   private readonly id: string;
   private listeners: Map<string, EventListener> = new Map();
 
+  private showTimeout: number | null = null;
+
   constructor(element: HTMLElement, content: string, options?: TooltipOptions) {
     this.element = element;
     this.content = content;
@@ -92,9 +94,21 @@ export class Tooltip {
   async show() {
     if (this.tooltipEl) return;
 
+    const delay = this.options.delay ?? 0;
+
+    if (delay > 0) {
+      this.showTimeout = window.setTimeout(() => {
+        this.showTimeout = null;
+        this.showTooltip();
+      }, delay);
+    } else {
+      this.showTooltip();
+    }
+  }
+
+  private async showTooltip() {
     this.tooltipEl = this.createElement();
     this.setupAccessibility();
-
     document.body.appendChild(this.tooltipEl);
 
     SmartPositioning.position(
@@ -113,10 +127,15 @@ export class Tooltip {
   }
 
   async hide() {
+    if (this.showTimeout) {
+      clearTimeout(this.showTimeout);
+      this.showTimeout = null;
+      return;
+    }
+
     if (!this.tooltipEl) return;
 
     await AnimationManager.hide(this.tooltipEl);
-
     document.body.removeChild(this.tooltipEl);
     this.tooltipEl = null;
   }

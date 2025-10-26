@@ -11,6 +11,7 @@ export const TOOLTIP_CONSTANTS = {
     TOOLTIP_POSITION: "data-hintorium-tooltip-position",
     TOOLTIP_THEME: "data-hintorium-tooltip-theme",
     TOOLTIP_ANIMATION: "data-hintorium-tooltip-animation",
+    TOOLTIP_DELAY: "data-hintorium-tooltip-delay",
   },
 
   CSS_CLASSES: {
