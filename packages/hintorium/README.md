@@ -1,127 +1,101 @@
-# Hintorium – Advanced Tooltip Library
+# Hintorium
 
-Hintorium is a modern, highly configurable tooltip library built with TypeScript.
-It provides developers with an easy way to add interactive, accessible, and responsive tooltips to any web project.
-
----
-
-## 🚀 Overview
-
-Hintorium goes beyond standard tooltips by offering:
-
-- Smart positioning with automatic flipping to stay within viewport
-- Multiple themes: dark, light, glass, pastel, neon, gradient
-- Smooth animations: fade, slide, zoom, bounce
-- HTML and dynamic content support (callbacks, async loading, remote content)
-- Accessibility (keyboard focus support, ARIA attributes)
-- Mobile-friendly interaction (tap & long-press)
-- Configurable delay, size, and custom rendering options
-- Extensible plugin system (Markdown, i18n, analytics, inline hints, onboarding)
+> Advanced, accessible, and fully customizable tooltip library for modern web apps.  
+> Built with TypeScript and SCSS.
 
 ---
 
-## 🎯 Features
-
-### 1. Flexible positioning
-
-Tooltips can appear on top, bottom, left, or right of any element.
-If there isn’t enough space, Hintorium intelligently flips the tooltip to fit.
-
-### 2. Rich content support
-
-Supports plain text, safe HTML, DOM elements, or dynamically loaded content from APIs or callbacks.
-Includes loading and error states with accessible visual feedback.
-
-### 3. Multiple themes & animations
-
-Choose from a variety of visual styles and entry/exit animations to match your UI.
-
-### 4. Accessibility (A11y)
-
-Built with ARIA and keyboard navigation in mind. Tooltips are fully screen-reader compatible.
-
-### 5. Mobile & responsive
-
-Tooltips automatically adjust to viewport size and handle touch interactions seamlessly.
-
-### 6. Extensible
-
-Hintorium is designed to grow with your project:
-
-- Markdown rendering
-- Internationalization (i18n)
-- Inline hints with icons
-- Guided onboarding / tooltips tours
-- Analytics tracking tooltip usage
-
----
-
-## 🔧 Installation
-
-Install via npm:
+## 🚀 Installation
 
 ```bash
-npm install hintorium
+npm install @hintorium/core
+# or
+pnpm add @hintorium/core
+# or
+yarn add @hintorium/core
 ```
 
 ---
 
-## ⚙️ Usage
+## 🧩 Usage
 
-Basic usage with HTML:
+Import the core script and styles in your app:
+
+```ts
+import { initTooltips } from "@hintorium/core";
+import "@hintorium/core/styles.css";
+
+initTooltips({
+  theme: "dark",
+  animation: "fade",
+  delay: 150,
+});
+```
+
+Then, in your HTML:
 
 ```html
-<button data-hintorium-tooltip="This is a tooltip!" data-hintorium-tooltip-position="top">Hover me</button>
+<button data-tooltip="Save changes">💾 Save</button>
 ```
 
-Initialize globally in JS:
+Hintorium automatically finds elements with `data-tooltip` attributes and applies positioning, animations, and themes.
 
-```ts
-import { initTooltip } from "hintorium";
+---
 
-initTooltip({
-  theme: "dark",
-  delay: 200,
-});
+## 🎨 Themes & Animations
+
+Available out of the box:
+
+**Themes:** `light`, `dark`, `glass`, `neon`, `pastel`, `gradient`  
+**Animations:** `fade`, `slide`, `zoom`, `bounce`
+
+You can customize them with SCSS variables or extend them via plugin API.
+
+---
+
+## ⚙️ Configuration
+
+| Option        | Type                                  | Default   | Description                      |
+| ------------- | ------------------------------------- | --------- | -------------------------------- |
+| `theme`       | `string`                              | `"light"` | Tooltip theme                    |
+| `delay`       | `number`                              | `150`     | Delay before showing tooltip     |
+| `animation`   | `string`                              | `"fade"`  | Entry/exit animation             |
+| `position`    | `"top" / "bottom" / "left" / "right"` | `"top"`   | Tooltip position                 |
+| `interactive` | `boolean`                             | `false`   | Allow hover/focus inside tooltip |
+
+---
+
+## 🧠 Accessibility
+
+- Fully ARIA-compliant
+- Keyboard accessible (`Tab`, `Esc`)
+- Screen-reader support
+- High-contrast mode compatible
+
+---
+
+## 📘 Documentation
+
+👉 Full documentation, examples, and live demos available at  
+[https://hintorium.vercel.app](https://hintorium.vercel.app)
+
+---
+
+## 🧱 Project Structure
+
+This library is part of the **Hintorium Monorepo**:
+
 ```
-
-For dynamic or HTML content:
-
-```ts
-new Tooltip(triggerElement, {
-  content: async () => {
-    const res = await fetch('https://randomuser.me/api/');
-    const user = await res.json();
-    return \`<strong>\${user.results[0].name.first}</strong>\`;
-  },
-  theme: 'glass',
-});
+.
+├── apps/
+│   └── docs/           # documentation and examples
+└── packages/
+    └── hintorium/      # the core tooltip library
 ```
 
 ---
 
-## 📝 Why Hintorium?
+## 🧾 License
 
-- Reduces repetitive tooltip boilerplate
-- Works across devices and browsers
-- Handles complex positioning and viewport constraints automatically
-- Fully extensible for custom UI and integrations
-- Improves accessibility and user experience
-
----
-
-## 📌 Roadmap
-
-Hintorium continues to evolve with features such as:
-
-- Guided onboarding tours
-- Inline hints
-- Markdown and i18n plugins
-- Analytics for tooltip interactions
-- Lazy rendering and sticky tooltips
-
----
-
-## 💡 License
-
-MIT License — free to use and modify in personal or commercial projects.
+MIT © [Kamil Engineer](https://github.com/kamil-engineer)  
+See [LICENSE](https://github.com/kamil-engineer/Hintorium/blob/main/LICENSE)
