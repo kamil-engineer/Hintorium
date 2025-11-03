@@ -1,5 +1,6 @@
 import { AccessibilityManager } from "./accessibility";
 import { TOOLTIP_CONSTANTS } from "./constants";
+import { InlineHint } from "./inline-hint";
 import { MobileManager } from "./mobile";
 import { Tooltip } from "./tooltip";
 import type { TooltipOptions } from "./types";
@@ -52,6 +53,7 @@ export class TooltipManager {
     AccessibilityManager.init();
     this.registerGlobalTouchListener();
     this.initializeAllTooltips();
+    InlineHint.initFromDOM();
 
     return this;
   }
