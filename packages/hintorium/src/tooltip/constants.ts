@@ -67,5 +67,6 @@ export const TOOLTIP_CONSTANTS = {
     TOUCH_DELAY: 500,
     DEFAULT_OFFSET: 8,
     VIEWPORT_PADDING: 4,
+    DELAY: 0,
   },
 };

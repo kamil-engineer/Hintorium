@@ -1,20 +1,32 @@
 {
-  "name": "hintorum",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "hintiorium-monorepo",
+  "version": "0.0.1",
+  "private": "true",
+  "description": "",
+  "main": "index.js",
+  "packageManager": "npm@11.6.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kamil-engineer/Hintorium.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kamil-engineer/Hintorium/issues"
+  },
+  "homepage": "https://github.com/kamil-engineer/Hintorium#readme",
   "devDependencies": {
-    "@storybook/addon-docs": "^9.1.10",
-    "@storybook/html-vite": "^9.1.10",
-    "storybook": "^9.1.10",
-    "typescript": "~5.9.3",
-    "vite": "^7.1.7"
+    "turbo": "^2.6.0"
   }
 }
