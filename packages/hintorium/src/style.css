@@ -40,6 +40,9 @@
   opacity: 0;
   pointer-events: none;
   transition: var(--hint-tooltip-transition);
+  & > * {
+    margin: 0;
+  }
 }
 
 .hintorium-tooltip::after {

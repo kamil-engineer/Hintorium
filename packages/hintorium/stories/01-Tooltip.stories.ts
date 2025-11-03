@@ -30,3 +30,23 @@ Default.parameters = {
     },
   },
 };
+
+export const InlineHint = () => {
+  const button = document.createElement("button");
+  button.textContent = "Hover on icon";
+  button.setAttribute("data-hintorium-hint", "Hello Tooltip!");
+  document.body.appendChild(button);
+
+  initTooltip();
+
+  return button;
+};
+
+InlineHint.parameters = {
+  docs: {
+    description: {
+      story:
+        "Default tooltip appears on hover at icon and uses global/default settings.",
+    },
+  },
+};

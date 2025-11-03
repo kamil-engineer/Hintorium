@@ -22,6 +22,27 @@ NormalTooltip.parameters = {
   },
 };
 
+export const MarkdownTooltip = () => {
+  const button = document.createElement("button");
+  button.textContent = "Hover me";
+  button.setAttribute(
+    "data-hintorium-tooltip",
+    "**Markdown** ***Markdownnnn***"
+  );
+  document.body.appendChild(button);
+
+  initTooltip();
+  return button;
+};
+
+MarkdownTooltip.parameters = {
+  docs: {
+    description: {
+      story: "Tooltip with markdown content.",
+    },
+  },
+};
+
 export const HTMLTooltip = () => {
   const button = document.createElement("button");
   button.textContent = "Hover me";
