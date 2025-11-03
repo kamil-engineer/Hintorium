@@ -8,6 +8,7 @@ export const VALID_TOOLTIP_POSITIONS = [
 export const TOOLTIP_CONSTANTS = {
   ATTRIBUTES: {
     TOOLTIP: "data-hintorium-tooltip",
+    HINT_TOOLTIP: "data-hintorium-hint",
     TOOLTIP_POSITION: "data-hintorium-tooltip-position",
     TOOLTIP_THEME: "data-hintorium-tooltip-theme",
     TOOLTIP_ANIMATION: "data-hintorium-tooltip-animation",
@@ -16,6 +17,7 @@ export const TOOLTIP_CONSTANTS = {
 
   CSS_CLASSES: {
     BASE: "hintorium-tooltip",
+    HINT: "hintorium-inline-hint",
     SHOW: "show",
     HIDDEN: "hidden",
 
