@@ -1,3 +1,5 @@
+import { marked } from "marked";
+
 export type TooltipContentSource =
   | string
   | HTMLElement
@@ -29,7 +31,7 @@ export class TooltipContent {
       }
 
       if (typeof this.content === "string") {
-        return this.sanitizeHTML(this.content);
+        return this.renderString(this.content);
       }
 
       let result: string | HTMLElement = this.LOADING_HTML;
@@ -39,13 +41,22 @@ export class TooltipContent {
       if (resolved instanceof HTMLElement) {
         result = resolved;
       } else {
-        result = this.sanitizeHTML(resolved ?? "");
+        result = await this.renderString(resolved);
       }
 
       return result;
     } catch {
       return this.ERROR_HTML;
     }
+  }
+
+  /**
+   * Convert a string to HTML, treating it as Markdown
+   * and then sanitizing it.
+   */
+  private async renderString(raw: string): Promise<string> {
+    const htmlFromMarkdown = await marked.parse(raw);
+    return this.sanitizeHTML(htmlFromMarkdown);
   }
 
   /**
@@ -71,7 +82,7 @@ export class TooltipContent {
         const response = await fetch(result);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const text = await response.text();
-        const safe = this.sanitizeHTML(text);
+        const safe = await this.renderString(text);
         TooltipContent.cache.set(result, safe);
         return safe;
       } catch {
