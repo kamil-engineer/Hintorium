@@ -13,7 +13,7 @@ import type { TooltipOptions } from "./types";
  * new InlineHint(labelEl, "Explain the field", { position: "right" });
  *
  * // or declarative
- * <span data-hint="Explain" data-hint-position="bottom"></span>
+ * <span data-tooltip-hint="Explain" data-hintorium-tooltip-position="bottom"></span>
  */
 
 export class InlineHint {
