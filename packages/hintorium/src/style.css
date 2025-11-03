@@ -330,3 +330,7 @@
   clip: rect(1px, 1px, 1px, 1px) !important;
   white-space: nowrap !important;
 }
+
+.container {
+  font-family: var(--hint-tooltip-font-family);
+}

@@ -91,8 +91,6 @@ export class TooltipManager {
       ...options,
     };
 
-    console.log(mergedOptions);
-
     const tooltip = new Tooltip(element, content, mergedOptions);
 
     this.tooltips.set(element, tooltip);
