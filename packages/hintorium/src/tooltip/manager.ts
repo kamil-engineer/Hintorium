@@ -91,6 +91,8 @@ export class TooltipManager {
       ...options,
     };
 
+    console.log(mergedOptions);
+
     const tooltip = new Tooltip(element, content, mergedOptions);
 
     this.tooltips.set(element, tooltip);
@@ -175,18 +177,25 @@ export class TooltipManager {
     );
 
     const options: TooltipOptions = {
-      position: TooltipValidator.getValidPosition(rawPosition, element),
-      theme: TooltipValidator.getValidTheme(rawTheme, element),
-      animation: TooltipValidator.getValidAnimation(rawAnimation, element),
-      mobile: MobileManager.resolveMobileOptions(this.options.mobile),
-      delay: TooltipValidator.validateDelay(rawDelay, element),
+      position: rawPosition
+        ? TooltipValidator.getValidPosition(rawPosition, element)
+        : this.options.position ?? TOOLTIP_CONSTANTS.DEFAULT.POSITION,
+      theme: rawTheme
+        ? TooltipValidator.getValidTheme(rawTheme, element)
+        : this.options.theme ?? TOOLTIP_CONSTANTS.DEFAULT.THEME,
+      animation: rawAnimation
+        ? TooltipValidator.getValidAnimation(rawAnimation, element)
+        : this.options.animation ?? TOOLTIP_CONSTANTS.DEFAULT.ANIMATION,
+      mobile:
+        this.options.mobile !== undefined
+          ? MobileManager.resolveMobileOptions(this.options.mobile)
+          : {},
+      delay: rawDelay
+        ? TooltipValidator.validateDelay(rawDelay, element)
+        : this.options.delay ?? TOOLTIP_CONSTANTS.DEFAULT.DELAY,
     };
 
-    return {
-      ...TOOLTIP_CONSTANTS.DEFAULT,
-      ...this.options,
-      ...options,
-    };
+    return options;
   }
 
   /**

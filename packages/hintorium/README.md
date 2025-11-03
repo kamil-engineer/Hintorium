@@ -1,5 +1,8 @@
 # Hintorium
 
+![npm](https://img.shields.io/npm/dw/hintorium-core)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+
 > Advanced, accessible, and fully customizable tooltip library for modern web apps.  
 > Built with TypeScript and SCSS.
 
@@ -8,11 +11,11 @@
 ## 🚀 Installation
 
 ```bash
-npm install @hintorium/core
+npm install hintorium-core
 # or
-pnpm add @hintorium/core
+pnpm add hintorium-core
 # or
-yarn add @hintorium/core
+yarn add hintorium-core
 ```
 
 ---
@@ -22,8 +25,8 @@ yarn add @hintorium/core
 Import the core script and styles in your app:
 
 ```ts
-import { initTooltips } from "@hintorium/core";
-import "@hintorium/core/styles.css";
+import { initTooltips } from "hintorium-core";
+import "hintorium-core/dist/core.css";
 
 initTooltips({
   theme: "dark",
