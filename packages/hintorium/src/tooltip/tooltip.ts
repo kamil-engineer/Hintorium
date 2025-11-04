@@ -15,6 +15,7 @@ export class Tooltip {
   private listeners: Map<string, EventListener> = new Map();
 
   private showTimeout: number | null = null;
+  private rtl: boolean;
 
   constructor(
     element: HTMLElement,
@@ -22,6 +23,7 @@ export class Tooltip {
     options?: TooltipOptions
   ) {
     this.element = element;
+    this.rtl = this.detectRTL();
     this.contentManager = new TooltipContent(content);
     this.id = this.generateId();
 
@@ -49,6 +51,11 @@ export class Tooltip {
     tooltip.classList.add(
       this.options.theme || TOOLTIP_CONSTANTS.DEFAULT.THEME
     );
+
+    if (this.rtl) {
+      tooltip.setAttribute("dir", "rtl");
+      tooltip.classList.add(TOOLTIP_CONSTANTS.CSS_CLASSES.RTL);
+    }
 
     const contentNode = await this.contentManager.render();
 
@@ -81,7 +88,7 @@ export class Tooltip {
   private setupListeners(): void {
     const eventsMap: Record<string, EventListener> = {
       mouseenter: this.handleMouseEnter,
-      mouseleave: this.handleMouseLeave,
+      // mouseleave: this.handleMouseLeave,
       focus: this.handleMouseEnter,
       blur: this.handleMouseLeave,
       "tooltip:show": this.handleTooltipShow,
@@ -125,7 +132,8 @@ export class Tooltip {
     SmartPositioning.position(
       this.element,
       this.tooltipEl,
-      this.options.position
+      this.options.position,
+      this.rtl
     );
 
     if (this.options.a11y?.announceOnShow) {
@@ -149,6 +157,27 @@ export class Tooltip {
     await AnimationManager.hide(this.tooltipEl);
     document.body.removeChild(this.tooltipEl);
     this.tooltipEl = null;
+  }
+
+  /**
+   * Detect if RTL is enabled.
+   */
+
+  detectRTL(): boolean {
+    if (this.options.rtl) return this.options.rtl;
+
+    const dir =
+      this.element.dir || document.documentElement.dir || document.body.dir;
+
+    if (dir) return dir.toLowerCase() === "rtl";
+
+    const lang = document.documentElement.lang?.toLowerCase() ?? "";
+    const rtlLangs = ["ar", "he", "fa", "ur"];
+    return rtlLangs.some((prefix) => lang.startsWith(prefix));
+  }
+
+  isRTL(): boolean {
+    return this.rtl;
   }
 
   destroy(): void {

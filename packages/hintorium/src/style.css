@@ -363,6 +363,22 @@
   }
 }
 
+/* ==================================== */
+/* 🇴🇸 RTL SUPPORT — direction: rtl */
+/* ==================================== */
+
+.hintorium-tooltip[dir="rtl"],
+.hintorium-tooltip.hintorium-tooltip-rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+.hintorium-tooltip[dir="rtl"] *,
+.hintorium-tooltip.hintorium-tooltip-rtl * {
+  direction: rtl;
+  text-align: inherit;
+}
+
 /* ======= HELPERS ======= */
 
 .keyboard-focus {
@@ -390,4 +406,8 @@
 
 .container {
   font-family: var(--hint-tooltip-font-family);
+}
+
+#app {
+  padding: 80px;
 }

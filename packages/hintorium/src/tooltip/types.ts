@@ -25,4 +25,5 @@ export type TooltipOptions = {
     readonly longPress?: boolean;
     readonly touchDelay?: number;
   };
+  rtl?: boolean;
 };
