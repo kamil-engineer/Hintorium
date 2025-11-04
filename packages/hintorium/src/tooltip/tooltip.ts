@@ -88,7 +88,7 @@ export class Tooltip {
   private setupListeners(): void {
     const eventsMap: Record<string, EventListener> = {
       mouseenter: this.handleMouseEnter,
-      // mouseleave: this.handleMouseLeave,
+      mouseleave: this.handleMouseLeave,
       focus: this.handleMouseEnter,
       blur: this.handleMouseLeave,
       "tooltip:show": this.handleTooltipShow,
