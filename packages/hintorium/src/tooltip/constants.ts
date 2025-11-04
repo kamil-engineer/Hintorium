@@ -18,6 +18,7 @@ export const TOOLTIP_CONSTANTS = {
   CSS_CLASSES: {
     BASE: "hintorium-tooltip",
     HINT: "hintorium-inline-hint",
+    RTL: "hintorium-tooltip-rtl",
     SHOW: "show",
     HIDDEN: "hidden",
 

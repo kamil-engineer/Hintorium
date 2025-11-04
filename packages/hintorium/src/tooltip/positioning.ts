@@ -29,12 +29,14 @@ export class SmartPositioning {
    * @param tooltipElement - The tooltip element to be positioned.
    * @param position - Desired position ("top" | "bottom" | "left" | "right" | "auto").
    * @param offset - Distance in pixels between the trigger and the tooltip.
+   * @param rtl - If direction is rtl or ltr.
    */
 
   static position(
     triggerElement: HTMLElement,
     tooltipElement: HTMLElement,
     position: TooltipPosition = "top",
+    rtl?: boolean,
     offset = SmartPositioning.DEFAULT_OFFSET
   ): void {
     if (typeof window === "undefined" || !triggerElement || !tooltipElement)
@@ -44,7 +46,8 @@ export class SmartPositioning {
       triggerElement,
       tooltipElement,
       position,
-      offset
+      offset,
+      rtl
     );
     tooltipElement.style.top = `${coords.top}px`;
     tooltipElement.style.left = `${coords.left}px`;
@@ -58,7 +61,8 @@ export class SmartPositioning {
     trigger: HTMLElement,
     tooltip: HTMLElement,
     preferred: TooltipPosition,
-    offset: number
+    offset: number,
+    rtl?: boolean
   ): PositionCoordinates {
     // 1️⃣ Read element and viewport dimensions
     const triggerRect = trigger.getBoundingClientRect();
@@ -97,6 +101,11 @@ export class SmartPositioning {
       left: space.left >= tpWidth,
       right: space.right >= tpWidth,
     };
+
+    if (rtl) {
+      if (preferred === "left") preferred = "right";
+      else if (preferred === "right") preferred = "left";
+    }
 
     // 5️⃣ Determine actual position (flip if necessary)
     let actual: TooltipPosition = preferred;
@@ -166,6 +175,7 @@ export class SmartPositioning {
 
     // 9️⃣ Set data-position for CSS
     tooltip.setAttribute("data-position", actual);
+    tooltip.setAttribute("dir", rtl ? "rtl" : "ltr");
 
     return { top: topPos, left: leftPos, actualPosition: actual };
   }
