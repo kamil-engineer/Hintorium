@@ -13,7 +13,9 @@ export class Tooltip {
   private options: TooltipOptions = {};
   private readonly id: string;
   private listeners: Map<string, EventListener> = new Map();
-
+  private outsideClickListener:
+    | ((event: MouseEvent | TouchEvent) => void)
+    | null = null;
   private showTimeout: number | null = null;
   private rtl: boolean;
 
@@ -43,6 +45,7 @@ export class Tooltip {
     this.tooltipEl ? this.hide() : this.show();
   private handleMouseEnter = () => this.show();
   private handleMouseLeave = () => this.hide();
+  private handleClick = () => (this.tooltipEl ? this.hide() : this.show());
 
   private async createElement(): Promise<HTMLDivElement> {
     const tooltip = document.createElement("div");
@@ -88,13 +91,18 @@ export class Tooltip {
   private setupListeners(): void {
     const eventsMap: Record<string, EventListener> = {
       mouseenter: this.handleMouseEnter,
-      mouseleave: this.handleMouseLeave,
+      mouseleave: this.options.sticky ? () => {} : this.handleMouseLeave, // 👈 ignore mouseleave if sticky
       focus: this.handleMouseEnter,
-      blur: this.handleMouseLeave,
+      blur: this.options.sticky ? () => {} : this.handleMouseLeave,
       "tooltip:show": this.handleTooltipShow,
       "tooltip:hide": this.handleTooltipHide,
       "tooltip:toggle": this.handleTooltipToggle,
     };
+
+    if (this.options.sticky) {
+      this.element.addEventListener("click", this.handleClick);
+      this.listeners.set("click", this.handleClick);
+    }
 
     Object.entries(eventsMap).forEach(([event, handler]) => {
       this.element.addEventListener(event, handler);
@@ -141,10 +149,25 @@ export class Tooltip {
         `Tooltip shown: ${this.element.textContent}`
       );
     }
+    if (this.options.sticky) {
+      this.addOutsideClickListener();
+    }
 
     await AnimationManager.show(this.tooltipEl, this.options.animation);
   }
 
+  private addOutsideClickListener() {
+    this.outsideClickListener = (event: MouseEvent | TouchEvent) => {
+      const target = event.target as HTMLElement;
+      if (this.tooltipEl?.contains(target) || this.element.contains(target)) {
+        return;
+      }
+      this.hide();
+    };
+
+    document.addEventListener("mousedown", this.outsideClickListener);
+    document.addEventListener("touchstart", this.outsideClickListener);
+  }
   async hide() {
     if (this.showTimeout) {
       clearTimeout(this.showTimeout);
@@ -154,9 +177,15 @@ export class Tooltip {
 
     if (!this.tooltipEl) return;
 
-    await AnimationManager.hide(this.tooltipEl);
-    document.body.removeChild(this.tooltipEl);
-    this.tooltipEl = null;
+    try {
+      await AnimationManager.hide(this.tooltipEl);
+
+      this.tooltipEl?.parentNode?.removeChild(this.tooltipEl);
+    } catch (err) {
+      console.warn("[Hintorium Tooltip] Error hiding tooltip:", err);
+    } finally {
+      this.tooltipEl = null;
+    }
   }
 
   /**

@@ -116,8 +116,6 @@ export class HintoriumI18n {
     const pack = this.translations[lang];
     const fallbackPack = this.translations[this.fallbackLang];
 
-    console.log(lang);
-
     const resolveNested = (obj: any, path: string) => {
       return path.split(".").reduce((acc, part) => acc?.[part], obj);
     };
@@ -127,12 +125,6 @@ export class HintoriumI18n {
       resolveNested(fallbackPack, key) ||
       fallback ||
       key;
-
-    if (!resolveNested(pack, key)) {
-      console.warn(
-        `[HintoriumI18n] Missing translation for "${key}" in "${lang}"`
-      );
-    }
 
     return text;
   }
