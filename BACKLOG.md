@@ -54,7 +54,7 @@ Going beyond classic tooltips → greater value for the community.
 - [x] 🏷️ Inline hints (small "?" icons with hints)
 - [ ] 🧩 Plugins / extensions:
 - [x] Markdown tooltips
-- [ ] i18n integration (translations)
+- [x] i18n integration (translations)
 - [ ] 📊 Analytics (number of times the tooltip has appeared)
 
 ---
@@ -66,6 +66,6 @@ Additional ideas that can be implemented later.
 - [ ] Lazy rendering (tooltip created only when needed)
 - [ ] Sticky mode (tooltip disappears only when clicking outside of it)
 - [ ] Developer mode (debugging, frame around the tooltip)
-- [ ] RTL support (Arabic/Hebrew languages)
+- [x] RTL support (Arabic/Hebrew languages)
 
 ---
