@@ -68,3 +68,22 @@ I18nTooltip.parameters = {
     },
   },
 };
+
+export const StickyTooltip = () => {
+  const button = document.createElement("button");
+  button.textContent = "Hover me";
+  button.setAttribute("data-hintorium-tooltip", "Sticky tooltip");
+  button.setAttribute("data-hintorium-tooltip-position", "left");
+  document.body.appendChild(button);
+
+  initTooltip({ sticky: true });
+  return button;
+};
+
+StickyTooltip.parameters = {
+  docs: {
+    description: {
+      story: "Tooltip with sticky functionality.",
+    },
+  },
+};

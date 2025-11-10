@@ -63,9 +63,8 @@ Going beyond classic tooltips → greater value for the community.
 
 Additional ideas that can be implemented later.
 
-- [ ] Lazy rendering (tooltip created only when needed)
+- [x] Lazy rendering (tooltip created only when needed)
 - [ ] Sticky mode (tooltip disappears only when clicking outside of it)
-- [ ] Developer mode (debugging, frame around the tooltip)
 - [x] RTL support (Arabic/Hebrew languages)
 
 ---

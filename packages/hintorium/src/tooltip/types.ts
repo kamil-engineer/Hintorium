@@ -26,4 +26,5 @@ export type TooltipOptions = {
     readonly touchDelay?: number;
   };
   rtl?: boolean;
+  sticky?: boolean;
 };
