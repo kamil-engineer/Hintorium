@@ -1,4 +1,5 @@
 import { marked } from "marked";
+import { I18n } from "./i18n";
 
 export type TooltipContentSource =
   | string
@@ -31,6 +32,12 @@ export class TooltipContent {
       }
 
       if (typeof this.content === "string") {
+        const translation = I18n.t(this.content);
+
+        if (translation) {
+          return this.renderString(translation);
+        }
+
         return this.renderString(this.content);
       }
 
