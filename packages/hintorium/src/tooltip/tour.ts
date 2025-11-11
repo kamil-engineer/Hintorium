@@ -2,6 +2,7 @@ import type { TooltipContentSource } from "./content";
 import { StorageManager } from "./storage";
 import { Tooltip } from "./tooltip";
 import type { TooltipOptions } from "./types";
+import { I18n } from "./i18n";
 
 type TourStep = {
   target: string;
@@ -13,6 +14,30 @@ type TourConstructor = {
   steps: TourStep[];
   localStorageKey?: string;
 };
+
+const en = JSON.parse(
+  JSON.stringify({
+    hintorium: {
+      tour: {
+        next: "Next →",
+        done: "Done",
+        prev: "← Back",
+      },
+    },
+  })
+);
+
+const pl = JSON.parse(
+  JSON.stringify({
+    hintorium: {
+      tour: {
+        next: "Następny →",
+        done: "Gotowe",
+        prev: "← Wstecz",
+      },
+    },
+  })
+);
 
 export class HintoriumTour {
   private steps: TourStep[] = [];
@@ -36,7 +61,13 @@ export class HintoriumTour {
       this.tourStorageKey = localStorageKey;
     }
 
+    this.registerDefaultTranslations();
     this.initializeState();
+  }
+
+  private registerDefaultTranslations() {
+    I18n.setTranslations("en", en);
+    I18n.setTranslations("pl", pl);
   }
 
   initializeState() {
@@ -112,12 +143,16 @@ export class HintoriumTour {
       <button class= "hintorium-tour-btn hintorium-tour-prev" ${
         isFirst ? "disabled" : ""
       }>
-        ← Back
+        ${I18n.t("hintorium.tour.prev")}
       </button>
       ${
         !isLast
-          ? `<button class="hintorium-tour-btn hintorium-tour-next">Next →</button>`
-          : `<button class="hintorium-tour-btn hintorium-tour-done">Done ✓</button>`
+          ? `<button class="hintorium-tour-btn hintorium-tour-next">${I18n.t(
+              "hintorium.tour.next"
+            )}</button>`
+          : `<button class="hintorium-tour-btn hintorium-tour-done">${I18n.t(
+              "hintorium.tour.done"
+            )}</button>`
       }
     </div>
   `;
