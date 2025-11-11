@@ -98,6 +98,8 @@ export class HintoriumTour {
 
     if (this.completedTour) return;
 
+    Tooltip.tourActive = true;
+
     this.showStep(this.current);
   }
 
@@ -192,6 +194,7 @@ export class HintoriumTour {
   finish() {
     if (this.activeTooltip) {
       this.activeTooltip.hide();
+      this.activeTooltip.destroy();
       this.activeTooltip = null;
     }
     this.current = 0;

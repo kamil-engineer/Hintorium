@@ -8,6 +8,9 @@ import { SmartPositioning } from "./positioning";
 import type { TooltipOptions } from "./types";
 
 export class Tooltip {
+  public static activeTooltip: Tooltip | null = null;
+  public static tourActive: boolean = false;
+
   public element: HTMLElement;
   private contentManager: TooltipContent;
   private tooltipEl: HTMLDivElement | null = null;
@@ -44,10 +47,15 @@ export class Tooltip {
   private handleTooltipHide = () => this.hide();
   private handleTooltipToggle = () =>
     this.tooltipEl ? this.hide() : this.show();
-  private handleMouseEnter = () => this.show();
+  private handleMouseEnter = () => {
+    if (Tooltip.tourActive) return;
+    this.show();
+  };
   private handleMouseLeave = () => this.hide();
-  private handleClick = () => (this.tooltipEl ? this.hide() : this.show());
-
+  private handleClick = () => {
+    if (Tooltip.tourActive) return;
+    this.tooltipEl ? this.hide() : this.show();
+  };
   private async createElement(): Promise<HTMLDivElement> {
     const tooltip = document.createElement("div");
     tooltip.id = this.id;
@@ -119,6 +127,12 @@ export class Tooltip {
   }
 
   async show(): Promise<void> {
+    if (Tooltip.activeTooltip && Tooltip.activeTooltip !== this) {
+      await Tooltip.activeTooltip.hide();
+    }
+
+    Tooltip.activeTooltip = this;
+
     if (this.tooltipEl) return;
 
     const delay = this.options.delay ?? 0;
@@ -196,6 +210,7 @@ export class Tooltip {
       console.warn("[Hintorium Tooltip] Error hiding tooltip:", err);
     } finally {
       this.tooltipEl = null;
+      if (Tooltip.activeTooltip === this) Tooltip.activeTooltip = null;
     }
   }
 
