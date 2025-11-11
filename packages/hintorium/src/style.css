@@ -115,6 +115,18 @@
   --hint-tooltip-loading-color: rgba(0, 0, 0, 0.55);
   --hint-tooltip-error-color: #d63031;
 
+  --tour-btn-bg: #edf2f7;
+  --tour-btn-color: #333333;
+  --tour-btn-border: 1px solid #cbd5e0;
+  --tour-btn-hover-bg: #e2e8f0;
+  --tour-btn-hover-color: #000000;
+  --tour-btn-disabled-bg: #f6fbff;
+  --tour-btn-disabled-color: #5f6f84;
+
+  --tour-btn-done-bg: #d63031;
+  --tour-btn-done-color: #ffffff;
+  --tour-btn-done-border: 1px solid #b02628;
+
   background-color: var(--tooltip-bg);
   color: var(--tooltip-color);
   border: var(--tooltip-border);
@@ -128,6 +140,18 @@
   --tooltip-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   --hint-tooltip-loading-color: rgba(255, 255, 255, 0.75);
   --hint-tooltip-error-color: #ff6b6b;
+
+  --hint-tour-btn-bg: #4a5568;
+  --hint-tour-btn-color: #f7fafc;
+  --hint-tour-btn-border: 1px solid #2d3748;
+  --hint-tour-btn-hover-bg: #2d3748;
+  --hint-tour-btn-hover-color: #fff;
+  --tour-btn-disabled-bg: #354155;
+  --tour-btn-disabled-color: #a0aec0;
+  --hint-tour-separator-color: #cbd5e0;
+  --tour-btn-done-bg: #d63031;
+  --tour-btn-done-color: #ffffff;
+  --tour-btn-done-border: 1px solid #b02628;
 
   background-color: var(--tooltip-bg);
   color: var(--tooltip-color);
@@ -143,6 +167,19 @@
   --tooltip-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   --hint-tooltip-loading-color: rgba(17, 17, 17, 0.75);
   --hint-tooltip-error-color: #c0392b;
+
+  --tour-btn-bg: rgba(255, 255, 255, 0.3);
+  --tour-btn-color: #111111;
+  --tour-btn-border: 1px solid rgba(255, 255, 255, 0.4);
+  --tour-btn-hover-bg: rgba(255, 255, 255, 0.5);
+  --tour-btn-hover-color: #000000;
+  --tour-btn-disabled-bg: rgba(255, 255, 255, 0.2);
+  --tour-btn-disabled-color: rgba(15, 12, 12, 0.73);
+
+  /* Done button */
+  --tour-btn-done-bg: #d63031;
+  --tour-btn-done-color: #ffffff;
+  --tour-btn-done-border: 1px solid #b02628;
 
   background-color: var(--tooltip-bg);
   color: var(--tooltip-color);
@@ -164,6 +201,19 @@
   --hint-tooltip-loading-color: rgba(51, 51, 51, 0.75);
   --hint-tooltip-error-color: #a83279;
 
+  --tour-btn-bg: rgba(255, 255, 255, 0.6);
+  --tour-btn-color: #333333;
+  --tour-btn-border: 1px solid rgba(0, 0, 0, 0.1);
+  --tour-btn-hover-bg: rgba(255, 255, 255, 0.8);
+  --tour-btn-hover-color: #111111;
+  --tour-btn-disabled-bg: rgba(255, 255, 255, 0.4);
+  --tour-btn-disabled-color: rgba(15, 12, 12, 0.73);
+
+  /* Done button */
+  --tour-btn-done-bg: #a83279;
+  --tour-btn-done-color: #ffffff;
+  --tour-btn-done-border: 1px solid #8b2865;
+
   background: var(--tooltip-bg);
   color: var(--tooltip-color);
   border: var(--tooltip-border);
@@ -179,6 +229,18 @@
   --tooltip-text-shadow: 0 0 5px #00ff88;
   --hint-tooltip-loading-color: #00ff88;
   --hint-tooltip-error-color: #ff0055;
+
+  --tour-btn-bg: rgba(0, 255, 136, 0.1);
+  --tour-btn-color: #00ff88;
+  --tour-btn-border: 1px solid #00ff88;
+  --tour-btn-hover-bg: rgba(0, 255, 136, 0.2);
+  --tour-btn-hover-color: #00ff88;
+  --tour-btn-disabled-bg: rgba(0, 255, 136, 0.05);
+  --tour-btn-disabled-color: rgba(0, 255, 136, 0.81);
+
+  --tour-btn-done-bg: #d63031;
+  --tour-btn-done-color: #ffffff;
+  --tour-btn-done-border: 1px solid #b02628;
 
   background-color: var(--tooltip-bg);
   color: var(--tooltip-color);
@@ -205,6 +267,19 @@
   --tooltip-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
   --hint-tooltip-loading-color: #ffffff;
   --hint-tooltip-error-color: #ffcc00;
+
+  /* Tour buttons */
+  --tour-btn-bg: rgba(255, 255, 255, 0.2);
+  --tour-btn-color: #ffffff;
+  --tour-btn-border: 1px solid rgba(255, 255, 255, 0.5);
+  --tour-btn-hover-bg: rgba(255, 255, 255, 0.3);
+  --tour-btn-hover-color: #ffffff;
+  --tour-btn-disabled-bg: rgba(255, 255, 255, 0.1);
+  --tour-btn-disabled-color: rgba(255, 255, 255, 0.4);
+
+  --tour-btn-done-bg: #d63031;
+  --tour-btn-done-color: #ffffff;
+  --tour-btn-done-border: 1px solid #b02628;
 
   background: var(--tooltip-bg);
   background-size: 300% 300%;
@@ -384,10 +459,12 @@
 /* ============================= */
 
 .hintorium-tour-nav {
+  --space-up: 10px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: var(--space-up);
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 8px;
   gap: 8px;
@@ -397,6 +474,7 @@
 .hintorium-tour-progress {
   display: flex;
   align-items: center;
+  color: var(--hint-tour-separator-color);
   font-size: 13px;
   opacity: 0.8;
 }
@@ -408,7 +486,7 @@
 
 .hintorium-tour-separator {
   margin: 0 4px;
-  opacity: 0.5;
+  color: var(--hint-tour-separator-color);
 }
 
 .hintorium-tour-buttons {
@@ -418,26 +496,27 @@
 }
 
 .hintorium-tour-btn {
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  border: none;
-  border-radius: 4px;
+  background-color: var(--hint-tour-btn-bg);
+  color: var(--hint-tour-btn-color);
+  border: var(--hint-tour-btn-border);
   padding: 4px 10px;
-  background: var(--tooltip-color);
-  color: var(--tooltip-bg);
+  border-radius: 4px;
+  font-size: 13px;
   cursor: pointer;
-  transition: var(--hint-tooltip-transition);
+  transition: all 0.2s ease;
 }
 
-.hintorium-tour-btn:hover:not(:disabled) {
-  opacity: 0.85;
-  transform: translateY(-1px);
+.hintorium-tour-btn:hover:not(:disabled),
+.hintorium-tour-btn:focus:not(:disabled) {
+  background-color: var(--hint-tour-btn-hover-bg);
+  color: var(--hint-tour-btn-hover-color);
 }
 
 .hintorium-tour-btn:disabled {
-  opacity: 0.4;
+  background-color: var(--tour-btn-disabled-bg);
+  color: var(--tour-btn-disabled-color);
   cursor: not-allowed;
+  opacity: 1;
 }
 
 .hintorium-tour-btn:focus-visible {
@@ -446,8 +525,15 @@
 }
 
 .hintorium-tour-done {
-  background: var(--hint-tooltip-error-color);
-  color: #fff;
+  background-color: var(--tour-btn-done-bg);
+  color: var(--tour-btn-done-color);
+  border: var(--tour-btn-done-border);
+}
+
+.hintorium-tour-done:hover,
+.hintorium-tour-done:focus {
+  background-color: var(--tour-btn-hover-bg);
+  color: var(--tour-btn-hover-color);
 }
 
 /* ======= HELPERS ======= */
