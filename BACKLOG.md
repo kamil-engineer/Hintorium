@@ -55,7 +55,7 @@ Going beyond classic tooltips → greater value for the community.
 - [ ] 🧩 Plugins / extensions:
 - [x] Markdown tooltips
 - [x] i18n integration (translations)
-- [ ] 📊 Analytics (number of times the tooltip has appeared)
+- [x] 📊 Analytics (number of times the tooltip has appeared)
 
 ---
 
@@ -64,7 +64,7 @@ Going beyond classic tooltips → greater value for the community.
 Additional ideas that can be implemented later.
 
 - [x] Lazy rendering (tooltip created only when needed)
-- [ ] Sticky mode (tooltip disappears only when clicking outside of it)
+- [x] Sticky mode (tooltip disappears only when clicking outside of it)
 - [x] RTL support (Arabic/Hebrew languages)
 
 ---

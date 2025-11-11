@@ -15,6 +15,10 @@ export const TOOLTIP_CONSTANTS = {
     TOOLTIP_DELAY: "data-hintorium-tooltip-delay",
   },
 
+  STORAGE_KEYS: {
+    TOOLTIP_ANALYTICS: "tooltip-hintorium_analytics",
+  },
+
   CSS_CLASSES: {
     BASE: "hintorium-tooltip",
     HINT: "hintorium-inline-hint",
