@@ -27,4 +27,5 @@ export type TooltipOptions = {
   };
   rtl?: boolean;
   sticky?: boolean;
+  onInjectContent?: (tooltipEl: HTMLDivElement) => void;
 };

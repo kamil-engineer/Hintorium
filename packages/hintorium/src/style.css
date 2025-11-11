@@ -379,6 +379,77 @@
   text-align: inherit;
 }
 
+/* ============================= */
+/* 🧭 Hintorium Tour Navigation  */
+/* ============================= */
+
+.hintorium-tour-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 8px;
+  gap: 8px;
+  font-family: var(--hint-tooltip-font-family);
+}
+
+.hintorium-tour-progress {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.hintorium-tour-step,
+.hintorium-tour-total {
+  font-weight: 500;
+}
+
+.hintorium-tour-separator {
+  margin: 0 4px;
+  opacity: 0.5;
+}
+
+.hintorium-tour-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hintorium-tour-btn {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 10px;
+  background: var(--tooltip-color);
+  color: var(--tooltip-bg);
+  cursor: pointer;
+  transition: var(--hint-tooltip-transition);
+}
+
+.hintorium-tour-btn:hover:not(:disabled) {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.hintorium-tour-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.hintorium-tour-btn:focus-visible {
+  outline: 2px solid #4a90e2;
+  outline-offset: 2px;
+}
+
+.hintorium-tour-done {
+  background: var(--hint-tooltip-error-color);
+  color: #fff;
+}
+
 /* ======= HELPERS ======= */
 
 .keyboard-focus {

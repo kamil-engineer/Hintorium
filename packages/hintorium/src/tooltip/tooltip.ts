@@ -118,31 +118,32 @@ export class Tooltip {
     this.listeners.clear();
   }
 
-  async show() {
+  async show(): Promise<void> {
     if (this.tooltipEl) return;
 
     const delay = this.options.delay ?? 0;
 
     if (delay > 0) {
-      this.showTimeout = window.setTimeout(() => {
-        this.showTimeout = null;
-        this.showTooltip();
-      }, delay);
+      return new Promise((resolve) => {
+        this.showTimeout = window.setTimeout(async () => {
+          this.showTimeout = null;
+          await this.showTooltip();
+          resolve();
+        }, delay);
+      });
     } else {
-      this.showTooltip();
+      await this.showTooltip();
     }
-
-    console.log(Analytics);
-    // Później możemy pobrać statystyki
-    console.log("Tooltip shown times:", Analytics.getCount(this.id));
-
-    // Wszystkie tooltipy
-    console.log("All analytics:", Analytics.getAll());
   }
 
   private async showTooltip() {
     this.tooltipEl = await this.createElement();
     this.setupAccessibility();
+
+    if (this.options.onInjectContent) {
+      this.options.onInjectContent(this.tooltipEl);
+    }
+
     document.body.appendChild(this.tooltipEl);
 
     SmartPositioning.position(
