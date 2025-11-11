@@ -1,4 +1,5 @@
 import { AccessibilityManager } from "./accessibility";
+import { Analytics } from "./analytics";
 import { AnimationManager } from "./animation";
 import { TOOLTIP_CONSTANTS } from "./constants";
 import { TooltipContent, type TooltipContentSource } from "./content";
@@ -130,6 +131,13 @@ export class Tooltip {
     } else {
       this.showTooltip();
     }
+
+    console.log(Analytics);
+    // Później możemy pobrać statystyki
+    console.log("Tooltip shown times:", Analytics.getCount(this.id));
+
+    // Wszystkie tooltipy
+    console.log("All analytics:", Analytics.getAll());
   }
 
   private async showTooltip() {
@@ -143,6 +151,8 @@ export class Tooltip {
       this.options.position,
       this.rtl
     );
+
+    Analytics.increment(this.id);
 
     if (this.options.a11y?.announceOnShow) {
       AccessibilityManager.announceToScreenReader(
