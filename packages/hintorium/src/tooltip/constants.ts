@@ -23,6 +23,8 @@ export const TOOLTIP_CONSTANTS = {
     BASE: "hintorium-tooltip",
     HINT: "hintorium-inline-hint",
     RTL: "hintorium-tooltip-rtl",
+    WRAPPER: "hintorium-tooltip-inner",
+    HINTORIUM_TOUR: "hintorium-tooltip-tour",
     SHOW: "show",
     HIDDEN: "hidden",
 

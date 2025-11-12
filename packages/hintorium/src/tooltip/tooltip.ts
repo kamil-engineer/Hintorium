@@ -69,13 +69,22 @@ export class Tooltip {
       tooltip.classList.add(TOOLTIP_CONSTANTS.CSS_CLASSES.RTL);
     }
 
+    const innerWrapper = document.createElement("div");
+    innerWrapper.classList.add(TOOLTIP_CONSTANTS.CSS_CLASSES.WRAPPER);
+
+    if (this.options.isTour) {
+      innerWrapper.classList.add(TOOLTIP_CONSTANTS.CSS_CLASSES.HINTORIUM_TOUR);
+    }
+
     const contentNode = await this.contentManager.render();
 
     if (typeof contentNode === "string") {
-      tooltip.innerHTML = contentNode;
+      innerWrapper.innerHTML = contentNode;
     } else {
-      tooltip.appendChild(contentNode);
+      innerWrapper.appendChild(contentNode);
     }
+    tooltip.appendChild(innerWrapper);
+
     tooltip.setAttribute("data-position", this.options.position || "top");
 
     return tooltip;
