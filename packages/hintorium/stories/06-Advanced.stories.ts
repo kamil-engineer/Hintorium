@@ -1,4 +1,4 @@
-import { initTooltip, Tooltip } from "../src/index";
+import { HintoriumTour, initTooltip, Tooltip } from "../src/index";
 import { I18n } from "../src/tooltip/i18n";
 
 export default {
@@ -84,6 +84,96 @@ StickyTooltip.parameters = {
   docs: {
     description: {
       story: "Tooltip with sticky functionality.",
+    },
+  },
+};
+
+export const TourTooltips = () => {
+  const div = document.createElement("div");
+
+  const button = document.createElement("button");
+  button.textContent = "Hover me";
+  button.id = "tour-target-1";
+  button.setAttribute("data-hintorium-tooltip", "Sticky tooltip");
+  button.setAttribute("data-hintorium-tooltip-position", "left");
+  div.appendChild(button);
+
+  const secondButton = document.createElement("button");
+  secondButton.textContent = "Hover me too";
+  secondButton.id = "tour-target-2";
+  secondButton.setAttribute("data-hintorium-tooltip", "Another tooltip");
+  secondButton.setAttribute("data-hintorium-tooltip-position", "right");
+  div.appendChild(secondButton);
+
+  document.body.appendChild(div);
+
+  new HintoriumTour({
+    steps: [
+      {
+        target: "#tour-target-1",
+        content: "This is the first step of the tour!",
+      },
+      {
+        target: "#tour-target-2",
+        content: "This is the second step of the tour!",
+      },
+    ],
+  }).start();
+
+  return div;
+};
+
+TourTooltips.parameters = {
+  docs: {
+    description: {
+      story: "Tour tooltips functionality.",
+    },
+  },
+};
+
+export const AutoPlayTourTooltips = () => {
+  const div = document.createElement("div");
+
+  const button = document.createElement("button");
+  button.textContent = "Hover me";
+  button.id = "tour-target-1";
+  button.setAttribute("data-hintorium-tooltip", "Sticky tooltip");
+  button.setAttribute("data-hintorium-tooltip-position", "left");
+  div.appendChild(button);
+
+  const secondButton = document.createElement("button");
+  secondButton.textContent = "Hover me too";
+  secondButton.id = "tour-target-2";
+  secondButton.setAttribute("data-hintorium-tooltip", "Another tooltip");
+  secondButton.setAttribute("data-hintorium-tooltip-position", "right");
+  div.appendChild(secondButton);
+
+  document.body.appendChild(div);
+
+  new HintoriumTour({
+    steps: [
+      {
+        target: "#tour-target-1",
+        content: "This is the first step of the tour!",
+      },
+      {
+        target: "#tour-target-2",
+        content: "This is the second step of the tour!",
+      },
+    ],
+    auto: {
+      delay: 3000,
+      enabled: true,
+    },
+  }).start();
+
+  return div;
+};
+
+AutoPlayTourTooltips.parameters = {
+  docs: {
+    description: {
+      story: "Tour tooltips functionality with auto play setup.",
     },
   },
 };
