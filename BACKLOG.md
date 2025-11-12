@@ -50,9 +50,9 @@ Features that distinguish the library and increase the user experience.
 
 Going beyond classic tooltips → greater value for the community.
 
-- [ ] 🗺️ Onboarding / guided tours (step-by-step tooltips)
+- [x] 🗺️ Onboarding / guided tours (step-by-step tooltips)
 - [x] 🏷️ Inline hints (small "?" icons with hints)
-- [ ] 🧩 Plugins / extensions:
+- [x] 🧩 Plugins / extensions:
 - [x] Markdown tooltips
 - [x] i18n integration (translations)
 - [x] 📊 Analytics (number of times the tooltip has appeared)

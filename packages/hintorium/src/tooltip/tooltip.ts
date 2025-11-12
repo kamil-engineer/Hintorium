@@ -8,6 +8,9 @@ import { SmartPositioning } from "./positioning";
 import type { TooltipOptions } from "./types";
 
 export class Tooltip {
+  public static activeTooltip: Tooltip | null = null;
+  public static tourActive: boolean = false;
+
   public element: HTMLElement;
   private contentManager: TooltipContent;
   private tooltipEl: HTMLDivElement | null = null;
@@ -44,10 +47,15 @@ export class Tooltip {
   private handleTooltipHide = () => this.hide();
   private handleTooltipToggle = () =>
     this.tooltipEl ? this.hide() : this.show();
-  private handleMouseEnter = () => this.show();
+  private handleMouseEnter = () => {
+    if (Tooltip.tourActive) return;
+    this.show();
+  };
   private handleMouseLeave = () => this.hide();
-  private handleClick = () => (this.tooltipEl ? this.hide() : this.show());
-
+  private handleClick = () => {
+    if (Tooltip.tourActive) return;
+    this.tooltipEl ? this.hide() : this.show();
+  };
   private async createElement(): Promise<HTMLDivElement> {
     const tooltip = document.createElement("div");
     tooltip.id = this.id;
@@ -61,13 +69,22 @@ export class Tooltip {
       tooltip.classList.add(TOOLTIP_CONSTANTS.CSS_CLASSES.RTL);
     }
 
+    const innerWrapper = document.createElement("div");
+    innerWrapper.classList.add(TOOLTIP_CONSTANTS.CSS_CLASSES.WRAPPER);
+
+    if (this.options.isTour) {
+      innerWrapper.classList.add(TOOLTIP_CONSTANTS.CSS_CLASSES.HINTORIUM_TOUR);
+    }
+
     const contentNode = await this.contentManager.render();
 
     if (typeof contentNode === "string") {
-      tooltip.innerHTML = contentNode;
+      innerWrapper.innerHTML = contentNode;
     } else {
-      tooltip.appendChild(contentNode);
+      innerWrapper.appendChild(contentNode);
     }
+    tooltip.appendChild(innerWrapper);
+
     tooltip.setAttribute("data-position", this.options.position || "top");
 
     return tooltip;
@@ -118,31 +135,38 @@ export class Tooltip {
     this.listeners.clear();
   }
 
-  async show() {
+  async show(): Promise<void> {
+    if (Tooltip.activeTooltip && Tooltip.activeTooltip !== this) {
+      await Tooltip.activeTooltip.hide();
+    }
+
+    Tooltip.activeTooltip = this;
+
     if (this.tooltipEl) return;
 
     const delay = this.options.delay ?? 0;
 
     if (delay > 0) {
-      this.showTimeout = window.setTimeout(() => {
-        this.showTimeout = null;
-        this.showTooltip();
-      }, delay);
+      return new Promise((resolve) => {
+        this.showTimeout = window.setTimeout(async () => {
+          this.showTimeout = null;
+          await this.showTooltip();
+          resolve();
+        }, delay);
+      });
     } else {
-      this.showTooltip();
+      await this.showTooltip();
     }
-
-    console.log(Analytics);
-    // Później możemy pobrać statystyki
-    console.log("Tooltip shown times:", Analytics.getCount(this.id));
-
-    // Wszystkie tooltipy
-    console.log("All analytics:", Analytics.getAll());
   }
 
   private async showTooltip() {
     this.tooltipEl = await this.createElement();
     this.setupAccessibility();
+
+    if (this.options.onInjectContent) {
+      this.options.onInjectContent(this.tooltipEl);
+    }
+
     document.body.appendChild(this.tooltipEl);
 
     SmartPositioning.position(
@@ -195,6 +219,7 @@ export class Tooltip {
       console.warn("[Hintorium Tooltip] Error hiding tooltip:", err);
     } finally {
       this.tooltipEl = null;
+      if (Tooltip.activeTooltip === this) Tooltip.activeTooltip = null;
     }
   }
 
