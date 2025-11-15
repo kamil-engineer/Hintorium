@@ -1,3 +1,4 @@
+import { handleMobileNavigation } from "../logic/mobile-navigation";
 import NotFound from "./../pages/NotFound";
 import { type Route, routes } from "./routes";
 
@@ -73,6 +74,10 @@ export function render(pathWithQuery: string) {
   }
 
   window.scrollTo(0, 0);
+
+  requestAnimationFrame(() => {
+    handleMobileNavigation();
+  });
 }
 
 function handleLinkClick(e: MouseEvent) {
