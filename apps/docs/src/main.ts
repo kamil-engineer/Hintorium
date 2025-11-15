@@ -1,5 +1,7 @@
 import "./style.css";
-import "../../../packages/hintorium/src";
-import { initTooltip } from "../../../packages/hintorium/src";
 
-initTooltip();
+import { initRouter } from "./router/router";
+
+document.addEventListener("DOMContentLoaded", () => {
+  initRouter();
+});
