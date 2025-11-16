@@ -1,4 +1,5 @@
 import { handleMobileNavigation } from "../logic/mobile-navigation";
+
 import NotFound from "./../pages/NotFound";
 import { type Route, routes } from "./routes";
 

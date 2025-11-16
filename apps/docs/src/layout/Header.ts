@@ -10,7 +10,7 @@ export const Header = () => {
           <div class="header__actions">
             <a
               href="https://github.com/kamil-engineer/Hintorium"
-              class="button button--navigation"
+              class="button button--navigation button--icon"
             >
               <img
                 class="button__image"
@@ -21,17 +21,9 @@ export const Header = () => {
               />
             </a>
 
-            <button class="button button--navigation">
-              <img
-                class="button__image"
-                width="18"
-                height="18"
-                alt="Dark Theme"
-                src="/icons/icon-dark.svg"
-              />
-            </button>
-
-            <button class="button button--navigation button--hamburger">
+            <button
+              class="button button--navigation button--icon button--hamburger"
+            >
               <img
                 class="button__image"
                 width="18"
