@@ -28,6 +28,7 @@ export const Hero = () => {
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              aria-hidden="true"
               class="button__image"
             >
               <path d="M5 12h14" />
@@ -49,6 +50,7 @@ export const Hero = () => {
               stroke-linecap="round"
               stroke-linejoin="round"
               class="button__image"
+              aria-hidden="true"
             >
               <path d="m16 18 6-6-6-6" />
               <path d="m8 6-6 6 6 6" />

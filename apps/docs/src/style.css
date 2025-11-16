@@ -39,7 +39,7 @@
   --color-border: 229, 229, 229;
   --color-ring: 161, 161, 161;
   --color-foreground: 10, 10, 10;
-  --color-muted-foreground: 115, 115, 115;
+  --color-muted-foreground: 105, 105, 105;
   --color-primary-foreground: 250, 250, 250;
   --color-secondary: 245, 245, 245;
   --color-primary: 112, 52, 213;
@@ -186,7 +186,7 @@ html {
     margin-bottom: var(--mb-6);
     text-wrap: balance;
     line-height: 1.625;
-    color: rgb(var(--color-foreground));
+    color: rgb(var(--color-muted-foreground));
   }
 
   & .hero__actions {
@@ -279,12 +279,16 @@ html {
   &:visited {
     font-size: var(--text-sm);
     color: rgb(var(--color-muted-foreground));
-
+    outline: none;
     transition: 0.3s;
   }
 
   &:hover {
     color: rgb(var(--color-foreground));
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgb(var(--color-primary));
   }
 }
 
@@ -322,11 +326,20 @@ html {
 }
 
 .button--primary {
+  position: relative;
   background-color: rgb(var(--color-primary));
   color: rgb(var(--color-primary-foreground));
+  outline: none;
 
   &:hover {
     background-color: rgba(var(--color-primary), 0.9);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgb(var(--color-primary));
+    outline-offset: 2px;
+    border: none;
+    box-shadow: none;
   }
 }
 
@@ -334,6 +347,12 @@ html {
   border: 1px solid rgb(var(--color-border));
   background-color: rgb(var(--bg-background));
   color: rgb(var(--color-text-foreground));
+
+  &:focus-visible {
+    outline: 2px solid rgb(var(--color-border));
+    outline-offset: 2px;
+    box-shadow: none;
+  }
 }
 
 .button--default {

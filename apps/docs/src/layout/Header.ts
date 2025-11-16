@@ -23,6 +23,8 @@ export const Header = () => {
 
             <button
               class="button button--navigation button--icon button--hamburger"
+              aria-label="Open menu"
+              aria-expanded="false"
             >
               <img
                 class="button__image"
