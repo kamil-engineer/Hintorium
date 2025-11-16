@@ -59,7 +59,8 @@ function animateRender(newNode: HTMLElement) {
 export function render(pathWithQuery: string) {
   if (!app) return;
 
-  const [path, search] = pathWithQuery.split("?");
+  const [pathAndSearch, hash] = pathWithQuery.split("#");
+  const [path, search] = pathAndSearch.split("?");
   const route = routes.find((r) => pathToRegex(r.path).test(path));
 
   const query = getQueryParams(search || "");
@@ -75,6 +76,13 @@ export function render(pathWithQuery: string) {
   }
 
   window.scrollTo(0, 0);
+
+  if (hash) {
+    requestAnimationFrame(() => {
+      const target = document.getElementById(hash);
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    });
+  }
 
   requestAnimationFrame(() => {
     handleMobileNavigation();
