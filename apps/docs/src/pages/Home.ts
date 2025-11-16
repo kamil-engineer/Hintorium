@@ -6,7 +6,8 @@ export default function Home(): HTMLElement {
   const container = document.createElement("div");
   container.classList.add("container");
 
-  const content = /* HTML */ ` ${MobileNavigation()} ${Header()} ${Hero()}`;
+  const content = /* HTML */ ` ${MobileNavigation()} ${Header()}
+    <main>${Hero()}</main>`;
 
   container.innerHTML = content;
 
