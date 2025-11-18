@@ -22,7 +22,7 @@ Hintorium is an advanced TypeScript tooltip library focused on accessibility, sm
 
 export const Intro = () => {
   const container = document.createElement("div");
-  container.classList.add("container");
+  container.classList.add("storybook-container-hintorium");
   container.innerHTML = `
     <h2 style="text-align:center;">Welcome to Hintorium</h2>
     <p style="text-align:center; max-width:600px; margin:auto;">

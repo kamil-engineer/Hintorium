@@ -21,7 +21,7 @@
 
 /* ========== BASE TOOLTIP ========== */
 .hintorium-tooltip {
-  position: fixed;
+  position: absolute;
   z-index: var(--hint-tooltip-z-index);
   max-width: var(--hint-tooltip-max-width);
   width: max-content;
@@ -606,10 +606,6 @@
   white-space: nowrap !important;
 }
 
-.container {
+.storybook-container-hintorium {
   font-family: var(--hint-tooltip-font-family);
-}
-
-#app {
-  padding: 80px;
 }
