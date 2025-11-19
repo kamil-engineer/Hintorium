@@ -129,11 +129,11 @@ export const Examples = () => {
           <div class="example overview__item">
             <h3 class="example__title">Tooltip Positions</h3>
 
-            <div class="example__content">
+            <div class="example__content example__content--big">
               <button
                 data-hintorium-tooltip="Top position"
                 data-hintorium-tooltip-position="top"
-                class="button button--lg top"
+                class="button button--lg button--primary top"
               >
                 Top
               </button>
@@ -141,7 +141,7 @@ export const Examples = () => {
               <button
                 data-hintorium-tooltip="Right"
                 data-hintorium-tooltip-position="right"
-                class="button button--lg right"
+                class="button button--lg button--primary right"
               >
                 Right
               </button>
@@ -149,7 +149,7 @@ export const Examples = () => {
               <button
                 data-hintorium-tooltip="Bottom"
                 data-hintorium-tooltip-position="bottom"
-                class="button button--lg bottom"
+                class="button button--lg button--primary bottom"
               >
                 Bottom
               </button>
@@ -157,7 +157,7 @@ export const Examples = () => {
               <button
                 data-hintorium-tooltip="Left"
                 data-hintorium-tooltip-position="left"
-                class="button button--lg left"
+                class="button button--lg button--primary left"
               >
                 Left
               </button>

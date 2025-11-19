@@ -50,6 +50,7 @@
   --h-8: 2rem;
   --h-10: 2.5rem;
   --h-16: 4rem;
+  --h-52: 13rem;
 
   --gap-2: 0.25rem;
   --gap-3: 0.5rem;
@@ -338,7 +339,13 @@ html {
     flex-wrap: wrap;
     gap: var(--gap-8);
     padding: var(--py-12) 0;
-    min-height: var(--h-10);
+    min-height: var(--h-52);
+  }
+
+  & .example__content--big {
+    .button {
+      width: 40%;
+    }
   }
 
   & .example__code {
@@ -458,7 +465,7 @@ html {
   color: rgb(var(--color-primary-foreground));
   outline: none;
 
-  z-index: 11;
+  z-index: 8;
 
   &:hover {
     background-color: rgba(var(--color-primary), 0.9);
@@ -547,6 +554,12 @@ html {
 
     & .overview__items {
       grid-template-columns: 1fr;
+    }
+
+    & .example__content--big {
+      .button {
+        width: 30%;
+      }
     }
   }
 
