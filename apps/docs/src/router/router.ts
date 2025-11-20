@@ -94,10 +94,28 @@ function handleLinkClick(e: MouseEvent) {
   if (!target) return;
 
   const anchor = target.closest("a") as HTMLAnchorElement | null;
-  if (anchor && anchor.href.startsWith(window.location.origin)) {
+  if (!anchor || !anchor.href.startsWith(window.location.origin)) return;
+
+  const href = anchor.getAttribute("href")!;
+
+  const [path, hash] = href.split("#");
+
+  if (path === window.location.pathname || !path) {
     e.preventDefault();
-    const path = anchor.getAttribute("href")!;
-    window.history.pushState(null, "", path);
+    if (hash) {
+      const targetEl = document.getElementById(hash);
+      console.log(targetEl);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", href);
+      }
+    }
+    return;
+  }
+
+  if (!hash) {
+    e.preventDefault();
+    window.history.pushState(null, "", href);
     render(path);
   }
 }
