@@ -1,4 +1,5 @@
 import { Examples } from "../layout/Examples";
+import { Footer } from "../layout/Footer";
 import { Header } from "../layout/Header";
 import { Hero } from "../layout/Hero";
 import { MobileNavigation } from "../layout/MobileNavigation";
@@ -10,7 +11,8 @@ export default function Home(): HTMLElement {
   container.classList.add("container");
 
   const content = /* HTML */ ` ${MobileNavigation()} ${Header()}
-    <main>${Hero()} ${Overview()} ${Examples()} ${Reviews()}</main>`;
+    <main>${Hero()} ${Overview()} ${Examples()} ${Reviews()}</main>
+    ${Footer()}`;
 
   container.innerHTML = content;
 
