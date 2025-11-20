@@ -9,7 +9,7 @@ export const Navigation = () => {
           <a class="link link--navigation" href="#examples"> Examples</a>
         </li>
         <li>
-          <a class="link link--navigation" href="#api"> API</a>
+          <a class="link link--navigation" href="#reviews"> Reviews</a>
         </li>
       </ul>
     </nav>

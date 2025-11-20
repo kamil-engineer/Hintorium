@@ -1,6 +1,6 @@
 export const Examples = () => {
   const content = /* HTML */ `
-    <section class="overview" id="overview">
+    <section class="overview" id="examples">
       <div class="overview__wrapper">
         <div class="overview__content">
           <h2 class="overview__title">Interactive Examples</h2>

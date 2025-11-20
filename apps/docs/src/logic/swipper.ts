@@ -1,6 +1,5 @@
 import Swiper from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
+
 
 export const setupSwipper = () => {
   const swiper = new Swiper(".swiper", {
