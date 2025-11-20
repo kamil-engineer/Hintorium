@@ -44,6 +44,7 @@
   --color-secondary: 245, 245, 245;
   --color-primary: 112, 52, 213;
   --color-card: 255, 255, 255;
+  --color-star: 255, 215, 0;
   --color-black: 0, 0, 0;
 
   /* SPACING SYSTEM */
@@ -52,6 +53,7 @@
   --h-10: 2.5rem;
   --h-16: 4rem;
   --h-52: 13rem;
+  --h-60: 16rem;
 
   --gap-2: 0.25rem;
   --gap-3: 0.5rem;
@@ -527,6 +529,11 @@ html {
   color: rgb(var(--color-primary-foreground));
 }
 
+.tag--premium {
+  background-color: rgb(var(--color-star));
+  color: rgb(var(--color-foreground));
+}
+
 .wrapper {
   --width: 80rem;
   max-width: var(--width);
@@ -707,6 +714,21 @@ html {
       .button {
         width: 30%;
       }
+    }
+  }
+
+  .review {
+    padding: var(--p-5);
+    & .review__content {
+      grid-template-columns: 1fr;
+    }
+
+    & .review__image-container {
+      height: var(--h-60);
+    }
+
+    & .review__image {
+      object-position: top;
     }
   }
 
