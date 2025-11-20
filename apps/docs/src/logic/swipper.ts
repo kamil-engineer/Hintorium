@@ -1,12 +1,9 @@
 import Swiper from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
 
 export const setupSwipper = () => {
-  new Swiper(".swiper", {
-    modules: [Pagination],
+  const swiper = new Swiper(".swiper", {
     slidesPerView: 1,
     spaceBetween: 20,
     loop: true,
@@ -15,15 +12,28 @@ export const setupSwipper = () => {
       delay: 3000,
       disableOnInteraction: false,
     },
+  });
 
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
+  const paginationButtons = document.querySelectorAll(
+    ".custom-swiper-pagination .pagination-item"
+  );
 
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
+  const updatePagination = () => {
+    paginationButtons.forEach((btn, index) => {
+      btn.classList.toggle(
+        "pagination-item--active",
+        index === swiper.realIndex
+      );
+    });
+  };
+
+  updatePagination();
+
+  swiper.on("slideChange", () => {
+    updatePagination();
+  });
+
+  paginationButtons.forEach((btn, index) => {
+    btn.addEventListener("click", () => swiper.slideToLoop(index));
   });
 };

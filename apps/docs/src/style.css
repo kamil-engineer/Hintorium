@@ -670,8 +670,28 @@ html {
 
 /* --- SWIPER --- */
 
-.swiper-pagination {
-  --swiper-pagination-bottom: -25px;
+.custom-swiper-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-2);
+  width: 3.5rem;
+  margin: 1rem auto 0;
+}
+
+.pagination-item {
+  --size: 0.5rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 9999px;
+  border: 1px solid rgb(var(--color-border));
+  transition: 0.3s;
+}
+
+.pagination-item.pagination-item--active {
+  flex: 1;
+  background-color: rgb(var(--color-primary));
+  border-color: rgb(var(--color-primary));
 }
 
 /* --- MEDIA --- */

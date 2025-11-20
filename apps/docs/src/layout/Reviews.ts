@@ -166,7 +166,11 @@ export const Reviews = () => {
               .join("")}
           </div>
 
-          <div class="swiper-pagination"></div>
+          <div class="custom-swiper-pagination">
+            ${Array.from({ length: reviews.length }, () => {
+              return /* HTML */ ` <button class="pagination-item"></button> `;
+            }).join("")}
+          </div>
         </div>
       </div>
     </section>
