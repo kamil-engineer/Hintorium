@@ -575,6 +575,13 @@ html {
     font-size: var(--text-sm);
     color: rgb(var(--color-muted-foreground));
   }
+
+  & .footer__socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: var(--gap-2);
+  }
 }
 
 /* --- REUSEABLE --- */
@@ -851,6 +858,11 @@ html {
   .footer {
     & .footer__top-content {
       grid-template-columns: 1fr;
+    }
+
+    & .footer__bottom-content {
+      flex-direction: column;
+      text-align: center;
     }
   }
 

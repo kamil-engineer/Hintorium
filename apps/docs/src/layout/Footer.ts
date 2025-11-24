@@ -44,7 +44,50 @@ export const Footer = () => {
               &copy; ${new Date().getFullYear()} Hintorium Library. All rights
               reserved.
             </p>
-            <p>asd</p>
+            <ul class="footer__socials">
+              <li>
+                <a
+                  href="https://github.com/kamil-engineer/Hintorium"
+                  class="button button--navigation button--icon"
+                >
+                  <img
+                    class="button__image"
+                    width="18"
+                    height="18"
+                    alt="Github"
+                    src="/icons/icon-github.svg"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:mathey.academy@gmail.com"
+                  class="button button--navigation button--icon"
+                >
+                  <img
+                    class="button__image"
+                    width="18"
+                    height="18"
+                    alt="Mail"
+                    src="/icons/icon-mail.svg"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.npmjs.com/~kamilengineer"
+                  class="button button--navigation button--icon"
+                >
+                  <img
+                    class="button__image"
+                    width="18"
+                    height="18"
+                    alt="Mail"
+                    src="/icons/icon-npm.svg"
+                  />
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
