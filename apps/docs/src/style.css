@@ -771,6 +771,11 @@ html {
   border: 0;
 }
 
+.body--no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
 /* --- SWIPER --- */
 
 .custom-swiper-pagination {
@@ -871,16 +876,18 @@ html {
   }
 
   .mobile-nav {
-    display: hidden;
+    display: none;
     position: fixed;
     left: 0;
     right: 0;
     top: var(--h-16);
-    min-height: calc(100vh - var(--h-16));
+    height: calc(100vh - var(--h-16));
     padding: var(--py-8) var(--px-4);
     backdrop-filter: blur(8px);
     background-color: rgb(var(--background));
     z-index: 20;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 
     & .nav__list {
       flex-direction: column;
