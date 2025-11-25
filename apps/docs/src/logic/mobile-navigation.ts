@@ -2,38 +2,102 @@ let mobileNavInitialized = false;
 
 export const handleMobileNavigation = () => {
   if (mobileNavInitialized) return;
+  
   mobileNavInitialized = true;
 
-  const mobileMenu = document.querySelector(".mobile-nav");
+  const wrapper = document.querySelector<HTMLElement>(".header-with-nav");
+  if (!wrapper) return;
+
+  const mobileMenu = wrapper.querySelector<HTMLElement>(".mobile-nav");
   const toggleButton =
-    document.querySelector<HTMLButtonElement>(".button--hamburger");
-  const buttonIcon = toggleButton?.querySelector(".button__image");
+    wrapper.querySelector<HTMLButtonElement>(".button--hamburger");
+  const buttonIcon =
+    toggleButton?.querySelector<HTMLImageElement>(".button__image");
 
   const openIcon = "/icons/icon-menu.svg";
   const closeIcon = "/icons/icon-close.svg";
 
-  const toggleMenu = () => {
-    const isOpen = mobileMenu?.classList.toggle("open");
+  if (!mobileMenu || !toggleButton) return;
 
-    toggleButton?.setAttribute("aria-expanded", String(isOpen));
-    toggleButton?.setAttribute(
-      "aria-label",
-      isOpen ? "Close menu" : "Open menu"
-    );
+  const openMenu = () => {
+    mobileMenu.classList.add("open");
+    wrapper.classList.add("menu-open");
+    document.body.classList.add("body--no-scroll");
 
-    if (!buttonIcon) return;
+    // focus na pierwszy link menu
+    const firstLink =
+      mobileMenu.querySelector<HTMLElement>(".link--navigation");
+    firstLink?.focus();
 
-    buttonIcon.setAttribute("src", isOpen ? closeIcon : openIcon);
+    document.addEventListener("keydown", trapFocus);
   };
 
-  toggleButton?.addEventListener("click", toggleMenu);
+  const closeMenu = () => {
+    mobileMenu.classList.remove("open");
+    wrapper.classList.remove("menu-open");
+    document.body.classList.remove("body--no-scroll");
+    toggleButton.focus();
+    document.removeEventListener("keydown", trapFocus);
+  };
 
-  mobileMenu?.querySelectorAll(".link--navigation").forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileMenu.classList.remove("open");
-      toggleButton?.setAttribute("aria-expanded", "false");
-      toggleButton?.setAttribute("aria-label", "Open menu");
-      buttonIcon?.setAttribute("src", openIcon);
-    });
+  const trapFocus = (e: KeyboardEvent) => {
+    if (!wrapper.classList.contains("menu-open")) return;
+
+    const focusable = Array.from(
+      wrapper.querySelectorAll<HTMLElement>(
+        `a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])`
+      )
+    );
+
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.key === "Escape") {
+      e.preventDefault();
+      closeMenu();
+      return;
+    }
+
+    if (e.key === "Tab") {
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    }
+  };
+
+  toggleButton.addEventListener("click", () => {
+    if (mobileMenu.classList.contains("open")) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+
+    if (buttonIcon) {
+      buttonIcon.src = mobileMenu.classList.contains("open")
+        ? closeIcon
+        : openIcon;
+      toggleButton.setAttribute(
+        "aria-label",
+        mobileMenu.classList.contains("open") ? "Close menu" : "Open menu"
+      );
+      toggleButton.setAttribute(
+        "aria-expanded",
+        mobileMenu.classList.contains("open") ? "true" : "false"
+      );
+    }
+  });
+
+  mobileMenu.querySelectorAll(".link--navigation").forEach((link) => {
+    link.addEventListener("click", closeMenu);
   });
 };
