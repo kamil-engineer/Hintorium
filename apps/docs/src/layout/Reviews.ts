@@ -52,6 +52,12 @@ const reviews = [
 export const Reviews = () => {
   const content = /* HTML */ `
     <section class="overview" id="reviews">
+      <div class="overview__content">
+        <h2 class="overview__title">What do they think about our library?</h2>
+        <p class="overview__description">
+          Our special sponsors answered this question.
+        </p>
+      </div>
       <div class="overview__wrapper">
         <div class="swiper">
           <div class="swiper-wrapper">

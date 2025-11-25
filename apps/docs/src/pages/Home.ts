@@ -10,7 +10,9 @@ export default function Home(): HTMLElement {
   const container = document.createElement("div");
   container.classList.add("container");
 
-  const content = /* HTML */ ` ${MobileNavigation()} ${Header()}
+  const content = /* HTML */ ` <div class="header-with-nav">
+      ${MobileNavigation()} ${Header()}
+    </div>
     <main>${Hero()} ${Overview()} ${Examples()} ${Reviews()}</main>
     ${Footer()}`;
 
