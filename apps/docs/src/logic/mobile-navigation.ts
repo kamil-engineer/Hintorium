@@ -1,10 +1,7 @@
-let mobileNavInitialized = false;
+let initialized = false;
+let trapListener: ((e: KeyboardEvent) => void) | null = null;
 
 export const handleMobileNavigation = () => {
-  if (mobileNavInitialized) return;
-  
-  mobileNavInitialized = true;
-
   const wrapper = document.querySelector<HTMLElement>(".header-with-nav");
   if (!wrapper) return;
 
@@ -14,37 +11,27 @@ export const handleMobileNavigation = () => {
   const buttonIcon =
     toggleButton?.querySelector<HTMLImageElement>(".button__image");
 
+  if (!mobileMenu || !toggleButton) return;
+
   const openIcon = "/icons/icon-menu.svg";
   const closeIcon = "/icons/icon-close.svg";
 
-  if (!mobileMenu || !toggleButton) return;
+  // ------------------------------------------------------
+  // 1. Odpinanie starego trapFocus
+  // ------------------------------------------------------
+  if (trapListener) {
+    document.removeEventListener("keydown", trapListener);
+    trapListener = null;
+  }
 
-  const openMenu = () => {
-    mobileMenu.classList.add("open");
-    wrapper.classList.add("menu-open");
-    document.body.classList.add("body--no-scroll");
-
-    // focus na pierwszy link menu
-    const firstLink =
-      mobileMenu.querySelector<HTMLElement>(".link--navigation");
-    firstLink?.focus();
-
-    document.addEventListener("keydown", trapFocus);
-  };
-
-  const closeMenu = () => {
-    mobileMenu.classList.remove("open");
-    wrapper.classList.remove("menu-open");
-    document.body.classList.remove("body--no-scroll");
-    toggleButton.focus();
-    document.removeEventListener("keydown", trapFocus);
-  };
-
+  // ------------------------------------------------------
+  // 2. TrapFocus z aktualnymi referencjami
+  // ------------------------------------------------------
   const trapFocus = (e: KeyboardEvent) => {
     if (!wrapper.classList.contains("menu-open")) return;
 
     const focusable = Array.from(
-      wrapper.querySelectorAll<HTMLElement>(
+      mobileMenu.querySelectorAll<HTMLElement>(
         `a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])`
       )
     );
@@ -55,7 +42,6 @@ export const handleMobileNavigation = () => {
     const last = focusable[focusable.length - 1];
 
     if (e.key === "Escape") {
-      e.preventDefault();
       closeMenu();
       return;
     }
@@ -75,28 +61,64 @@ export const handleMobileNavigation = () => {
     }
   };
 
-  toggleButton.addEventListener("click", () => {
-    if (mobileMenu.classList.contains("open")) {
-      closeMenu();
-    } else {
-      openMenu();
+  // ------------------------------------------------------
+  // 3. Funkcje otwierania i zamykania
+  // ------------------------------------------------------
+  const openMenu = () => {
+    mobileMenu.classList.add("open");
+    wrapper.classList.add("menu-open");
+    document.body.classList.add("body--no-scroll");
+
+    // fokus na pierwszy element
+    mobileMenu.querySelector<HTMLElement>(".link--navigation")?.focus();
+
+    trapListener = trapFocus;
+    document.addEventListener("keydown", trapListener);
+
+    if (buttonIcon) {
+      buttonIcon.src = closeIcon;
+      toggleButton.setAttribute("aria-label", "Close menu");
+      toggleButton.setAttribute("aria-expanded", "true");
+    }
+  };
+
+  const closeMenu = () => {
+    mobileMenu.classList.remove("open");
+    wrapper.classList.remove("menu-open");
+    document.body.classList.remove("body--no-scroll");
+
+    toggleButton.focus();
+
+    if (trapListener) {
+      document.removeEventListener("keydown", trapListener);
+      trapListener = null;
     }
 
     if (buttonIcon) {
-      buttonIcon.src = mobileMenu.classList.contains("open")
-        ? closeIcon
-        : openIcon;
-      toggleButton.setAttribute(
-        "aria-label",
-        mobileMenu.classList.contains("open") ? "Close menu" : "Open menu"
-      );
-      toggleButton.setAttribute(
-        "aria-expanded",
-        mobileMenu.classList.contains("open") ? "true" : "false"
-      );
+      buttonIcon.src = openIcon;
+      toggleButton.setAttribute("aria-label", "Open menu");
+      toggleButton.setAttribute("aria-expanded", "false");
+    }
+  };
+
+  // ------------------------------------------------------
+  // 4. Event listener na toggle — dodany TYLKO raz
+  // ------------------------------------------------------
+
+  document.body.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest(".button--hamburger");
+    if (btn) {
+      if (btn.classList.contains("open")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
     }
   });
 
+  // ------------------------------------------------------
+  // 5. Linki zamykające menu — zawsze podpinane na aktualnym DOM
+  // ------------------------------------------------------
   mobileMenu.querySelectorAll(".link--navigation").forEach((link) => {
     link.addEventListener("click", closeMenu);
   });

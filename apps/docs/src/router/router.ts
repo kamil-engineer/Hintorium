@@ -79,7 +79,7 @@ export function render(pathWithQuery: string) {
 
   if (hash) {
     requestAnimationFrame(() => {
-      const target = document.getElementById(hash);
+      const target = document.getElementById(hash); 
       if (target) target.scrollIntoView({ behavior: "smooth" });
     });
   }
@@ -116,12 +116,17 @@ function handleLinkClick(e: MouseEvent) {
   if (!hash) {
     e.preventDefault();
     window.history.pushState(null, "", href);
-    render(path);
+    render(href);
   }
 }
 
 export function initRouter() {
   document.body.addEventListener("click", handleLinkClick);
-  window.addEventListener("popstate", () => render(window.location.pathname));
+  window.addEventListener("popstate", () => {
+    render(
+      window.location.pathname + window.location.search + window.location.hash
+    );
+  });
+
   render(window.location.pathname);
 }

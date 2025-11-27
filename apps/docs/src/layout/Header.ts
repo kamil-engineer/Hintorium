@@ -1,12 +1,12 @@
 import { Logo } from "../shared/Logo";
 import { Navigation } from "./Navigation";
 
-export const Header = () => {
+export const Header = ({ docs = false }: { docs?: boolean } = {}) => {
   const content = /* HTML */ `
     <header class="header">
       <div class="wrapper">
         <div class="header__content">
-          ${Logo()} ${Navigation()}
+          ${Logo()} ${Navigation({ docs })}
           <div class="header__actions">
             <a
               href="https://github.com/kamil-engineer/Hintorium"

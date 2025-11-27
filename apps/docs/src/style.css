@@ -647,6 +647,13 @@ html {
   }
 }
 
+.link--active {
+  &:link,
+  &:visited {
+    color: rgb(var(--color-foreground));
+  }
+}
+
 .link--footer {
   &:link,
   &:visited {

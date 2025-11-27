@@ -1,3 +1,4 @@
+import Docs from "../pages/Docs";
 import Home from "./../pages/Home";
 
 export interface RouteWithParams {
@@ -16,8 +17,10 @@ export type Route = RouteWithParams | RouteWithoutParams;
 
 export const paths = {
   HOME: "/",
+  DOCS: "/docs",
 };
 
 export const routes: Route[] = [
   { path: paths.HOME, view: Home, title: "Home | Hintorium" },
+  { path: paths.DOCS, view: Docs, title: "Docs | Hintorium" },
 ];

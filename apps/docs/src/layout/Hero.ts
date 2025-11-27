@@ -16,7 +16,7 @@ export const Hero = () => {
           user experiences effortlessly.
         </p>
         <div class="hero__actions">
-          <button class="button button--lg button--primary">
+          <a href="/docs" class="button button--lg button--primary">
             Get Started
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +34,7 @@ export const Hero = () => {
               <path d="M5 12h14" />
               <path d="m12 5 7 7-7 7" />
             </svg>
-          </button>
+          </a>
           <a
             href="https://github.com/kamil-engineer/Hintorium"
             class="button button--lg button--outline"
