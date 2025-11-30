@@ -1,125 +1,242 @@
-let initialized = false;
-let trapListener: ((e: KeyboardEvent) => void) | null = null;
+class MobileNavigation {
+  private config = {
+    buttonSelector: "button--hamburger",
+    buttonIconSelector: "button__image",
+    menuSelector: "mobile-nav",
+    wrapperSelector: "header-with-nav",
+    linksSelector: "link--navigation",
+    closeIcon: "/icons/icon-close.svg",
+    openIcon: "/icons/icon-menu.svg",
+  };
 
-export const handleMobileNavigation = () => {
-  const wrapper = document.querySelector<HTMLElement>(".header-with-nav");
-  if (!wrapper) return;
+  private classModifiers = {
+    menuOpen: "open",
+    bodyScroll: "body--no-scroll",
+  };
 
-  const mobileMenu = wrapper.querySelector<HTMLElement>(".mobile-nav");
-  const toggleButton =
-    wrapper.querySelector<HTMLButtonElement>(".button--hamburger");
-  const buttonIcon =
-    toggleButton?.querySelector<HTMLImageElement>(".button__image");
+  private wrapper: HTMLElement | null = null;
+  private menu: HTMLElement | null = null;
+  private toggleButton: HTMLButtonElement | null = null;
+  private buttonIcon: HTMLElement | null = null;
+  private navLinks: NodeListOf<HTMLAnchorElement> | null = null;
+  private isOpen = false;
+  private cleanupFunctions: (() => void)[] = [];
 
-  if (!mobileMenu || !toggleButton) return;
+  constructor() {
+    this.init();
 
-  const openIcon = "/icons/icon-menu.svg";
-  const closeIcon = "/icons/icon-close.svg";
-
-  // ------------------------------------------------------
-  // 1. Odpinanie starego trapFocus
-  // ------------------------------------------------------
-  if (trapListener) {
-    document.removeEventListener("keydown", trapListener);
-    trapListener = null;
+    console.log(this);
   }
 
-  // ------------------------------------------------------
-  // 2. TrapFocus z aktualnymi referencjami
-  // ------------------------------------------------------
-  const trapFocus = (e: KeyboardEvent) => {
-    if (!wrapper.classList.contains("menu-open")) return;
+  private init() {
+    this.cleanup();
 
-    const focusable = Array.from(
-      mobileMenu.querySelectorAll<HTMLElement>(
-        `a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])`
-      )
+    if (!this.findElements()) return;
+
+    this.isOpen =
+      this.menu?.classList.contains(this.classModifiers.menuOpen) ?? false;
+
+    this.updateButtonState();
+
+    this.attachEventListeners();
+  }
+
+  private attachEventListeners(): void {
+    if (!this.toggleButton || !this.menu || !this.wrapper) return;
+
+    this.toggleButton.addEventListener(
+      "click",
+      this.handleToggleClick.bind(this)
     );
 
-    if (!focusable.length) return;
+    this.cleanupFunctions.push(() => {
+      this.toggleButton?.removeEventListener(
+        "click",
+        this.handleToggleClick.bind(this)
+      );
+    });
 
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
+    this.navLinks?.forEach((link) => {
+      link.addEventListener("click", this.handleLinkClick.bind(this));
+    });
 
+    this.cleanupFunctions.push(() => {
+      this.navLinks?.forEach((link) => {
+        link.removeEventListener("click", this.handleLinkClick.bind(this));
+      });
+    });
+
+    document.addEventListener("click", this.handleOutsideClick.bind(this));
+
+    this.cleanupFunctions.push(() => {
+      document.removeEventListener("click", this.handleOutsideClick.bind(this));
+    });
+
+    document.addEventListener("keydown", this.handleKeydown.bind(this));
+    this.cleanupFunctions.push(() => {
+      document.removeEventListener("keydown", this.handleKeydown.bind(this));
+    });
+  }
+
+  private handleKeydown(e: KeyboardEvent): void {
     if (e.key === "Escape") {
-      closeMenu();
+      e.preventDefault();
+      this.close();
       return;
     }
 
-    if (e.key === "Tab") {
-      if (e.shiftKey) {
-        if (document.activeElement === first) {
-          e.preventDefault();
-          last.focus();
-        }
-      } else {
-        if (document.activeElement === last) {
-          e.preventDefault();
-          first.focus();
-        }
+    if (e.key === "Tab" && this.isOpen) {
+      this.trapFocus(e);
+    }
+  }
+
+  private trapFocus(e: KeyboardEvent): void {
+    if (!this.wrapper) return;
+
+    const focusableElements = this.getFocusableElements();
+
+    if (focusableElements.length === 0) return;
+
+    const first = focusableElements[0];
+    const last = focusableElements[focusableElements.length - 1];
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
       }
     }
-  };
+  }
 
-  // ------------------------------------------------------
-  // 3. Funkcje otwierania i zamykania
-  // ------------------------------------------------------
-  const openMenu = () => {
-    mobileMenu.classList.add("open");
-    wrapper.classList.add("menu-open");
-    document.body.classList.add("body--no-scroll");
+  private getFocusableElements(): HTMLElement[] {
+    if (!this.wrapper) return [];
 
-    // fokus na pierwszy element
-    mobileMenu.querySelector<HTMLElement>(".link--navigation")?.focus();
+    return Array.from(
+      this.wrapper.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      )
+    );
+  }
 
-    trapListener = trapFocus;
-    document.addEventListener("keydown", trapListener);
+  private handleOutsideClick(e: Event): void {
+    if (!this.isOpen || !this.wrapper || !this.menu) return;
 
-    if (buttonIcon) {
-      buttonIcon.src = closeIcon;
-      toggleButton.setAttribute("aria-label", "Close menu");
-      toggleButton.setAttribute("aria-expanded", "true");
+    const target = e.target as Node;
+
+    if (!this.wrapper.contains(target)) {
+      this.close();
     }
-  };
+  }
 
-  const closeMenu = () => {
-    mobileMenu.classList.remove("open");
-    wrapper.classList.remove("menu-open");
-    document.body.classList.remove("body--no-scroll");
+  private handleLinkClick(): void {
+    this.close();
+  }
 
-    toggleButton.focus();
+  public toggle(): void {
+    if (this.isOpen) {
+      this.close();
+    } else {
+      this.open();
+    }
+  }
 
-    if (trapListener) {
-      document.removeEventListener("keydown", trapListener);
-      trapListener = null;
+  public open(): void {
+    if (this.isOpen || !this.menu || !this.wrapper) return;
+
+    this.isOpen = true;
+    this.menu.classList.add(this.classModifiers.menuOpen);
+    document.body.classList.add(this.classModifiers.bodyScroll);
+
+    this.updateButtonState();
+  }
+
+  public close(): void {
+    if (!this.isOpen || !this.menu || !this.wrapper) return;
+
+    this.isOpen = false;
+    this.menu.classList.remove(this.classModifiers.menuOpen);
+    document.body.classList.remove(this.classModifiers.bodyScroll);
+
+    this.updateButtonState();
+
+    if (this.toggleButton) {
+      this.toggleButton.focus();
+    }
+  }
+
+  private handleToggleClick(e: Event): void {
+    e.stopPropagation();
+    this.toggle();
+  }
+
+  private updateButtonState(): void {
+    if (!this.toggleButton) return;
+
+    if (this.buttonIcon) {
+      this.buttonIcon.setAttribute(
+        "src",
+        this.isOpen ? this.config.closeIcon : this.config.openIcon
+      );
+      this.buttonIcon.setAttribute(
+        "alt",
+        this.isOpen ? "Close menu icon" : "Open menu icon"
+      );
     }
 
-    if (buttonIcon) {
-      buttonIcon.src = openIcon;
-      toggleButton.setAttribute("aria-label", "Open menu");
-      toggleButton.setAttribute("aria-expanded", "false");
-    }
-  };
+    this.toggleButton.setAttribute(
+      "aria-label",
+      this.isOpen ? "Close menu" : "Open menu"
+    );
+    this.toggleButton.setAttribute("aria-expanded", this.isOpen.toString());
+  }
 
-  // ------------------------------------------------------
-  // 4. Event listener na toggle — dodany TYLKO raz
-  // ------------------------------------------------------
+  private findElements() {
+    this.wrapper = document.querySelector(`.${this.config.wrapperSelector}`);
 
-  document.body.addEventListener("click", (e) => {
-    const btn = (e.target as HTMLElement).closest(".button--hamburger");
-    if (btn) {
-      if (btn.classList.contains("open")) {
-        closeMenu();
-      } else {
-        openMenu();
+    if (!this.wrapper) return false;
+
+    this.menu = document.querySelector(`.${this.config.menuSelector}`);
+    this.toggleButton = document.querySelector(
+      `.${this.config.buttonSelector}`
+    );
+    this.buttonIcon = document.querySelector(
+      `.${this.config.buttonSelector} .${this.config.buttonIconSelector}`
+    );
+
+    this.navLinks = document.querySelectorAll(`.${this.config.linksSelector}`);
+
+    return !!(this.menu && this.toggleButton);
+  }
+
+  public cleanup(): void {
+    this.cleanupFunctions.forEach((cleanup) => {
+      try {
+        cleanup();
+      } catch (error) {
+        console.error("Error during cleanup:", error);
       }
-    }
-  });
+    });
+    this.cleanupFunctions = [];
 
-  // ------------------------------------------------------
-  // 5. Linki zamykające menu — zawsze podpinane na aktualnym DOM
-  // ------------------------------------------------------
-  mobileMenu.querySelectorAll(".link--navigation").forEach((link) => {
-    link.addEventListener("click", closeMenu);
-  });
+    if (this.isOpen && this.menu && this.wrapper) {
+      this.menu.classList.remove(this.classModifiers.menuOpen);
+      document.body.classList.remove(this.classModifiers.bodyScroll);
+    }
+
+    this.wrapper = null;
+    this.menu = null;
+    this.toggleButton = null;
+    this.buttonIcon = null;
+    this.navLinks = null;
+    this.isOpen = false;
+  }
+}
+
+export const handleMobileNavigation = () => {
+  return new MobileNavigation();
 };
