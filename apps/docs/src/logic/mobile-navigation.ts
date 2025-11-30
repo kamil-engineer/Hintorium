@@ -24,8 +24,6 @@ class MobileNavigation {
 
   constructor() {
     this.init();
-
-    console.log(this);
   }
 
   private init() {
