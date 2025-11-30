@@ -187,6 +187,10 @@ export class Router {
       if (route) {
         element = route.view(context);
 
+        if (route.layout) {
+          element = route.layout(element, context);
+        }
+
         if (typeof route.title === "function") {
           title = await route.title(context);
         } else {
