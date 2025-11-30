@@ -688,6 +688,10 @@ html {
   outline: none;
   background-color: transparent;
   text-decoration: none;
+
+  & .button__image {
+    pointer-events: none;
+  }
 }
 
 .button:disabled {
