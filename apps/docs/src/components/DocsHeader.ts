@@ -12,6 +12,7 @@ export const DocsHeader = () => {
         stroke-linecap="round"
         stroke-linejoin="round"
         class="breadcrumbs__icon"
+        aria-hidden="true"
       >
         <path d="m9 18 6-6-6-6"></path>
       </svg>
@@ -26,7 +27,7 @@ export const DocsHeader = () => {
         </li>
         ${separator}
         <li class="breadcrumbs__item">
-          <a href="/" class="link link--breadcrumb"> Documentation </a>
+          <a href="/docs" class="link link--breadcrumb"> Documentation </a>
         </li>
       </ul>
     </header>
