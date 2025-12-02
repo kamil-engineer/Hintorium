@@ -1,7 +1,10 @@
 import { DocsSidebar } from "../components/DocsSidebar";
 import { DocsSideContents } from "../components/DocsSideContents";
 
-export const DocsContent = (subContent: HTMLElement): string => {
+export const DocsContent = (
+  subContent: HTMLElement,
+  showSideContents: boolean
+): string => {
   const tempDiv = document.createElement("div");
   tempDiv.appendChild(subContent.cloneNode(true));
 
@@ -10,7 +13,7 @@ export const DocsContent = (subContent: HTMLElement): string => {
       ${DocsSidebar()}
       <div class="docs-main__wrapper">
         <main class="docs-main__content">${tempDiv.innerHTML}</main>
-        ${DocsSideContents()}
+        ${showSideContents ? DocsSideContents() : ""}
       </div>
     </div>
   `;

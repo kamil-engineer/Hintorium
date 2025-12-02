@@ -4,16 +4,27 @@ import { DocsContent } from "../layout/DocsContent";
 import { Header } from "../layout/Header";
 import { MobileNavigation } from "../layout/MobileNavigation";
 
+function isDocsIndexPage(path: string = window.location.pathname): boolean {
+  return path === "/docs" || path === "/docs/";
+}
+
 export function DocsLayout(content: HTMLElement): HTMLElement {
   const container = document.createElement("div");
   container.classList.add("container");
+
+  const currentPath = window.location.pathname;
+  const showSideContents = !isDocsIndexPage(currentPath);
+
+  console.log(currentPath);
 
   const layoutHTML = /* HTML */ `
     <div class="header-with-nav">
       ${MobileNavigation()} ${Header({ docs: true })}
     </div>
     <main class="docs-content">
-      <div class="wrapper">${DocsHeader()} ${DocsContent(content)}</div>
+      <div class="wrapper">
+        ${DocsHeader()} ${DocsContent(content, showSideContents)}
+      </div>
     </main>
   `;
 

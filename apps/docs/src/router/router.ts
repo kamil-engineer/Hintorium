@@ -181,6 +181,13 @@ export class Router {
         }
       }
 
+      const fullPath = hash ? `${pathWithQuery}` : pathWithQuery;
+      if (replace) {
+        window.history.replaceState(null, "", fullPath);
+      } else {
+        window.history.pushState(null, "", fullPath);
+      }
+
       let element: HTMLElement;
       let title: string;
 
@@ -206,13 +213,6 @@ export class Router {
 
       await this.animateTransition(element);
       document.title = title;
-
-      const fullPath = hash ? `${pathWithQuery}` : pathWithQuery;
-      if (replace) {
-        window.history.replaceState(null, "", fullPath);
-      } else {
-        window.history.pushState(null, "", fullPath);
-      }
 
       window.scrollTo(0, 0);
       if (hash) {
