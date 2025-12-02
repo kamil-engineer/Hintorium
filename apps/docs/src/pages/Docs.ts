@@ -109,7 +109,7 @@ export default function Docs(): HTMLElement {
             <p class="topics__item-description">
               Learn the basics about Tooltip Library
             </p>
-            <a href="#asddd" class="link link--topic"
+            <a href="/docs/introduction" class="link link--topic"
               >Explore
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -141,19 +141,17 @@ export default function Docs(): HTMLElement {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="topics__icon"
-                aria-hidden="true"
               >
-                <path d="M12 7v14"></path>
                 <path
-                  d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+                  d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
                 ></path>
               </svg>
-              <h3 class="topics__subtitle">Introduction</h3>
+              <h3 class="topics__subtitle">Getting Started</h3>
             </div>
             <p class="topics__item-description">
-              Learn the basics about Tooltip Library
+              Install and set up in minutes
             </p>
-            <a href="#asddd" class="link link--topic"
+            <a href="/docs/getting-started" class="link link--topic"
               >Explore
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -185,19 +183,15 @@ export default function Docs(): HTMLElement {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="topics__icon"
-                aria-hidden="true"
               >
-                <path d="M12 7v14"></path>
-                <path
-                  d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
-                ></path>
+                <path d="m18 16 4-4-4-4"></path>
+                <path d="m6 8-4 4 4 4"></path>
+                <path d="m14.5 4-5 16"></path>
               </svg>
-              <h3 class="topics__subtitle">Introduction</h3>
+              <h3 class="topics__subtitle">API reference</h3>
             </div>
-            <p class="topics__item-description">
-              Learn the basics about Tooltip Library
-            </p>
-            <a href="#asddd" class="link link--topic"
+            <p class="topics__item-description">Complete API documentation</p>
+            <a href="/docs/api" class="link link--topic"
               >Explore
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -229,19 +223,19 @@ export default function Docs(): HTMLElement {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="topics__icon"
-                aria-hidden="true"
               >
-                <path d="M12 7v14"></path>
+                <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+                <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+                <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+                <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
                 <path
-                  d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+                  d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"
                 ></path>
               </svg>
-              <h3 class="topics__subtitle">Introduction</h3>
+              <h3 class="topics__subtitle">Customization</h3>
             </div>
-            <p class="topics__item-description">
-              Learn the basics about Tooltip Library
-            </p>
-            <a href="#asddd" class="link link--topic"
+            <p class="topics__item-description">Customize the look and feel</p>
+            <a href="/docs/styling" class="link link--topic"
               >Explore
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -273,19 +267,19 @@ export default function Docs(): HTMLElement {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="topics__icon"
-                aria-hidden="true"
               >
-                <path d="M12 7v14"></path>
-                <path
-                  d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
-                ></path>
+                <circle cx="16" cy="4" r="1"></circle>
+                <path d="m18 19 1-7-6 1"></path>
+                <path d="m5 8 3-3 5.5 3-2.36 3.5"></path>
+                <path d="M4.24 14.5a5 5 0 0 0 6.88 6"></path>
+                <path d="M13.76 17.5a5 5 0 0 0-6.88-6"></path>
               </svg>
-              <h3 class="topics__subtitle">Introduction</h3>
+              <h3 class="topics__subtitle">Accessibility</h3>
             </div>
             <p class="topics__item-description">
-              Learn the basics about Tooltip Library
+              WCAG compliant and keyboard friendly
             </p>
-            <a href="#asddd" class="link link--topic"
+            <a href="/docs/accessibility" class="link link--topic"
               >Explore
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -317,19 +311,15 @@ export default function Docs(): HTMLElement {
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="topics__icon"
-                aria-hidden="true"
               >
-                <path d="M12 7v14"></path>
-                <path
-                  d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
-                ></path>
+                <path d="M16 8q6 0 6-6-6 0-6 6" />
+                <path d="M17.41 3.59a10 10 0 1 0 3 3" />
+                <path d="M2 2a26.6 26.6 0 0 1 10 20c.9-6.82 1.5-9.5 4-14" />
               </svg>
-              <h3 class="topics__subtitle">Introduction</h3>
+              <h3 class="topics__subtitle">Animation</h3>
             </div>
-            <p class="topics__item-description">
-              Learn the basics about Tooltip Library
-            </p>
-            <a href="#asddd" class="link link--topic"
+            <p class="topics__item-description">Feel free to animations</p>
+            <a href="/docs/animations" class="link link--topic"
               >Explore
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -650,7 +650,7 @@ html {
 }
 
 .content-article {
-  max-width: 48rem;
+  max-width: 54rem;
   margin: 0 auto;
   padding: var(--py-6) var(--px-6);
 }
@@ -732,7 +732,7 @@ html {
   & .topics__list {
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     gap: var(--gap-4);
   }
 
@@ -768,6 +768,7 @@ html {
   & .topics__item-description {
     color: rgb(var(--color-foreground), 0.7);
     font-size: var(--text-sm);
+    margin-bottom: var(--mb-4);
   }
 
   & .topics__item:hover .topics__icon {
@@ -892,7 +893,7 @@ html {
 .link--topic {
   &:link,
   &:visited {
-    margin-top: var(--mt-5);
+    margin-top: auto;
     width: fit-content;
     color: rgb(var(--color-primary));
     font-size: var(--text-xs);
