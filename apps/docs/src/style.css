@@ -75,6 +75,7 @@
   --py-12: 3rem;
   --py-16: 4rem;
   --py-20: 5rem;
+  --py-24: 5.5rem;
   --py-32: 8rem;
   --py-1: 0.25rem;
   --px-5: 1.5rem;
@@ -128,6 +129,7 @@ html {
 .container {
   min-height: 100vh;
   background-color: rgb(var(--bg-background));
+  overflow-x: hidden;
 }
 
 /* --- HEADER --- */
@@ -810,6 +812,10 @@ html {
   color: rgb(var(--color-foreground), 0.6);
 }
 
+.docs-content .wrapper {
+  padding: 0;
+}
+
 /* --- REUSEABLE --- */
 
 .breadcrumbs {
@@ -1155,6 +1161,44 @@ html {
 @media (max-width: 64rem) {
   .wrapper {
     padding: 0 var(--px-5);
+  }
+}
+
+@media (max-width: 50rem) {
+  .article__title {
+    font-size: var(--text-3xl);
+  }
+
+  .article__description {
+    font-size: 1rem;
+  }
+
+  .docs-main {
+    & .docs-main__sidebar {
+      display: none;
+    }
+  }
+
+  .cta {
+    padding: var(--p-5);
+
+    & .cta__title {
+      font-size: var(--text-lg);
+    }
+  }
+
+  .article-bottom {
+    padding-bottom: var(--py-24);
+  }
+
+  .article__actions {
+    border-top: 1px solid rgb(var(--color-border), 0.5);
+    position: fixed;
+    bottom: 0;
+    padding: var(--px-3);
+    left: 0;
+    width: 100%;
+    background-color: rgb(var(--background));
   }
 }
 
