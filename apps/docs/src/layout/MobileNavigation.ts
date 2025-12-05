@@ -1,17 +1,83 @@
+import { DOCS_NAVIGATION } from "../config/docs-navigation";
+import { isLinkActive } from "../helpers/link";
+
+function isDocsPage(): boolean {
+  return window.location.pathname.startsWith("/docs");
+}
+
 export const MobileNavigation = () => {
+  const currentPath = window.location.pathname;
+  const currentHash = window.location.hash.slice(1);
+  const isDocs = isDocsPage();
+
+  let navItems = "";
+
+  if (isDocs) {
+    // DOCS NAVIGATION
+    navItems = /* HTML */ `
+      ${DOCS_NAVIGATION.map((item) => {
+        if (item.type === "section") {
+          return /* HTML */ ` <li class="nav__subtitle">${item.title}</li> `;
+        }
+
+        const isActive = isLinkActive(
+          item.path,
+          currentPath,
+          currentHash,
+          true
+        );
+
+        return /* HTML */ `
+          <li>
+            <a
+              class="link link--navigation ${isActive ? "link--active" : ""}"
+              href="${item.path}"
+              ${isActive ? 'aria-current="page"' : ""}
+            >
+              ${item.title}
+            </a>
+          </li>
+        `;
+      }).join("")}
+    `;
+  } else {
+    const homeNavItems = [
+      { href: "#overview", title: "Overview" },
+      { href: "#examples", title: "Examples" },
+      { href: "#reviews", title: "Reviews" },
+    ];
+
+    navItems = /* HTML */ `
+      <li class="nav__subtitle">Menu</li>
+      ${homeNavItems
+        .map((item) => {
+          const isActive = isLinkActive(
+            item.href,
+            currentPath,
+            currentHash,
+            true
+          );
+
+          return /* HTML */ `
+            <li>
+              <a
+                class="link link--navigation ${isActive ? "link--active" : ""}"
+                href="${item.href}"
+                ${isActive ? 'aria-current="page"' : ""}
+              >
+                ${item.title}
+              </a>
+            </li>
+          `;
+        })
+        .join("")}
+    `;
+  }
+
   const content = /* HTML */ `
     <nav class="mobile-nav">
       <ul class="nav__list">
-        <li class="nav__subtitle">Menu</li>
-        <li>
-          <a class="link link--navigation" href="#overview"> Overview</a>
-        </li>
-        <li>
-          <a class="link link--navigation" href="#examples"> Examples</a>
-        </li>
-        <li>
-          <a class="link link--navigation" href="#reviews"> Reviews</a>
-        </li>
+        ${navItems}
       </ul>
     </nav>
   `;

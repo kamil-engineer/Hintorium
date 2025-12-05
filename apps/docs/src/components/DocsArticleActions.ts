@@ -1,28 +1,78 @@
+import { getDocPages, type DocPage } from "../config/docs-navigation";
+import { createIcon } from "../utils/icons";
+
+function getAdjacentPages(currentPath: string): {
+  prev: DocPage | null;
+  next: DocPage | null;
+} {
+  const pages = getDocPages();
+  const currentIndex = pages.findIndex((page) => page.path === currentPath);
+
+  if (currentIndex === -1) {
+    return { prev: null, next: null };
+  }
+
+  return {
+    prev: currentIndex > 0 ? pages[currentIndex - 1] : null,
+    next: currentIndex < pages.length - 1 ? pages[currentIndex + 1] : null,
+  };
+}
+
+function isDocsIndexPage(path: string): boolean {
+  return path === "/docs" || path === "/docs/";
+}
+
 export const DocsArticleActions = () => {
+  const currentPath = window.location.pathname;
+  const isIndexPage = isDocsIndexPage(currentPath);
+
+  let prev: DocPage | null = null;
+  let next: DocPage | null = null;
+
+  if (isIndexPage) {
+    const pages = getDocPages();
+    next = pages.length > 0 ? pages[0] : null;
+  } else {
+    const adjacent = getAdjacentPages(currentPath);
+    prev = adjacent.prev;
+    next = adjacent.next;
+  }
+
   const content = /* HTML */ `
     <div class="article__actions">
       <button class="button button--outline button--sm button--copy">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="button__icon"
-        >
-          <path
-            d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"
-          ></path>
-          <path
-            d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"
-          ></path>
-        </svg>
-        Copy page
+        ${createIcon("copy", "button__icon")} Copy page
       </button>
+      <div class="article__navigation">
+        ${prev || next
+          ? /* HTML */ `
+              <div class="article__navigation">
+                ${prev
+                  ? /* HTML */ `
+                      <a
+                        href="${prev.path}"
+                        class="button button--outline button--sm button--nav"
+                        aria-label="Previous page: ${prev.title}"
+                      >
+                        ${createIcon("leftArrow", "button__icon")}
+                      </a>
+                    `
+                  : ""}
+                ${next
+                  ? /* HTML */ `
+                      <a
+                        href="${next.path}"
+                        class="button button--outline button--sm button--nav"
+                        aria-label="Next page: ${next.title}"
+                      >
+                        ${createIcon("rightArrow", "button__icon")}
+                      </a>
+                    `
+                  : ""}
+              </div>
+            `
+          : ""}
+      </div>
     </div>
   `;
 

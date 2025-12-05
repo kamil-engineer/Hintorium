@@ -125,6 +125,26 @@ export const icons = {
       d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
     ></path>
   </svg>`,
+  copy: /* HTML */ `
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path
+        d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"
+      ></path>
+      <path
+        d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"
+      ></path>
+    </svg>
+  `,
   codeSlash: /* HTML */ `<svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
@@ -141,6 +161,23 @@ export const icons = {
     <path d="m6 8-4 4 4 4"></path>
     <path d="m14.5 4-5 16"></path>
   </svg>`,
+  leftArrow: /* HTML */ `
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M5 12l14 0"></path>
+      <path d="M5 12l6 6"></path>
+      <path d="M5 12l6 -6"></path>
+    </svg>
+  `,
   palette: /* HTML */ `<svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
