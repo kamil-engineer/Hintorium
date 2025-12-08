@@ -126,18 +126,24 @@ html {
   font-family: var(--ff-primary);
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .container {
   min-height: 100vh;
   background-color: rgb(var(--bg-background));
-  overflow-x: hidden;
 }
 
 /* --- HEADER --- */
 
-.header {
+.header-with-nav {
   position: sticky;
   z-index: 10;
   top: 0;
+}
+
+.header {
   border-bottom: 1px solid rgba(var(--color-border), 0.4);
   background-color: rgba(var(--background), 0.7);
   backdrop-filter: blur(8px);
