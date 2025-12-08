@@ -1,4 +1,5 @@
 import { DocsArticleActions } from "../../components/DocsArticleActions";
+import { createIcon } from "../../utils/icons";
 
 export const Motivation = () => {
   const container = document.createElement("div");
@@ -14,11 +15,17 @@ export const Motivation = () => {
         <p class="article__description">
           Why we created the Hintorium and what problems it solves.
         </p>
+
+        <div class="article-tags">
+          <span class="tag tag--time"> ${createIcon("read")} 2 minutes</span>
+        </div>
       </div>
     </article>
   `;
 
   container.innerHTML = content;
+
+  
 
   return container;
 };

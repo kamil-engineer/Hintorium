@@ -36,6 +36,9 @@ export const Header = ({ docs = false }: { docs?: boolean } = {}) => {
             </button>
           </div>
         </div>
+        <div class="progress-container">
+          <div class="progress-bar"></div>
+        </div>
       </div>
     </header>
   `;
