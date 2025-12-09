@@ -6,11 +6,18 @@ export const initTocScrollTracking = () => {
   if (sections.length === 0 || tocLinks.length === 0) return;
 
   const observerOptions: IntersectionObserverInit = {
-    rootMargin: "-20% 0px -70% 0px",
+    rootMargin: "-10% 0px -70% 0px",
     threshold: 0,
   };
 
   let activeSection: string | null = null;
+  let isNearBottom = false;
+
+  function checkIfNearBottom() {
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    isNearBottom = scrollPosition >= documentHeight - 50;
+  }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -20,6 +27,12 @@ export const initTocScrollTracking = () => {
         activeSection = sectionId;
         updateActiveLink(sectionId);
       }
+
+      if (isNearBottom && sections.length > 0) {
+        const lastSection = sections[sections.length - 1];
+        activeSection = lastSection.id;
+        updateActiveLink(lastSection.id);
+      }
     });
   }, observerOptions);
 
@@ -27,15 +40,34 @@ export const initTocScrollTracking = () => {
     observer.observe(section);
   });
 
-    function updateActiveLink(sectionId: string): void {
+  function updateActiveLink(sectionId: string): void {
     tocLinks.forEach((link) => {
       if (link.dataset.tocLink === sectionId) {
-        link.classList.add('toc__link--active');
+        link.classList.add("link--toc-active");
       } else {
-        link.classList.remove('toc__link--active');
+        link.classList.remove("link--toc-active");
       }
     });
   }
+
+  let scrollTimeout: number;
+  function handleScroll(): void {
+    checkIfNearBottom();
+
+    if (scrollTimeout) {
+      window.cancelAnimationFrame(scrollTimeout);
+    }
+
+    scrollTimeout = window.requestAnimationFrame(() => {
+      if (isNearBottom && sections.length > 0) {
+        const lastSection = sections[sections.length - 1];
+        updateActiveLink(lastSection.id);
+      }
+    });
+  }
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  checkIfNearBottom();
 };
 
 export const toc = () => {
@@ -71,7 +103,7 @@ export const toc = () => {
                 <li class="toc__item">
                   <a
                     href="#${section.id}"
-                    class="toc__link"
+                    class="link link--toc"
                     data-toc-link="${section.id}"
                   >
                     ${heading?.textContent || "Untitled"}

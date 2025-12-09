@@ -847,6 +847,30 @@ body {
   padding: 0;
 }
 
+.toc {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-3);
+
+  & .toc__title {
+    font-size: var(--text-sm);
+    color: rgb(var(--color-muted-foreground));
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  & .toc__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-3);
+  }
+
+  & .toc__item {
+    font-size: var(--text-xs);
+  }
+}
+
 /* --- REUSEABLE --- */
 
 .progress-container {
@@ -988,6 +1012,27 @@ body {
 
   &:hover {
     background-color: rgb(var(--color-sidebar-accent));
+  }
+}
+
+.link--toc {
+  &:link,
+  &:visited {
+    font-size: var(--text-xs);
+    color: rgb(var(--color-muted-foreground));
+    line-height: 1.5;
+    transition: 0.2s;
+  }
+
+  &:hover {
+    color: rgb(var(--color-primary));
+  }
+}
+
+.link--toc-active {
+  &:link,
+  &:visited {
+    color: rgb(var(--color-primary));
   }
 }
 
