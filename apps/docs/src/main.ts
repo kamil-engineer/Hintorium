@@ -9,6 +9,7 @@ import { handleMobileNavigation } from "./logic/mobile-navigation";
 import { copyPage } from "./logic/copy-page";
 import { dynamicProgressBar } from "./logic/progress";
 import { toc } from "./logic/toc";
+import { initScrollAnimations } from "./logic/init-scroll-animations";
 
 const router = new Router({
   routes,
@@ -19,6 +20,7 @@ router.afterRender(() => {
   copyPage();
   dynamicProgressBar();
   toc();
+  initScrollAnimations();
 });
 
 document.addEventListener("DOMContentLoaded", () => {

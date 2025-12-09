@@ -636,7 +636,7 @@ body {
     position: sticky;
     top: calc(var(--h-16));
     max-height: 90vh;
-    max-width: var(--w-44);
+    width: var(--w-44);
     border-left: 1px solid rgb(var(--color-border), 0.5);
     padding: var(--py-8) var(--px-6);
   }
@@ -1304,10 +1304,6 @@ body {
   display: flex;
   align-items: center;
   gap: var(--gap-2);
-}
-
-.button--nav {
-  animation: fadeInUp 0.4s ease-out backwards;
 }
 
 .button--nav:first-child {
@@ -2109,4 +2105,572 @@ body {
 .link--inline {
   color: rgb(var(--color-primary));
   text-decoration: underline;
+}
+
+/* ==============================================
+   HOME PAGE ANIMATIONS
+   Dodaj na końcu swojego CSS
+   ============================================== */
+
+/* --- HERO SECTION ANIMATIONS --- */
+
+.hero__wrapper > * {
+  animation: fadeInUp 0.8s ease-out backwards;
+}
+
+.subtitle-wrapper {
+  animation-delay: 0.1s;
+}
+
+.hero__title {
+  animation-delay: 0.2s;
+}
+
+.hero__description {
+  animation-delay: 0.3s;
+}
+
+.hero__actions {
+  animation-delay: 0.4s;
+}
+
+.hero__partners {
+  animation-delay: 0.5s;
+}
+
+/* Grid background animation */
+.grid-background {
+  animation: gridFade 1s ease-out;
+}
+
+@keyframes gridFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.03;
+  }
+}
+
+/* Hero gradient text shimmer */
+.hero__title-bottom {
+  position: relative;
+  background: linear-gradient(
+    120deg,
+    rgb(var(--color-gradient-light)),
+    rgb(var(--color-gradient-dark)),
+    rgb(var(--color-gradient-light)),
+    rgb(var(--color-gradient-dark))
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Hero buttons hover effects */
+.hero__actions .button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero__actions .button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(var(--color-primary), 0.3);
+}
+
+.hero__actions .button--outline:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(var(--color-border), 0.2);
+  border-color: rgb(var(--color-primary));
+}
+
+/* Partners list fade in */
+.hero__partners-list {
+  animation: fadeIn 1s ease-out 0.6s backwards;
+}
+
+.hero__partners-partner {
+  display: inline-block;
+  animation: floatUp 3s ease-in-out infinite;
+}
+
+.hero__partners-partner:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.hero__partners-partner:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.hero__partners-partner:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.hero__partners-partner:nth-child(4) {
+  animation-delay: 0.9s;
+}
+
+@keyframes floatUp {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* --- OVERVIEW SECTION ANIMATIONS --- */
+
+/* Scroll-triggered animation setup */
+.overview__content {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.overview__content.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Overview items staggered animation */
+.overview__item {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.overview__item.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.overview__items .overview__item:nth-child(1).animate {
+  transition-delay: 0.1s;
+}
+
+.overview__items .overview__item:nth-child(2).animate {
+  transition-delay: 0.2s;
+}
+
+.overview__items .overview__item:nth-child(3).animate {
+  transition-delay: 0.3s;
+}
+
+.overview__items .overview__item:nth-child(4).animate {
+  transition-delay: 0.4s;
+}
+
+/* Overview item hover effect */
+.overview__item {
+  transition: all 0.3s ease;
+}
+
+.overview__item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(var(--color-primary), 0.1);
+}
+
+.overview__item:hover .overview__image {
+  transform: scale(1.05);
+}
+
+.overview__image {
+  transition: transform 0.3s ease;
+}
+
+/* --- EXAMPLES SECTION ANIMATIONS --- */
+
+/* Example cards fade in */
+.example {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.example.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delay for examples */
+.overview__items .example:nth-child(1).animate {
+  transition-delay: 0.1s;
+}
+
+.overview__items .example:nth-child(2).animate {
+  transition-delay: 0.2s;
+}
+
+.overview__items .example:nth-child(3).animate {
+  transition-delay: 0.3s;
+}
+
+.overview__items .example:nth-child(4).animate {
+  transition-delay: 0.4s;
+}
+
+/* Example buttons pulse on hover */
+.example__content .button {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.example__content .button::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: rgb(var(--color-primary));
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.example__content .button:hover::before {
+  opacity: 0.1;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.15;
+  }
+}
+
+/* Code block slide in */
+.example__code {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.5s ease 0.3s;
+}
+
+.example.animate .example__code {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- REVIEWS SECTION ANIMATIONS --- */
+
+/* Review cards slide in from sides */
+.review {
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.swiper-slide-active .review {
+  animation: slideInFromLeft 0.6s ease-out forwards;
+}
+
+.swiper-slide-next .review {
+  animation: slideInFromRight 0.6s ease-out forwards;
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Review image zoom on hover */
+.review__image-container {
+  overflow: hidden;
+}
+
+.review__image {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.review__image-container:hover .review__image {
+  transform: scale(1.08);
+}
+
+/* Tags bounce in */
+.review__tags .tag {
+  animation: bounceIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards;
+}
+
+.review__tags .tag:nth-child(1) {
+  animation-delay: 0.4s;
+}
+
+.review__tags .tag:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Stars fill animation */
+.review__stars img {
+  animation: starPop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards;
+}
+
+.review__stars img:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.review__stars img:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.review__stars img:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.review__stars img:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+.review__stars img:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+@keyframes starPop {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+/* Review text fade in */
+.review__text {
+  animation: fadeInUp 0.6s ease-out 0.6s backwards;
+}
+
+/* Best items check animation */
+.review__best-item {
+  animation: slideInFromLeft 0.4s ease-out backwards;
+}
+
+.review__best-item:nth-child(1) {
+  animation-delay: 0.7s;
+}
+
+.review__best-item:nth-child(2) {
+  animation-delay: 0.8s;
+}
+
+.review__best-item:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+.review__best-marker {
+  animation: checkmark 0.4s ease-out backwards;
+}
+
+.review__best-item:nth-child(1) .review__best-marker {
+  animation-delay: 0.8s;
+}
+
+.review__best-item:nth-child(2) .review__best-marker {
+  animation-delay: 0.9s;
+}
+
+.review__best-item:nth-child(3) .review__best-marker {
+  animation-delay: 1s;
+}
+
+@keyframes checkmark {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-90deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+/* Pagination dots animation */
+.pagination-item {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pagination-item:hover {
+  transform: scale(1.2);
+}
+
+.pagination-item--active {
+  animation: expandDot 0.3s ease-out;
+}
+
+@keyframes expandDot {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* --- FOOTER ANIMATIONS --- */
+
+.footer {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.footer.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.footer__top-content > div {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.footer.animate .footer__top-content > div:nth-child(1) {
+  animation: fadeInUp 0.6s ease-out 0.1s forwards;
+}
+
+.footer.animate .footer__top-content > div:nth-child(2) {
+  animation: fadeInUp 0.6s ease-out 0.2s forwards;
+}
+
+.footer.animate .footer__top-content > div:nth-child(3) {
+  animation: fadeInUp 0.6s ease-out 0.3s forwards;
+}
+
+/* Footer links hover */
+.link--footer {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.link--footer::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgb(var(--color-primary));
+  transition: width 0.3s ease;
+}
+
+.link--footer:hover::after {
+  width: 100%;
+}
+
+/* Social icons hover */
+.footer__socials .button {
+  transition: all 0.3s ease;
+}
+
+.footer__socials .button:hover {
+  transform: translateY(-3px) rotate(5deg);
+  background: rgb(var(--color-primary), 0.1);
+}
+
+/* --- UTILITY KEYFRAMES --- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- REDUCED MOTION --- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .hero__title-bottom {
+    animation: none;
+  }
+
+  .hero__partners-partner {
+    animation: none;
+  }
+}
+
+/* --- MOBILE OPTIMIZATIONS --- */
+
+@media (max-width: 40rem) {
+  /* Uproszczone animacje na mobile */
+  .overview__item:hover {
+    transform: none;
+  }
+
+  .example__content .button:hover::before {
+    animation: none;
+  }
 }
