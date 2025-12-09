@@ -10,7 +10,6 @@ export const initTocScrollTracking = () => {
     threshold: 0,
   };
 
-  let activeSection: string | null = null;
   let isNearBottom = false;
 
   function checkIfNearBottom() {
@@ -24,13 +23,12 @@ export const initTocScrollTracking = () => {
       const sectionId = entry.target.id;
 
       if (entry.isIntersecting) {
-        activeSection = sectionId;
         updateActiveLink(sectionId);
       }
 
       if (isNearBottom && sections.length > 0) {
         const lastSection = sections[sections.length - 1];
-        activeSection = lastSection.id;
+
         updateActiveLink(lastSection.id);
       }
     });
