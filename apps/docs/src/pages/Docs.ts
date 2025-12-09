@@ -17,8 +17,6 @@ export function DocsLayout(content: HTMLElement): HTMLElement {
   const currentPath = window.location.pathname;
   const showSideContents = !isDocsIndexPage(currentPath);
 
-  console.log(currentPath);
-
   const layoutHTML = /* HTML */ `
     <div class="header-with-nav">
       ${MobileNavigation()} ${Header({ docs: true })}

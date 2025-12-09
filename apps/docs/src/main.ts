@@ -8,6 +8,7 @@ import { routes } from "./router/routes";
 import { handleMobileNavigation } from "./logic/mobile-navigation";
 import { copyPage } from "./logic/copy-page";
 import { dynamicProgressBar } from "./logic/progress";
+import { toc } from "./logic/toc";
 
 const router = new Router({
   routes,
@@ -17,6 +18,7 @@ router.afterRender(() => {
   handleMobileNavigation();
   copyPage();
   dynamicProgressBar();
+  toc();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
