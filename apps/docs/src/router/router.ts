@@ -181,11 +181,22 @@ export class Router {
         }
       }
 
+      const fullPath = hash ? `${pathWithQuery}` : pathWithQuery;
+      if (replace) {
+        window.history.replaceState(null, "", fullPath);
+      } else {
+        window.history.pushState(null, "", fullPath);
+      }
+
       let element: HTMLElement;
       let title: string;
 
       if (route) {
         element = route.view(context);
+
+        if (route.layout) {
+          element = route.layout(element, context);
+        }
 
         if (typeof route.title === "function") {
           title = await route.title(context);
@@ -202,13 +213,6 @@ export class Router {
 
       await this.animateTransition(element);
       document.title = title;
-
-      const fullPath = hash ? `${pathWithQuery}` : pathWithQuery;
-      if (replace) {
-        window.history.replaceState(null, "", fullPath);
-      } else {
-        window.history.pushState(null, "", fullPath);
-      }
 
       window.scrollTo(0, 0);
       if (hash) {

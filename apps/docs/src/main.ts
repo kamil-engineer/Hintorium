@@ -6,17 +6,21 @@ import { setupSwipper } from "./logic/swipper";
 import { Router } from "./router/router";
 import { routes } from "./router/routes";
 import { handleMobileNavigation } from "./logic/mobile-navigation";
+import { copyPage } from "./logic/copy-page";
+import { dynamicProgressBar } from "./logic/progress";
+import { toc } from "./logic/toc";
+import { initScrollAnimations } from "./logic/init-scroll-animations";
 
 const router = new Router({
   routes,
-  transitionDuration: 300,
-  onRouteChange: (path, context) => {
-    console.log("Route changed:", path, context);
-  },
 });
 
 router.afterRender(() => {
   handleMobileNavigation();
+  copyPage();
+  dynamicProgressBar();
+  toc();
+  initScrollAnimations();
 });
 
 document.addEventListener("DOMContentLoaded", () => {

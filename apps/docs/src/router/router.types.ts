@@ -20,6 +20,7 @@ export type Route = {
   afterEnter?: (context: RouteContext) => void | Promise<void>;
   beforeLeave?: () => boolean | Promise<boolean>;
   meta?: Record<string, any>;
+  layout?: (content: HTMLElement, context: RouteContext) => HTMLElement;
 };
 
 export type RouterConfig = {
