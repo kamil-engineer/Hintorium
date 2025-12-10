@@ -1,0 +1,16 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-8);
+    list-style-type: none;
+  }
+}
+
+.mobile-nav {
+  display: none;
+}

@@ -1,0 +1,24 @@
+.header-with-nav {
+  position: sticky;
+  z-index: 10;
+  top: 0;
+}
+
+.header {
+  border-bottom: 1px solid rgba(var(--color-border), 0.4);
+  background-color: rgba(var(--background), 0.7);
+  backdrop-filter: blur(8px);
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: var(--h-16);
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-2);
+  }
+}

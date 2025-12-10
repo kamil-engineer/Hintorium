@@ -1,6 +1,59 @@
+import { CodeExample } from "../components/CodeExample";
+
+export const BasicTooltipExample = CodeExample({
+  title: "Basic Tooltip",
+  description: "Simple tooltip with default settings",
+  demo: /* HTML */ `
+    <button
+      data-hintorium-tooltip="This is a tooltip"
+      class="button button--lg button--primary"
+    >
+      Hover me
+    </button>
+  `,
+  snippets: [
+    {
+      language: "html",
+      label: "HTML",
+      code: `<button data-hintorium-tooltip="This is a tooltip">
+  Hover me
+</button>`,
+    },
+    {
+      language: "typescript",
+      label: "TypeScript",
+      code: `// Global initialization
+initTooltip();
+
+// Or manual initialization
+const button = document.querySelector('button');
+new Tooltip(button, "This is a tooltip");`,
+    },
+  ],
+});
+
 export const Examples = () => {
   const content = /* HTML */ `
     <section class="overview" id="examples">
+      <div class="overview__wrapper">
+        <div class="overview__content">
+          <h2 class="overview__title">Interactive Examples</h2>
+          <p class="overview__description">
+            Hover to see tooltips, click tabs to view code
+          </p>
+        </div>
+
+        <div class="examples-grid">${BasicTooltipExample}</div>
+      </div>
+    </section>
+  `;
+
+  return content;
+};
+
+/*
+
+  <section class="overview" id="examples">
       <div class="overview__wrapper">
         <div class="overview__content">
           <h2 class="overview__title">Interactive Examples</h2>
@@ -182,7 +235,4 @@ export const Examples = () => {
         </div>
       </div>
     </section>
-  `;
-
-  return content;
-};
+*/

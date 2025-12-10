@@ -1,0 +1,61 @@
+.overview {
+  padding: var(--py-12) var(--px-4);
+
+  &__wrapper {
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+
+  &__content {
+    text-align: center;
+    margin-bottom: var(--mb-16);
+  }
+
+  &__title {
+    font-size: var(--text-4xl);
+    font-weight: 700;
+    margin-bottom: var(--mb-4);
+  }
+
+  &__description {
+    color: rgb(var(--color-muted-foreground));
+  }
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    list-style-type: none;
+    gap: var(--gap-6);
+  }
+
+  &__item {
+    transition: 0.3s;
+    border: 1px solid rgb(var(--color-border), 0.5);
+    background-color: var(--color-card);
+    color: rgb(var(--color-foreground));
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-6);
+    padding: var(--p-5);
+    border-radius: 11px;
+
+    justify-content: flex-start;
+
+    &:hover {
+      border: 1px solid rgb(var(--color-border), 0.8);
+    }
+  }
+
+  &__subtitle {
+    font-weight: 600;
+    font-size: var(--text-xl);
+  }
+
+  &__subdescription {
+    color: rgb(var(--color-muted-foreground));
+  }
+
+  &__image {
+    margin-bottom: var(--mb-4);
+  }
+}
