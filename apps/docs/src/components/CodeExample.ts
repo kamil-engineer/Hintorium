@@ -20,7 +20,6 @@ export function CodeExample(config: CodeExampleConfig): string {
 
   return /* HTML */ `
     <div class="code-example">
-      <!-- Title & Description -->
       <div class="code-example__header">
         <h3 class="code-example__title">${title}</h3>
         ${description
@@ -28,12 +27,9 @@ export function CodeExample(config: CodeExampleConfig): string {
           : ""}
       </div>
 
-      <!-- Demo Area -->
       <div class="code-example__demo">${demo}</div>
 
-      <!-- Code Viewer -->
       <div class="code-example__viewer" data-code-viewer="${id}">
-        <!-- Tabs -->
         <div class="code-viewer__tabs">
           ${snippets
             .map(
@@ -52,7 +48,6 @@ export function CodeExample(config: CodeExampleConfig): string {
             .join("")}
         </div>
 
-        <!-- Code Panels -->
         <div class="code-viewer__panels">
           ${snippets
             .map(
@@ -63,7 +58,6 @@ export function CodeExample(config: CodeExampleConfig): string {
                     : ""}"
                   data-panel="${id}-${index}"
                 >
-                  <!-- Copy Button -->
                   <button
                     class="code-viewer__copy"
                     data-copy="${id}-${index}"
@@ -80,6 +74,7 @@ export function CodeExample(config: CodeExampleConfig): string {
                       stroke-width="2"
                       stroke-linecap="round"
                       stroke-linejoin="round"
+                      aria-hidden="true"
                     >
                       <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
                       <path
@@ -89,7 +84,6 @@ export function CodeExample(config: CodeExampleConfig): string {
                     <span class="code-viewer__copy-text">Copy</span>
                   </button>
 
-                  <!-- Code Block -->
                   <pre
                     class="code-viewer__pre"
                   ><code class="code-viewer__code language-${snippet.language}">${escapeHtml(

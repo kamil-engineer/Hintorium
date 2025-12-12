@@ -39,11 +39,11 @@ export const DocsArticleActions = () => {
   }
 
   const content = /* HTML */ `
-    <div class="article__actions">
+    <div class="content-article__actions">
       <button class="button button--outline button--sm button--copy">
         ${createIcon("copy", "button__icon")} Copy page
       </button>
-      <div class="article__navigation">
+      <div class="content-article__navigation">
         ${prev || next
           ? /* HTML */ `
               <div class="article__navigation">

@@ -1,12 +1,35 @@
+@use "./animations/keyframes";
+
 @use "./abstracts/variables";
 @use "./base/reset";
 @use "./base/reuseable";
+@use "./base/utils";
 
 @use "./components/atoms/container";
 @use "./components/atoms/subtitle";
+@use "./components/atoms/link";
+@use "./components/atoms/tag";
+@use "./components/atoms/button";
+@use "./components/atoms/wrapper";
+@use "./components/atoms/progress";
+@use "./components/atoms/logo";
+@use "./components/atoms/breadcrumbs";
+@use "./components/atoms/swiper-pagination";
 @use "./components/molecules/hero";
 @use "./components/molecules/overview";
 @use "./components/molecules/example";
+@use "./components/molecules/review";
+@use "./components/molecules/article";
+@use "./components/molecules/cta";
+@use "./components/molecules/topics";
+@use "./components/molecules/story";
+@use "./components/molecules/toc";
 
 @use "./layout/header";
 @use "./layout/nav";
+@use "./layout/footer";
+@use "./layout/sidebar";
+
+@use "./pages/docs";
+
+@use "swiper/css";

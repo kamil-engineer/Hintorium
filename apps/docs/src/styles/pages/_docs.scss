@@ -1,0 +1,55 @@
+@use "./../abstracts/mixins" as *;
+
+.docs-content {
+  min-height: 100vh;
+  background-color: rgb(var(--background));
+
+  & .wrapper {
+    padding: 0;
+  }
+
+  &__header {
+    background-color: rgb(var(--background), 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--py-6) var(--px-6);
+  }
+}
+
+.docs-main {
+  display: flex;
+
+  &__sidebar {
+    position: sticky;
+    top: calc(var(--h-16));
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgb(var(--color-border), 0.5);
+    width: var(--w-44);
+
+    @include respond(md) {
+      display: none;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex: 1;
+  }
+
+  &__side-content {
+    position: sticky;
+    top: calc(var(--h-16));
+    max-height: 90vh;
+    width: var(--w-44);
+    border-left: 1px solid rgb(var(--color-border), 0.5);
+    padding: var(--py-8) var(--px-6);
+  }
+
+  &__content {
+    flex: 1;
+    overflow-y: auto;
+  }
+}

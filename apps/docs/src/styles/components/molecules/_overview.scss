@@ -1,5 +1,11 @@
+@use "./../../abstracts/mixins" as *;
+
 .overview {
   padding: var(--py-12) var(--px-4);
+
+  @include respond(md) {
+    padding: var(--py-8) var(--px-4);
+  }
 
   &__wrapper {
     max-width: 64rem;
@@ -26,6 +32,10 @@
     grid-template-columns: repeat(2, 1fr);
     list-style-type: none;
     gap: var(--gap-6);
+
+    @include respond(md) {
+      grid-template-columns: 1fr;
+    }
   }
 
   &__item {
