@@ -1,0 +1,18 @@
+.breadcrumbs {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-2);
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon {
+    color: rgb(var(--color-muted-foreground));
+    width: 1rem;
+    height: 1rem;
+  }
+}

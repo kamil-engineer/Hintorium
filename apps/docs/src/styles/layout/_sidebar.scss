@@ -1,0 +1,15 @@
+.sidebar {
+  padding: var(--py-6) var(--px-3);
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-2);
+    list-style-type: none;
+
+    & .nav__subtitle {
+      font-size: var(--text-sm);
+      color: rgb(var(--color-muted-foreground));
+      padding: var(--py-2) var(--px-3);
+    }
+  }
+}

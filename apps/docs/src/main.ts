@@ -1,4 +1,5 @@
-import "./style.css";
+import "./styles/main.scss";
+
 import "hintorium-core/dist/hintorium-core.css";
 import { initTooltip } from "hintorium-core";
 
@@ -10,12 +11,17 @@ import { copyPage } from "./logic/copy-page";
 import { dynamicProgressBar } from "./logic/progress";
 import { toc } from "./logic/toc";
 import { initScrollAnimations } from "./logic/init-scroll-animations";
+import { initCodeViewers } from "./logic/init-code-viewers";
 
 const router = new Router({
   routes,
 });
 
 router.afterRender(() => {
+  if (window.location.pathname === "/") {
+    initCodeViewers();
+  }
+
   handleMobileNavigation();
   copyPage();
   dynamicProgressBar();

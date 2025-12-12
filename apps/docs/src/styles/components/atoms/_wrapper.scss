@@ -1,0 +1,17 @@
+@use "./../../abstracts/mixins" as *;
+
+.wrapper {
+  --width: 80rem;
+  max-width: var(--width);
+  margin: 0 auto;
+
+  padding: 0 var(--px-8);
+
+  @include respond(xl) {
+    padding: 0 var(--px-5);
+  }
+
+  @include respond(md) {
+    padding: 0 var(--px-4);
+  }
+}

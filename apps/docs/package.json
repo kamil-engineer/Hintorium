@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "hintorium-core": "^2.0.1",
+    "sass": "^1.95.1",
     "typescript": "~5.9.3",
     "vite": "^7.1.7"
   },

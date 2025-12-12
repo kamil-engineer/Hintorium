@@ -1,0 +1,132 @@
+@use "./../../abstracts/mixins" as *;
+
+.review {
+  border: 1px solid rgb(var(--color-border), 0.5);
+  border-radius: 11px;
+  background-color: rgb(var(--color-card));
+  padding: var(--p-10);
+  backdrop-filter: blur(8px);
+
+  @include respond(md) {
+    padding: var(--p-5);
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap-8);
+    align-items: center;
+
+    @include respond(md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__general {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--gap-3);
+    height: 100%;
+  }
+
+  &__tags {
+    display: flex;
+    gap: var(--gap-2);
+  }
+
+  &__stars {
+    margin-bottom: var(--mb-3);
+  }
+
+  &__author {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-2);
+
+    &-name {
+      font-weight: 600;
+      font-size: var(--text-lg);
+      color: rgb(var(--color-foreground));
+    }
+
+    &-job {
+      font-size: var(--text-sm);
+      color: rgb(var(--color-muted-foreground));
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-4);
+    margin-bottom: var(--mb-3);
+    &-text {
+      font-size: var(--text-sm);
+      color: rgb(var(--color-foreground));
+    }
+  }
+
+  &__best {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-3);
+    list-style-type: none;
+    &-item {
+      display: flex;
+      align-items: center;
+      gap: var(--gap-3);
+      font-size: var(--text-sm);
+      color: rgb(var(--color-primary));
+    }
+    &-marker {
+      color: rgb(var(--color-primary));
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+
+    transition: 0.6s;
+
+    @include respond(md) {
+      object-position: top;
+    }
+  }
+
+  &__text {
+    font-size: var(--text-lg);
+    color: rgb(var(--color-foreground));
+    line-height: 1.6;
+    margin-bottom: var(--mb-3);
+  }
+
+  &__image-container {
+    position: relative;
+    height: 100%;
+    border-radius: 11px;
+    overflow: hidden;
+
+    @include respond(md) {
+      height: var(--h-60);
+    }
+
+    &:hover .review__image {
+      transform: scale(1.03);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(var(--color-black), 0.15);
+    }
+  }
+}

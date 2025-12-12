@@ -39,18 +39,18 @@ export default function Docs(): HTMLElement {
 
   indexContent.innerHTML = /* HTML */ `
     <article class="content-article">
-      <div class="top-wrapper">
-        <header class="article__header">
-          <h1 class="article__title">Documentation</h1>
+      <div class="content-article__top-wrapper">
+        <header class="content-article__header">
+          <h1 class="content-article__title">Documentation</h1>
           ${DocsArticleActions()}
         </header>
-        <p class="article__description">
+        <p class="content-article__description">
           Everything you need to know about building beautiful, accessible
           tooltips with the Tooltip Library.
         </p>
       </div>
 
-      <div class="article__cta cta">
+      <div class="content-article__cta cta">
         ${createIcon("fast", "cta__icon")}
 
         <div class="cta__content">
@@ -103,7 +103,7 @@ export default function Docs(): HTMLElement {
         </a>
       </div>
     </article>
-    <p class="article-bottom">
+    <p class="content-article__bottom">
       New to tooltips? Start with the <b>Introduction</b> guide.
     </p>
   `;
