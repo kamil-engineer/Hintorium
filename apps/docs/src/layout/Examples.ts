@@ -169,7 +169,9 @@ export const RichContentExample = CodeExample({
   title: "Rich Content",
   description: "Tooltips with HTML content, styling, and formatting",
   demo: /* HTML */ `
-    <div style="display: flex; gap: 1rem; justify-content: center;">
+    <div
+      style="display: flex; gap: 1rem; justify-content: center; flex-wrap:wrap"
+    >
       <button
         data-hintorium-tooltip="&lt;div style='padding: 0.5rem;'&gt;&lt;strong style='display: block; margin-bottom: 0.25rem;'&gt;Rich Tooltip&lt;/strong&gt;&lt;p style='margin: 0; color: rgba(255,255,255,0.9);'&gt;You can use HTML elements for advanced formatting!&lt;/p&gt;&lt;/div&gt;"
         class="button button--lg button--outline"
