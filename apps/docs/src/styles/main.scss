@@ -24,6 +24,10 @@
 @use "./components/molecules/topics";
 @use "./components/molecules/story";
 @use "./components/molecules/toc";
+@use "./components/molecules/problems";
+@use "./components/molecules/timeline";
+@use "./components/molecules/principles";
+@use "./components/molecules/impact";
 
 @use "./layout/header";
 @use "./layout/nav";
@@ -31,5 +35,6 @@
 @use "./layout/sidebar";
 
 @use "./pages/docs";
+@use "./pages/motivation";
 
 @use "swiper/css";

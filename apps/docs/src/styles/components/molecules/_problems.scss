@@ -1,0 +1,106 @@
+@use "./../../abstracts/mixins" as *;
+
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--p-5);
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.problem-card {
+  padding: var(--p-5);
+  border: 1px solid rgb(var(--color-border));
+  border-radius: 0.5rem;
+  background: rgb(var(--color-card));
+
+  display: flex;
+  flex-direction: column;
+
+  &__icon {
+    --size: 3rem;
+
+    width: var(--size);
+    height: var(--size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    background: rgb(var(--color-primary), 0.1);
+  }
+
+  &__svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: rgb(var(--color-primary));
+  }
+
+  &__title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  &__description {
+    color: rgb(var(--color-muted-foreground));
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  &__code {
+    overflow-x: auto;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+
+  &__frameworks {
+    padding-top: 1rem;
+    border-top: 1px solid rgb(var(--color-border));
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.6rem;
+
+    .framework-badge {
+      padding: 0.375rem 0.75rem;
+      background: rgb(var(--color-secondary));
+      border-radius: 0.25rem;
+      font-size: var(--text-xs);
+      font-weight: 500;
+      color: rgb(var(--color-secondary-foreground));
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    padding-top: 1rem;
+    border-top: 1px solid rgb(var(--color-border));
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgb(var(--color-border));
+
+    .stat__number {
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: rgb(var(--color-foreground));
+    }
+
+    .stat__label {
+      font-size: var(--text-sm);
+      color: rgb(var(--color-muted-foreground));
+    }
+  }
+}

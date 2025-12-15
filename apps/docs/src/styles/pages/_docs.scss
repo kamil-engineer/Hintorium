@@ -46,6 +46,10 @@
     width: var(--w-44);
     border-left: 1px solid rgb(var(--color-border), 0.5);
     padding: var(--py-8) var(--px-6);
+
+    @include respond(xl) {
+      display: none;
+    }
   }
 
   &__content {
