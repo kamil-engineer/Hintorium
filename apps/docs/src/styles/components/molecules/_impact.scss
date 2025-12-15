@@ -1,0 +1,39 @@
+@use "./../../abstracts/mixins" as *;
+
+.impact-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--p-5);
+  margin-top: 2rem;
+
+  @include respond(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.impact-card {
+  padding: 2rem 1.5rem;
+  border: 1px solid rgb(var(--color-border));
+  border-radius: 0.5rem;
+  text-align: center;
+  background: rgb(var(--color-card));
+
+  &__stat {
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgb(var(--color-primary));
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  &__label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  &__description {
+    font-size: var(--text-sm);
+    color: rgb(var(--color-muted-foreground));
+  }
+}

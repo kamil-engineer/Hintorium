@@ -36,7 +36,7 @@ export const Motivation = () => {
         <div class="problems-grid">
           <div class="problem-card problem-card--bloat">
             <div class="problem-card__icon">
-              ${createIcon("accessibility", "problem-card__svg")}
+              ${createIcon("bundle", "problem-card__svg")}
             </div>
             <h3 class="problem-card__title">Bundle Size Bloat</h3>
             <p class="problem-card__description">
@@ -52,7 +52,7 @@ export const Motivation = () => {
 
           <div class="problem-card problem-card--complexity">
             <div class="problem-card__icon">
-              ${createIcon("accessibility", "problem-card__svg")}
+              ${createIcon("config", "problem-card__svg")}
             </div>
             <h3 class="problem-card__title">Configuration Complexity</h3>
             <p class="problem-card__description">
@@ -60,12 +60,14 @@ export const Motivation = () => {
               documentation. Most libraries over-engineer the API with dozens of
               options you'll never use.
             </p>
-            <code class="problem-card__code">
-              // 😰 Too many options
-              <br />
-              tooltip({ placement, trigger, delay, offset, boundary, flip,
-              preventOverflow, ... })
-            </code>
+            <div class="problem-card__stat">
+              <code class="problem-card__code">
+                // 😰 Too many options
+                <br />
+                tooltip({ placement, trigger, delay, offset, boundary, flip,
+                preventOverflow, ... })
+              </code>
+            </div>
           </div>
 
           <div class="problem-card problem-card--accessibility">
@@ -109,15 +111,14 @@ export const Motivation = () => {
 
         <div class="story">
           <div class="story__icon">💡</div>
-          <div class="story__content">
-            <h3 class="story__title">It Started With a Simple Question</h3>
-            <p class="story__description">
-              "Why does adding a tooltip to our app increase the bundle size by
-              20KB?" This question led us down a rabbit hole of analyzing
-              existing solutions, reading source code, and understanding what
-              developers really need.
-            </p>
-          </div>
+
+          <h3 class="story__title">It Started With a Simple Question</h3>
+          <p class="story__description">
+            "Why does adding a tooltip to our app increase the bundle size by
+            20KB?" This question led us down a rabbit hole of analyzing existing
+            solutions, reading source code, and understanding what developers
+            really need.
+          </p>
         </div>
 
         <div class="timeline">
@@ -160,98 +161,42 @@ export const Motivation = () => {
       </section>
 
       <section class="docs-section">
-        <h2 class="docs-section__title">What Makes Hintorium Different</h2>
-
-        <div class="features-comparison">
-          <div class="comparison-header">
-            <div class="comparison-col">Feature</div>
-            <div class="comparison-col">Other Libraries</div>
-            <div class="comparison-col comparison-col--highlight">
-              Hintorium
-            </div>
-          </div>
-
-          <div class="comparison-row">
-            <div class="comparison-col">
-              <strong>Bundle Size</strong>
-            </div>
-            <div class="comparison-col">
-              <span class="badge badge--bad">20-30KB</span>
-            </div>
-            <div class="comparison-col">
-              <span class="badge badge--good">~5KB</span>
-            </div>
-          </div>
-
-          <div class="comparison-row">
-            <div class="comparison-col">
-              <strong>Framework Support</strong>
-            </div>
-            <div class="comparison-col">Framework-specific</div>
-            <div class="comparison-col">
-              <span class="badge badge--good">Universal</span>
-            </div>
-          </div>
-
-          <div class="comparison-row">
-            <div class="comparison-col">
-              <strong>Accessibility</strong>
-            </div>
-            <div class="comparison-col">Opt-in / Manual</div>
-            <div class="comparison-col">
-              <span class="badge badge--good">Built-in</span>
-            </div>
-          </div>
-
-          <div class="comparison-row">
-            <div class="comparison-col">
-              <strong>Learning Curve</strong>
-            </div>
-            <div class="comparison-col">
-              <span class="badge badge--neutral">Medium-High</span>
-            </div>
-            <div class="comparison-col">
-              <span class="badge badge--good">5 minutes</span>
-            </div>
-          </div>
-
-          <div class="comparison-row">
-            <div class="comparison-col">
-              <strong>TypeScript</strong>
-            </div>
-            <div class="comparison-col">Partial / External</div>
-            <div class="comparison-col">
-              <span class="badge badge--good">First-class</span>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="docs-section">
         <h2 class="docs-section__title">Our Design Principles</h2>
 
         <div class="principles">
           <div class="principle">
-            <div class="principle__number">01</div>
             <div class="principle__content">
-              <h3 class="principle__title">Simplicity First</h3>
-              <p class="principle__description">
-                The API should be so simple that you can start using it in under
-                5 minutes. No complex configuration, no hidden gotchas.
-              </p>
-              <code class="principle__code">
-                new Hintorium(); // That's it. Really.
-              </code>
+              <header class="principle__header">
+                <div class="principle__number">01</div>
+                <div class="principle__top">
+                  <h3 class="principle__title">Simplicity First</h3>
+                  <p class="principle__description">
+                    The API should be so simple that you can start using it in
+                    under 5 minutes. No complex configuration, no hidden
+                    gotchas.
+                  </p>
+                </div>
+              </header>
+              <div class="principle__wrapper">
+                <code class="principle__code">
+                  new Tooltip(); // That's it. Really.
+                </code>
+              </div>
             </div>
           </div>
 
           <div class="principle">
-            <div class="principle__number">02</div>
             <div class="principle__content">
-              <h3 class="principle__title">Performance Matters</h3>
-              <p class="principle__description">
-                Every kilobyte counts. We optimize for speed, size, and runtime
-                performance. Your users deserve fast experiences.
-              </p>
+              <header class="principle__header">
+                <div class="principle__number">02</div>
+                <div class="principle__top">
+                  <h3 class="principle__title">Performance Matters</h3>
+                  <p class="principle__description">
+                    Every kilobyte counts. We optimize for speed, size, and
+                    runtime performance. Your users deserve fast experiences.
+                  </p>
+                </div>
+              </header>
               <div class="principle__stats">
                 <div class="stat-item">
                   <span class="stat-item__value">5KB</span>
@@ -270,37 +215,49 @@ export const Motivation = () => {
           </div>
 
           <div class="principle">
-            <div class="principle__number">03</div>
             <div class="principle__content">
-              <h3 class="principle__title">Accessible by Default</h3>
-              <p class="principle__description">
-                Accessibility isn't a feature—it's a requirement. Every tooltip
-                works with keyboard, screen readers, and follows ARIA best
-                practices out of the box.
-              </p>
-              <ul class="principle__features">
-                <li>✓ ARIA roles & attributes</li>
-                <li>✓ Keyboard navigation (Tab, Esc)</li>
-                <li>✓ Screen reader announcements</li>
-                <li>✓ Focus management</li>
-              </ul>
+              <header class="principle__header">
+                <div class="principle__number">03</div>
+                <div class="principle__top">
+                  <h3 class="principle__title">Accessible by Default</h3>
+                  <p class="principle__description">
+                    Accessibility isn't a feature—it's a requirement. Every
+                    tooltip works with keyboard, screen readers, and follows
+                    ARIA best practices out of the box.
+                  </p>
+                </div>
+              </header>
+              <div class="principle__wrapper">
+                <ul class="principle__features">
+                  <li>✓ ARIA roles & attributes</li>
+                  <li>✓ Keyboard navigation (Tab, Esc)</li>
+                  <li>✓ Screen reader announcements</li>
+                  <li>✓ Focus management</li>
+                </ul>
+              </div>
             </div>
           </div>
 
           <div class="principle">
-            <div class="principle__number">04</div>
             <div class="principle__content">
-              <h3 class="principle__title">Framework Agnostic</h3>
-              <p class="principle__description">
-                Write once, use everywhere. Hintorium works with vanilla JS,
-                React, Vue, Svelte, Angular—or any framework you choose.
-              </p>
-              <div class="principle__frameworks">
-                <span class="framework-icon" title="Vanilla JS">JS</span>
-                <span class="framework-icon" title="React">⚛️</span>
-                <span class="framework-icon" title="Vue">🅥</span>
-                <span class="framework-icon" title="Svelte">🔥</span>
-                <span class="framework-icon" title="Angular">🅰️</span>
+              <header class="principle__header">
+                <div class="principle__number">04</div>
+                <div class="principle__top">
+                  <h3 class="principle__title">Framework Agnostic</h3>
+                  <p class="principle__description">
+                    Write once, use everywhere. Hintorium works with vanilla JS,
+                    React, Vue, Svelte, Angular—or any framework you choose.
+                  </p>
+                </div>
+              </header>
+              <div class="principle__wrapper">
+                <ul class="principle__frameworks">
+                  <li class="framework-icon" title="Vanilla JS">JS</li>
+                  <li class="framework-icon" title="React">⚛️</li>
+                  <li class="framework-icon" title="Vue">🅥</li>
+                  <li class="framework-icon" title="Svelte">🔥</li>
+                  <li class="framework-icon" title="Angular">🅰️</li>
+                </ul>
               </div>
             </div>
           </div>

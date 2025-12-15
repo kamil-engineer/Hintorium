@@ -1,0 +1,18 @@
+.docs-section {
+  padding: var(--py-8) 0;
+  margin-bottom: 3rem;
+
+  &__title {
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  &__text {
+    font-size: var(--text-lg);
+    line-height: 1.7;
+    color: rgb(var(--color-muted-foreground));
+    margin-bottom: 2rem;
+  }
+}
