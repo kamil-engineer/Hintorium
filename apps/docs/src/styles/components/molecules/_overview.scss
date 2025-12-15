@@ -15,6 +15,15 @@
   &__content {
     text-align: center;
     margin-bottom: var(--mb-16);
+
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   &__title {
@@ -39,7 +48,6 @@
   }
 
   &__item {
-    transition: 0.3s;
     border: 1px solid rgb(var(--color-border), 0.5);
     background-color: var(--color-card);
     color: rgb(var(--color-foreground));
@@ -51,8 +59,28 @@
 
     justify-content: flex-start;
 
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @for $i from 1 through 5 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+
     &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(var(--color-primary), 0.1);
       border: 1px solid rgb(var(--color-border), 0.8);
+
+      @include respond(md) {
+        transform: translateY(0);
+      }
     }
   }
 

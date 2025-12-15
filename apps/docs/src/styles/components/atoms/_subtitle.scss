@@ -7,6 +7,8 @@
   background-color: rgba(var(--color-secondary), 0.3);
   backdrop-filter: blur(8px);
 
+  animation-delay: 0.1s;
+
   & .subtitle {
     font-size: var(--text-xs);
     color: rgba(var(--color-foreground), 0.7);

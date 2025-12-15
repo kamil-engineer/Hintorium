@@ -10,12 +10,41 @@
   &--sidebar {
     &:link,
     &:visited {
+      position: relative;
+      transition: all 0.2s ease;
       text-align: left;
       padding: var(--py-2) var(--px-3);
       border-radius: 0.375rem;
       font-size: var(--text-sm);
       color: rgb(var(--color-foreground));
       transition: 0.2s;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 0;
+        background: rgb(var(--color-primary));
+        border-radius: 0 2px 2px 0;
+        transition: height 0.2s ease;
+      }
+    }
+
+    &.link--primary {
+      animation: slideInLeft 0.3s ease-out;
+    }
+
+    &.link--primary {
+      &::before {
+        height: 60%;
+      }
+    }
+
+    &:hover::before {
+      height: 60%;
     }
 
     &:hover {
@@ -26,11 +55,12 @@
   &--navigation {
     &:link,
     &:visited {
+      position: relative;
       font-size: var(--text-sm);
       color: rgb(var(--color-muted-foreground));
       outline: none;
       border-radius: 0;
-      transition: 0.3s;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
       @include respond(md) {
         font-weight: 500;
@@ -75,10 +105,34 @@
   &--breadcrumb {
     &:link,
     &:visited {
+      position: relative;
+      transition: all 0.3s ease;
       font-size: var(--text-sm);
       color: rgb(var(--color-muted-foreground));
+      border-radius: 0;
       outline: none;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: rgb(var(--color-primary));
+        transition: width 0.3s ease;
+      }
     }
+
+    &:hover {
+      color: rgb(var(--color-primary));
+      transform: translateY(-1px);
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+
     &:focus-visible {
       box-shadow: 0 0 0 3px rgb(var(--color-primary));
     }
@@ -87,10 +141,22 @@
   &--current {
     &:link,
     &:visited {
+      position: relative;
+      animation: fadeIn 0.4s ease-out;
       font-size: 1rem;
       font-weight: 600;
       color: rgb(var(--color-text-foreground));
       transition: 0.3s;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 4px;
+        background: rgba(var(--color-primary), 0.1);
+        opacity: 0;
+        animation: pulseFade 2s ease-in-out infinite;
+      }
     }
 
     &:hover {

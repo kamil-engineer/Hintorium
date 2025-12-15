@@ -8,6 +8,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    animation: fadeInRight 0.4s ease-out backwards;
+
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.05}s;
+      }
+    }
   }
 
   &__icon {

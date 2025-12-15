@@ -19,9 +19,14 @@
 
 .mobile-nav {
   display: none;
+  animation: slideDown 0.3s ease-out;
 
   &.open {
-    display: flex;
+    display: none;
+
+    @include respond(md) {
+      display: flex;
+    }
   }
 
   @include respond(md) {
@@ -38,7 +43,52 @@
     overflow-y: auto;
   }
 
+  & .link--navigation {
+    &:link,
+    &:visited {
+      &:hover {
+        transform: translateX(8px);
+        color: rgb(var(--color-primary));
+      }
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: -12px;
+        top: 50%;
+        transform: translateY(-50%) scale(0);
+        width: 6px;
+        height: 6px;
+        background: rgb(var(--color-primary));
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    &:hover::before {
+      transform: translateY(-50%) scale(1);
+    }
+
+    &.link--active {
+      &::before {
+        transform: translateY(-50%) scale(1);
+      }
+    }
+  }
+
   .nav__list {
+    animation: fadeIn 0.4s ease-out;
+
+    & li {
+      animation: fadeInUp 0.4s ease-out backwards;
+
+      @for $i from 1 through 15 {
+        &:nth-child(#{$i}) {
+          animation-delay: #{$i * 0.05}s;
+        }
+      }
+    }
+
     @include respond(md) {
       flex-direction: column;
       align-items: flex-start;
@@ -47,6 +97,24 @@
   }
 
   .nav__subtitle {
+    animation: fadeIn 0.4s ease-out;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        rgba(var(--color-border), 0.5),
+        transparent
+      );
+    }
+
     @include respond(md) {
       font-size: var(--text-sm);
       color: rgb(var(--color-muted-foreground));

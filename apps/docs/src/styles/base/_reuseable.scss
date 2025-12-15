@@ -1,4 +1,6 @@
 .grid-background {
+  animation: gridFade 1s ease-out;
+
   position: absolute;
   inset: 0;
   opacity: 0.03;
