@@ -1,4 +1,5 @@
 import { DocsArticleActions } from "../../components/DocsArticleActions";
+import { dynamicTimeCalculation } from "../../logic/dynamic-time-calculation";
 import { createIcon } from "../../utils/icons";
 
 export const Motivation = () => {
@@ -17,7 +18,9 @@ export const Motivation = () => {
         </p>
 
         <div class="content-article__tags">
-          <span class="tag tag--time"> ${createIcon("read")} 2 minutes</span>
+          <span class="tag tag--time">
+            ${createIcon("read")} <span class="time">Loading ...</span></span
+          >
         </div>
       </div>
 
@@ -342,6 +345,8 @@ export const Motivation = () => {
   `;
 
   container.innerHTML = content;
+
+  dynamicTimeCalculation(container);
 
   return container;
 };
