@@ -7,6 +7,22 @@ type Topic = {
   icon: keyof typeof icons;
 };
 
+export const introductionTopics: Topic[] = [
+  {
+    icon: "rocket",
+    title: "Getting Started",
+    description:
+      "Install Hintorium and create your first tooltip in under 5 minutes.",
+    href: "/docs/getting-started",
+  },
+  {
+    icon: "codeSlash",
+    title: "API reference",
+    description: "Complete API documentation",
+    href: "/docs/api",
+  },
+];
+
 export const topics: Topic[] = [
   {
     icon: "book",

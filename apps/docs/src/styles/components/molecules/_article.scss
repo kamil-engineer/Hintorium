@@ -3,7 +3,7 @@
 .content-article {
   max-width: 54rem;
   margin: 0 auto;
-  padding: var(--py-6) var(--px-6);
+  padding: var(--py-6) var(--px-6) var(--py-24);
 
   &__top-wrapper {
     border-bottom: 1px solid rgb(var(--color-border), 0.5);
@@ -63,7 +63,7 @@
       border-top: 1px solid rgb(var(--color-border), 0.5);
       position: fixed;
       bottom: 0;
-      padding: var(--px-3);
+      padding: var(--p-5) var(--px-3);
       left: 0;
       width: 100%;
       background-color: rgb(var(--background));

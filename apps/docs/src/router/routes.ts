@@ -1,6 +1,7 @@
 import { getAllDocPaths } from "../config/docs-navigation";
 import { createDocRoute } from "../helpers/route";
 import Docs from "../pages/Docs";
+import { Introduction } from "../pages/docs/Introduction";
 import { Motivation } from "../pages/docs/Motivation";
 import Home from "./../pages/Home";
 import type { Route, RouteContext } from "./router.types";
@@ -26,7 +27,7 @@ export const DOC_COMPONENTS: Record<
   (ctx: RouteContext) => HTMLElement
 > = {
   [paths.DOCS_MOTIVATION]: Motivation,
-  [paths.DOCS_INTRODUCTION]: Motivation,
+  [paths.DOCS_INTRODUCTION]: Introduction,
   [paths.DOCS_GETTING_STARTED]: Motivation,
   [paths.DOCS_BASIC]: Motivation,
   [paths.DOCS_API]: Motivation,
