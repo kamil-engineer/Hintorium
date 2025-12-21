@@ -12,9 +12,12 @@ import { dynamicProgressBar } from "./logic/progress";
 import { toc } from "./logic/toc";
 import { initScrollAnimations } from "./logic/init-scroll-animations";
 import { initCodeViewers } from "./logic/init-code-viewers";
+import NotFound from "./pages/NotFound";
 
-const router = new Router({
+export const router = new Router({
   routes,
+  notFoundTitle: "Page Not Found | Hintorium",
+  notFoundView: NotFound,
 });
 
 router.afterRender(() => {
