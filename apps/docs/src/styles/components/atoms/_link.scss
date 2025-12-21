@@ -7,6 +7,28 @@
     text-decoration: none;
   }
 
+  &--quick {
+    &:link,
+    &:visited {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem;
+      border: 1px solid rgb(var(--color-border));
+      border-radius: 0.5rem;
+      background: rgb(var(--color-background));
+      text-decoration: none;
+      color: rgb(var(--color-foreground));
+      transition: all 0.2s ease;
+    }
+
+    &:hover {
+      border-color: rgb(var(--color-primary));
+      background: rgba(var(--color-primary), 0.05);
+      transform: translateY(-2px);
+    }
+  }
+
   &--sidebar {
     &:link,
     &:visited {

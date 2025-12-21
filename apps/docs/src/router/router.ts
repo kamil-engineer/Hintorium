@@ -114,6 +114,10 @@ export class Router {
     return div;
   }
 
+  public back() {
+    window.history.back();
+  }
+
   private handleLinkClick = (e: MouseEvent): void => {
     const target = e.target as HTMLElement;
     if (!target) return;
@@ -142,7 +146,8 @@ export class Router {
 
   private handlePopState = (): void => {
     this.navigate(
-      window.location.pathname + window.location.search + window.location.hash
+      window.location.pathname + window.location.search + window.location.hash,
+      true
     );
   };
 
