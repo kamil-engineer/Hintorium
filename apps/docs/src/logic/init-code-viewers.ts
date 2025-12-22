@@ -1,3 +1,5 @@
+import copyTextWithFeedback from "./copy";
+
 export function initCodeViewers() {
   const viewers = document.querySelectorAll("[data-code-viewer]");
 
@@ -25,30 +27,11 @@ export function initCodeViewers() {
         const panel = viewer.querySelector(`[data-panel="${panelId}"]`);
         const code = panel?.querySelector("code")?.textContent || "";
 
-        try {
-          await navigator.clipboard.writeText(code);
-
-          const originalText = button.querySelector(
-            ".code-viewer__copy-text"
-          )?.textContent;
-          const textElement = button.querySelector(".code-viewer__copy-text");
-
-          if (textElement) {
-            textElement.textContent = "Copied!";
-
-            setTimeout(() => {
-              textElement.textContent = originalText || "Copy";
-            }, 2000);
-          }
-        } catch (err) {
-          const textElement = button.querySelector(".code-viewer__copy-text");
-          if (textElement) {
-            textElement.textContent = "Failed";
-            setTimeout(() => {
-              textElement.textContent = "Copy";
-            }, 2000);
-          }
-        }
+        await copyTextWithFeedback(button, () => code, {
+          successText: "Copied!",
+          failText: "Failed",
+          timeout: 2000,
+        });
       });
     });
   });

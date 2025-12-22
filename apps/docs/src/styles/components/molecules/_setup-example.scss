@@ -1,0 +1,59 @@
+.setup-example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-4);
+
+  &__title {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: rgb(var(--color-foreground));
+  }
+
+  .cta {
+    margin-bottom: 0;
+  }
+
+  .cta__icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: rgb(var(--color-primary));
+  }
+
+  .cta__title {
+    font-size: 1rem;
+  }
+
+  .cta__description {
+    font-size: var(--text-sm);
+  }
+
+  .line {
+    border-bottom: 1px solid rgba(var(--color-border), 0.5);
+  }
+
+  &__code-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .install-method__code {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  &__subtitle {
+    color: rgba(var(--color-foreground), 0.7);
+    font-weight: 500;
+    font-size: var(--text-sm);
+  }
+}
+
+.code-wrapper {
+  margin: 2rem 0 1rem;
+
+  .install-method__code {
+    flex-direction: column;
+    align-items: start;
+  }
+}

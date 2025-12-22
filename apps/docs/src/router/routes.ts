@@ -1,6 +1,7 @@
 import { getAllDocPaths } from "../config/docs-navigation";
 import { createDocRoute } from "../helpers/route";
 import Docs from "../pages/Docs";
+import { GettingStarted } from "../pages/docs/GettingStarted";
 import { Introduction } from "../pages/docs/Introduction";
 import { Motivation } from "../pages/docs/Motivation";
 import Home from "./../pages/Home";
@@ -13,7 +14,6 @@ export const paths = {
   DOCS_MOTIVATION: "/docs/motivation",
   DOCS_INTRODUCTION: "/docs/introduction",
   DOCS_GETTING_STARTED: "/docs/getting-started",
-  DOCS_BASIC: "/docs/basic",
   DOCS_API: "/docs/api",
   DOCS_POSITIONING: "/docs/positioning",
   DOCS_STYLE: "/docs/style",
@@ -28,8 +28,7 @@ export const DOC_COMPONENTS: Record<
 > = {
   [paths.DOCS_MOTIVATION]: Motivation,
   [paths.DOCS_INTRODUCTION]: Introduction,
-  [paths.DOCS_GETTING_STARTED]: Motivation,
-  [paths.DOCS_BASIC]: Motivation,
+  [paths.DOCS_GETTING_STARTED]: GettingStarted,
   [paths.DOCS_API]: Motivation,
   [paths.DOCS_POSITIONING]: Motivation,
   [paths.DOCS_STYLE]: Motivation,

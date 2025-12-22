@@ -33,11 +33,6 @@ export const DOCS_NAVIGATION: DocItem[] = [
     title: "Getting Started",
   },
   {
-    type: "page",
-    path: "/docs/basic",
-    title: "Basic Usage",
-  },
-  {
     type: "section",
     title: "API",
   },
