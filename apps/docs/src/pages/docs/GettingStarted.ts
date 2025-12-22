@@ -1,4 +1,3 @@
-import { CodeExample } from "../../components/CodeExample";
 import { DocsArticleActions } from "../../components/DocsArticleActions";
 import { dynamicTimeCalculation } from "../../logic/dynamic-time-calculation";
 import { createIcon } from "../../utils/icons";
