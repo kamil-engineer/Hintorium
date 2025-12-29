@@ -5,6 +5,7 @@ import { APIReference } from "../pages/docs/ApiReference";
 import { GettingStarted } from "../pages/docs/GettingStarted";
 import { Introduction } from "../pages/docs/Introduction";
 import { Motivation } from "../pages/docs/Motivation";
+import { Positioning } from "../pages/docs/Positioning";
 import Home from "./../pages/Home";
 import type { Route, RouteContext } from "./router.types";
 
@@ -31,7 +32,7 @@ export const DOC_COMPONENTS: Record<
   [paths.DOCS_INTRODUCTION]: Introduction,
   [paths.DOCS_GETTING_STARTED]: GettingStarted,
   [paths.DOCS_API]: APIReference,
-  [paths.DOCS_POSITIONING]: Motivation,
+  [paths.DOCS_POSITIONING]: Positioning,
   [paths.DOCS_STYLE]: Motivation,
   [paths.DOCS_ANIMATIONS]: Motivation,
   [paths.DOCS_ACCESSIBILITY]: Motivation,
