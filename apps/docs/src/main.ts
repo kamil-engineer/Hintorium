@@ -30,10 +30,11 @@ router.afterRender(() => {
   dynamicProgressBar();
   toc();
   initScrollAnimations();
+
+  initTooltip();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   router.mount();
-  initTooltip();
   setupSwipper();
 });

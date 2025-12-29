@@ -1,6 +1,7 @@
 import { getAllDocPaths } from "../config/docs-navigation";
 import { createDocRoute } from "../helpers/route";
 import Docs from "../pages/Docs";
+import { APIReference } from "../pages/docs/ApiReference";
 import { GettingStarted } from "../pages/docs/GettingStarted";
 import { Introduction } from "../pages/docs/Introduction";
 import { Motivation } from "../pages/docs/Motivation";
@@ -29,7 +30,7 @@ export const DOC_COMPONENTS: Record<
   [paths.DOCS_MOTIVATION]: Motivation,
   [paths.DOCS_INTRODUCTION]: Introduction,
   [paths.DOCS_GETTING_STARTED]: GettingStarted,
-  [paths.DOCS_API]: Motivation,
+  [paths.DOCS_API]: APIReference,
   [paths.DOCS_POSITIONING]: Motivation,
   [paths.DOCS_STYLE]: Motivation,
   [paths.DOCS_ANIMATIONS]: Motivation,

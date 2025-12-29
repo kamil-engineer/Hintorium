@@ -18,6 +18,14 @@
   text-align: center;
   background: rgb(var(--color-card));
 
+  transition: 0.3s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(var(--color-primary), 0.1);
+    border-color: rgba(var(--color-primary), 0.15);
+  }
+
   &__stat {
     font-size: 3rem;
     font-weight: 700;

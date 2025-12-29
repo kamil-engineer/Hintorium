@@ -6,6 +6,16 @@
     font-weight: 700;
     margin-bottom: 1.5rem;
     color: rgb(var(--color-foreground));
+
+    display: flex;
+    align-items: center;
+    gap: var(--gap-4);
+  }
+
+  &__icon {
+    color: rgb(var(--color-primary));
+    width: 2rem;
+    height: 2rem;
   }
 
   &__text {
