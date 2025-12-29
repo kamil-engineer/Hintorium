@@ -54,6 +54,16 @@
     gap: var(--gap-2);
   }
 
+  &__sub-description {
+    line-height: 1.7;
+    color: rgb(var(--color-foreground), 0.8);
+  }
+
+  &__special {
+    color: rgb(var(--color-primary));
+    font-weight: 500;
+  }
+
   &__actions {
     display: flex;
     align-items: center;
