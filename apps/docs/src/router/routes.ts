@@ -1,6 +1,7 @@
 import { getAllDocPaths } from "../config/docs-navigation";
 import { createDocRoute } from "../helpers/route";
 import Docs from "../pages/Docs";
+import { Accessibility } from "../pages/docs/Accessibility";
 import { Animations } from "../pages/docs/Animations";
 import { APIReference } from "../pages/docs/ApiReference";
 import { GettingStarted } from "../pages/docs/GettingStarted";
@@ -37,7 +38,7 @@ export const DOC_COMPONENTS: Record<
   [paths.DOCS_POSITIONING]: Positioning,
   [paths.DOCS_STYLE]: Styling,
   [paths.DOCS_ANIMATIONS]: Animations,
-  [paths.DOCS_ACCESSIBILITY]: Motivation,
+  [paths.DOCS_ACCESSIBILITY]: Accessibility,
   [paths.DOCS_ADVANCED]: Motivation,
 };
 
