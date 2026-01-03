@@ -80,6 +80,11 @@
     font-size: var(--text-sm);
     overflow-x: auto;
     font-family: var(--ff-mono);
+
+    p {
+      word-break: break-word;
+    }
+
     .code-viewer__copy {
       position: static;
       z-index: auto;

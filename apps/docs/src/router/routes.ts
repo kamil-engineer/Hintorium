@@ -4,6 +4,7 @@ import Docs from "../pages/Docs";
 import { Accessibility } from "../pages/docs/Accessibility";
 import { Animations } from "../pages/docs/Animations";
 import { APIReference } from "../pages/docs/ApiReference";
+import { DynamicContent } from "../pages/docs/DynamicContent";
 import { GettingStarted } from "../pages/docs/GettingStarted";
 import { Introduction } from "../pages/docs/Introduction";
 import { Motivation } from "../pages/docs/Motivation";
@@ -24,7 +25,7 @@ export const paths = {
   DOCS_STYLE: "/docs/style",
   DOCS_ANIMATIONS: "/docs/animations",
   DOCS_ACCESSIBILITY: "/docs/accessibility",
-  DOCS_ADVANCED: "/docs/advanced",
+  DOCS_ADVANCED: "/docs/dynamic",
 } as const;
 
 export const DOC_COMPONENTS: Record<
@@ -39,7 +40,7 @@ export const DOC_COMPONENTS: Record<
   [paths.DOCS_STYLE]: Styling,
   [paths.DOCS_ANIMATIONS]: Animations,
   [paths.DOCS_ACCESSIBILITY]: Accessibility,
-  [paths.DOCS_ADVANCED]: Motivation,
+  [paths.DOCS_ADVANCED]: DynamicContent,
 };
 
 export const routes: Route[] = [
