@@ -68,8 +68,8 @@ export const DOCS_NAVIGATION: DocItem[] = [
   },
   {
     type: "page",
-    path: "/docs/advanced",
-    title: "Advanced Usage",
+    path: "/docs/dynamic",
+    title: "Dynamic Content",
   },
 ];
 
