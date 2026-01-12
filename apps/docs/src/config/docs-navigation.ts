@@ -71,6 +71,11 @@ export const DOCS_NAVIGATION: DocItem[] = [
     path: "/docs/dynamic",
     title: "Dynamic Content",
   },
+  {
+    type: "page",
+    path: "/docs/inline-hint",
+    title: "Inline Hints",
+  },
 ];
 
 export function getDocPages(): DocPage[] {
