@@ -9,4 +9,6 @@ export {
   type TooltipPosition,
 } from "./tooltip/types";
 
+export { I18n } from "./tooltip/i18n";
+
 export { Tooltip } from "./tooltip/tooltip";
