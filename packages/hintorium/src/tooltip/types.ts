@@ -11,6 +11,7 @@ export type TooltipTheme =
   | "gradient";
 
 export type TooltipOptions = {
+  id?: string;
   position?: TooltipPosition;
   theme?: TooltipTheme;
   animation?: TooltipAnimation;
@@ -29,4 +30,5 @@ export type TooltipOptions = {
   sticky?: boolean;
   isTour?: boolean;
   onInjectContent?: (tooltipEl: HTMLDivElement) => void;
+  onShow?: (id: string) => void;
 };

@@ -15,7 +15,7 @@ export class Tooltip {
   private contentManager: TooltipContent;
   private tooltipEl: HTMLDivElement | null = null;
   private options: TooltipOptions = {};
-  private readonly id: string;
+  public readonly id: string;
   private listeners: Map<string, EventListener> = new Map();
   private outsideClickListener:
     | ((event: MouseEvent | TouchEvent) => void)
@@ -31,7 +31,7 @@ export class Tooltip {
     this.element = element;
     this.rtl = this.detectRTL();
     this.contentManager = new TooltipContent(content);
-    this.id = this.generateId();
+    this.id = options?.id ?? this.generateId();
 
     if (options) {
       this.options = options;
@@ -177,6 +177,8 @@ export class Tooltip {
     );
 
     Analytics.increment(this.id);
+
+    this.options.onShow?.(this.id);
 
     if (this.options.a11y?.announceOnShow) {
       AccessibilityManager.announceToScreenReader(

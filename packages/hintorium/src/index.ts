@@ -1,4 +1,5 @@
 import "./style.css";
+
 export { initTooltip } from "./tooltip";
 export { InlineHint } from "./tooltip/inline-hint";
 export { HintoriumTour } from "./tooltip/tour";
@@ -10,5 +11,7 @@ export {
 } from "./tooltip/types";
 
 export { I18n } from "./tooltip/i18n";
+
+export { Analytics } from "./tooltip/analytics";
 
 export { Tooltip } from "./tooltip/tooltip";
