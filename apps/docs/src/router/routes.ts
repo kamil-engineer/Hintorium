@@ -2,6 +2,7 @@ import { getAllDocPaths } from "../config/docs-navigation";
 import { createDocRoute } from "../helpers/route";
 import Docs from "../pages/Docs";
 import { Accessibility } from "../pages/docs/Accessibility";
+import { AnalyticsTracking } from "../pages/docs/AnalyticsTracking";
 import { Animations } from "../pages/docs/Animations";
 import { APIReference } from "../pages/docs/ApiReference";
 import { DynamicContent } from "../pages/docs/DynamicContent";
@@ -30,6 +31,7 @@ export const paths = {
   DOCS_ADVANCED: "/docs/dynamic",
   DOCS_INLINE_HINT: "/docs/inline-hint",
   DOCS_INTERNATIONALIZATION: "/docs/internationalization",
+  DOCS_ANALYTICS_TRACKING: "/docs/analytics",
 } as const;
 
 export const DOC_COMPONENTS: Record<
@@ -47,6 +49,7 @@ export const DOC_COMPONENTS: Record<
   [paths.DOCS_ADVANCED]: DynamicContent,
   [paths.DOCS_INLINE_HINT]: InlineHint,
   [paths.DOCS_INTERNATIONALIZATION]: Internationalization,
+  [paths.DOCS_ANALYTICS_TRACKING]: AnalyticsTracking,
 };
 
 export const routes: Route[] = [

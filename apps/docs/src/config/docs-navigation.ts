@@ -81,6 +81,11 @@ export const DOCS_NAVIGATION: DocItem[] = [
     path: "/docs/internationalization",
     title: "Internationalization",
   },
+  {
+    type: "page",
+    path: "/docs/analytics",
+    title: "Analytics",
+  },
 ];
 
 export function getDocPages(): DocPage[] {

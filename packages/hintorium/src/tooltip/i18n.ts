@@ -173,6 +173,10 @@ export class HintoriumI18n {
       return path.split(".").reduce((acc, part) => acc?.[part], obj);
     };
 
+    if (!pack) {
+      return fallbackPack?.[key] || fallback || key;
+    }
+
     const text =
       resolveNested(pack, key) ||
       resolveNested(fallbackPack, key) ||
