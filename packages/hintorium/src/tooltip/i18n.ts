@@ -31,6 +31,7 @@ export class HintoriumI18n {
   private fallbackLang = "en";
   private translations: Translations = {};
   private supportedLangs: Set<string> = new Set(["en", "pl"]);
+  private loadingPromises: Map<string, Promise<void>> = new Map();
 
   /** Returns the global singleton instance */
   static getInstance(): HintoriumI18n {
@@ -65,6 +66,58 @@ export class HintoriumI18n {
       return;
     }
     this.fallbackLang = lang;
+  }
+
+  /**
+   * Loads multiple language files at once.
+   * @param langs - Array of language configurations
+   * @returns Promise that resolves when all translations are loaded
+   */
+  async loadMultipleTranslations(
+    langs: Array<{ lang: string; url: string }>
+  ): Promise<void> {
+    await Promise.all(
+      langs.map(({ lang, url }) => this.loadTranslations(lang, url))
+    );
+  }
+
+  /**
+   * Loads translations from an external file (JSON).
+   * @param lang - Language code
+   * @param url - URL to the JSON file
+   * @returns Promise that resolves when translations are loaded
+   */
+  async loadTranslations(lang: string, url: string): Promise<void> {
+    // Prevent duplicate loading
+    if (this.loadingPromises.has(lang)) {
+      return this.loadingPromises.get(lang);
+    }
+
+    const loadPromise = (async () => {
+      try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(
+            `Failed to load translations: ${response.statusText}`
+          );
+        }
+        const pack: LanguagePack = await response.json();
+
+        this.setTranslations(lang, pack);
+      } catch (error) {
+        console.error(
+          `[HintoriumI18n] Error loading translations for ${lang}:`,
+          error
+        );
+        throw error;
+      } finally {
+        this.loadingPromises.delete(lang);
+      }
+    })();
+
+    this.loadingPromises.set(lang, loadPromise);
+    return loadPromise;
   }
 
   /**
@@ -123,6 +176,7 @@ export class HintoriumI18n {
     const text =
       resolveNested(pack, key) ||
       resolveNested(fallbackPack, key) ||
+      pack[key] ||
       fallback ||
       key;
 
