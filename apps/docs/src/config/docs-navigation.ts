@@ -76,6 +76,11 @@ export const DOCS_NAVIGATION: DocItem[] = [
     path: "/docs/inline-hint",
     title: "Inline Hints",
   },
+  {
+    type: "page",
+    path: "/docs/internationalization",
+    title: "Internationalization",
+  },
 ];
 
 export function getDocPages(): DocPage[] {

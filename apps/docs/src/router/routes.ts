@@ -7,6 +7,7 @@ import { APIReference } from "../pages/docs/ApiReference";
 import { DynamicContent } from "../pages/docs/DynamicContent";
 import { GettingStarted } from "../pages/docs/GettingStarted";
 import { InlineHint } from "../pages/docs/InlineHint";
+import { Internationalization } from "../pages/docs/Internationalization";
 import { Introduction } from "../pages/docs/Introduction";
 import { Motivation } from "../pages/docs/Motivation";
 import { Positioning } from "../pages/docs/Positioning";
@@ -28,6 +29,7 @@ export const paths = {
   DOCS_ACCESSIBILITY: "/docs/accessibility",
   DOCS_ADVANCED: "/docs/dynamic",
   DOCS_INLINE_HINT: "/docs/inline-hint",
+  DOCS_INTERNATIONALIZATION: "/docs/internationalization",
 } as const;
 
 export const DOC_COMPONENTS: Record<
@@ -44,6 +46,7 @@ export const DOC_COMPONENTS: Record<
   [paths.DOCS_ACCESSIBILITY]: Accessibility,
   [paths.DOCS_ADVANCED]: DynamicContent,
   [paths.DOCS_INLINE_HINT]: InlineHint,
+  [paths.DOCS_INTERNATIONALIZATION]: Internationalization,
 };
 
 export const routes: Route[] = [
