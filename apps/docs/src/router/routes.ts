@@ -13,6 +13,7 @@ import { Introduction } from "../pages/docs/Introduction";
 import { Motivation } from "../pages/docs/Motivation";
 import { Positioning } from "../pages/docs/Positioning";
 import { Styling } from "../pages/docs/Styling";
+import { Tours } from "../pages/docs/Tours";
 import Home from "./../pages/Home";
 import type { Route, RouteContext } from "./router.types";
 
@@ -32,6 +33,7 @@ export const paths = {
   DOCS_INLINE_HINT: "/docs/inline-hint",
   DOCS_INTERNATIONALIZATION: "/docs/internationalization",
   DOCS_ANALYTICS_TRACKING: "/docs/analytics",
+  DOCS_TOURS: "/docs/tours",
 } as const;
 
 export const DOC_COMPONENTS: Record<
@@ -50,6 +52,7 @@ export const DOC_COMPONENTS: Record<
   [paths.DOCS_INLINE_HINT]: InlineHint,
   [paths.DOCS_INTERNATIONALIZATION]: Internationalization,
   [paths.DOCS_ANALYTICS_TRACKING]: AnalyticsTracking,
+  [paths.DOCS_TOURS]: Tours,
 };
 
 export const routes: Route[] = [

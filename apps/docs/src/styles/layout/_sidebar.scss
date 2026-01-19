@@ -16,7 +16,7 @@
   & li {
     animation: fadeInLeft 0.4s ease-out backwards;
 
-    @for $i from 1 through 15 {
+    @for $i from 1 through 18 {
       &:nth-child(#{$i}) {
         animation-delay: #{$i * 0.03}s;
       }
