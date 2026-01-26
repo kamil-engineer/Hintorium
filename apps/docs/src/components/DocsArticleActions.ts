@@ -1,4 +1,4 @@
-import { getDocPages, type DocPage } from "../config/docs-navigation";
+import { getDocPages, type DocPage } from "../data/docs-navigation";
 import { createIcon } from "../utils/icons";
 
 function getAdjacentPages(currentPath: string): {

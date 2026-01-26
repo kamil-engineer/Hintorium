@@ -1,54 +1,6 @@
+import { reviews } from "../data/reviews";
 import { createIcon } from "../utils/icons";
 import { generateStarSvg } from "../utils/stars";
-
-const reviews = [
-  {
-    id: 1,
-    stars: 5,
-    image: {
-      src: "/reviews/alex.jpg",
-      alt: "Head Shot of Alex Chen",
-    },
-    description: `"This tooltip library completely transformed how we handle user guidance. The smooth animations and customization options are unmatched. Highly recommend!"`,
-    author: {
-      name: "Alex Chen",
-      job: "Frontend Developer at Tech Startup",
-    },
-    values: ["Ease of use", "UI&UX", "Performance"],
-  },
-  {
-    id: 2,
-    stars: 4.5,
-    image: {
-      src: "/reviews/sarah.jpg",
-      alt: "Head Shot of Sarah Williams",
-    },
-    description: `"The accessibility features are top-notch. We implemented it across our entire design system and our users love the polished feel."`,
-    author: {
-      name: "Sarah Williams",
-      job: "Product Designer at Creative Agency",
-    },
-    values: ["Easy customizing", "Advanced features", "Easy setup"],
-  },
-  {
-    id: 3,
-    stars: 5,
-    image: {
-      src: "/reviews/marcus.jpg",
-      alt: "Head Shot of Marcus Johnson",
-    },
-    description: `"Lightweight, performant, and incredibly easy to integrate. It reduced our bundle size while improving UX significantly."`,
-    author: {
-      name: "Marcus Johnson",
-      job: "Lead Engineer at SaaS Platform",
-    },
-    values: [
-      "Perfected for speed",
-      "Features out of box",
-      "Ease of communication with creator",
-    ],
-  },
-];
 
 export const Reviews = () => {
   const content = /* HTML */ `
@@ -109,7 +61,7 @@ export const Reviews = () => {
                                     <li class="review__best-item">
                                       ${createIcon(
                                         "check",
-                                        "review__best-marker"
+                                        "review__best-marker",
                                       )}
                                       <span>${value}</span>
                                     </li>

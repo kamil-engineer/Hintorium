@@ -46,7 +46,7 @@ export const topics: Topic[] = [
     icon: "palette",
     title: "Customization",
     description: "Customize the look and feel",
-    href: "/docs/styling",
+    href: "/docs/style",
   },
   {
     icon: "accessibility",

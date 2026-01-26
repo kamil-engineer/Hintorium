@@ -1,4 +1,4 @@
-import { getDocLabel } from "../config/docs-navigation";
+import { getDocLabel } from "../data/docs-navigation";
 import { createIcon } from "../utils/icons";
 
 function slugToLabel(slug: string): string {

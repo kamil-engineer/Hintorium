@@ -3,7 +3,7 @@
 .content-article {
   max-width: 54rem;
   margin: 0 auto;
-  padding: var(--py-6) var(--px-6) var(--py-24);
+  padding: var(--py-6) var(--px-6) var(--py-16);
 
   &__top-wrapper {
     border-bottom: 1px solid rgb(var(--color-border), 0.5);
@@ -89,7 +89,7 @@
     color: rgb(var(--color-foreground), 0.6);
 
     @include respond(lg) {
-      padding-bottom: var(--py-24);
+      padding-bottom: var(--py-28);
     }
   }
 }

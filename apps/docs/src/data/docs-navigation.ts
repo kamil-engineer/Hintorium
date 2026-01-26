@@ -93,9 +93,15 @@ export const DOCS_NAVIGATION: DocItem[] = [
   },
 ];
 
+export const homeNavItems = [
+  { href: "#overview", title: "Overview" },
+  { href: "#examples", title: "Examples" },
+  { href: "#reviews", title: "Reviews" },
+];
+
 export function getDocPages(): DocPage[] {
   return DOCS_NAVIGATION.filter(
-    (item): item is DocPage => item.type === "page"
+    (item): item is DocPage => item.type === "page",
   );
 }
 

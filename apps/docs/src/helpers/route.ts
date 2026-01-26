@@ -1,4 +1,4 @@
-import { getDocLabel } from "../config/docs-navigation";
+import { getDocLabel } from "../data/docs-navigation";
 import { DocsLayout } from "../pages/Docs";
 import NotFound from "../pages/NotFound";
 import type { Route } from "../router/router.types";

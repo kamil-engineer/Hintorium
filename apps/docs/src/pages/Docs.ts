@@ -60,12 +60,12 @@ export default function Docs(): HTMLElement {
           </p>
           <div class="cta__actions">
             <a
-              href="/docs/introduction"
+              href="/docs/getting-started"
               class="button button--primary button--sm"
             >
               Start now</a
             >
-            <a href="/docs/usage" class="button button--outline button--sm">
+            <a href="/docs/examples" class="button button--outline button--sm">
               See examples</a
             >
           </div>
@@ -88,7 +88,7 @@ export default function Docs(): HTMLElement {
                     Explore ${createIcon("rightArrow", "link--topic-icon")}
                   </a>
                 </li>
-              `
+              `,
             )
             .join("")}
         </ul>

@@ -15,6 +15,10 @@
     padding: var(--p-5);
   }
 
+  @include respond(md) {
+    flex-direction: column;
+  }
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -31,13 +35,18 @@
     }
   }
 
+  &__icon {
+    color: rgb(var(--color-primary));
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--gap-2);
+  }
+
   &__description {
     color: rgb(var(--color-foreground), 0.7);
-
-    &__actions {
-      display: flex;
-      align-items: center;
-      gap: var(--gap-4);
-    }
   }
 }

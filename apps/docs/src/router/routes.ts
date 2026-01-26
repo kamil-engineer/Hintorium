@@ -1,4 +1,4 @@
-import { getAllDocPaths } from "../config/docs-navigation";
+import { getAllDocPaths } from "../data/docs-navigation";
 import { createDocRoute } from "../helpers/route";
 import Docs from "../pages/Docs";
 import { Accessibility } from "../pages/docs/Accessibility";

@@ -11,6 +11,9 @@ export const Header = ({ docs = false }: { docs?: boolean } = {}) => {
             <a
               href="https://github.com/kamil-engineer/Hintorium"
               class="button button--navigation button--icon"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View source on Github"
             >
               <img
                 class="button__image"

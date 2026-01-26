@@ -1,4 +1,4 @@
-import { DOCS_NAVIGATION } from "../config/docs-navigation";
+import { DOCS_NAVIGATION, homeNavItems } from "../data/docs-navigation";
 import { isLinkActive } from "../helpers/link";
 
 function isDocsPage(): boolean {
@@ -13,7 +13,6 @@ export const MobileNavigation = () => {
   let navItems = "";
 
   if (isDocs) {
-    // DOCS NAVIGATION
     navItems = /* HTML */ `
       ${DOCS_NAVIGATION.map((item) => {
         if (item.type === "section") {
@@ -24,7 +23,7 @@ export const MobileNavigation = () => {
           item.path,
           currentPath,
           currentHash,
-          true
+          true,
         );
 
         return /* HTML */ `
@@ -41,12 +40,6 @@ export const MobileNavigation = () => {
       }).join("")}
     `;
   } else {
-    const homeNavItems = [
-      { href: "#overview", title: "Overview" },
-      { href: "#examples", title: "Examples" },
-      { href: "#reviews", title: "Reviews" },
-    ];
-
     navItems = /* HTML */ `
       <li class="nav__subtitle">Menu</li>
       ${homeNavItems
@@ -55,7 +48,7 @@ export const MobileNavigation = () => {
             item.href,
             currentPath,
             currentHash,
-            true
+            true,
           );
 
           return /* HTML */ `
