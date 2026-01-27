@@ -29,7 +29,7 @@ const en = JSON.parse(
         prev: "← Back",
       },
     },
-  })
+  }),
 );
 
 const pl = JSON.parse(
@@ -41,7 +41,7 @@ const pl = JSON.parse(
         prev: "← Wstecz",
       },
     },
-  })
+  }),
 );
 
 export class HintoriumTour {
@@ -99,7 +99,7 @@ export class HintoriumTour {
 
     const completed = this.storage.get(
       `${this.tourStorageKey}-${this.tourCompleted}`,
-      false
+      false,
     );
 
     if (completed) {
@@ -109,7 +109,7 @@ export class HintoriumTour {
 
     const savedStep = this.storage.get(
       `${this.tourStorageKey}-${this.tourProgress}`,
-      0
+      0,
     );
 
     if (savedStep) {
@@ -140,6 +140,11 @@ export class HintoriumTour {
         this.autoPlayAnimationFrame = requestAnimationFrame(animate);
       } else {
         this.autoPlayAnimationFrame = null;
+        if (this.current === this.steps.length - 1) {
+          this.finish();
+        } else {
+          this.next();
+        }
       }
     };
 
@@ -174,12 +179,8 @@ export class HintoriumTour {
 
     await tooltip.show();
 
-    if (this.autoPlay && this.current < this.steps.length - 1) {
+    if (this.autoPlay) {
       this.clearAutoPlay();
-      this.autoPlayTimeout = window.setTimeout(
-        () => this.next(),
-        this.autoPlayDelay
-      );
       this.startProgressBarAnimation();
     }
   }
@@ -189,6 +190,10 @@ export class HintoriumTour {
       clearTimeout(this.autoPlayTimeout);
       this.autoPlayTimeout = null;
     }
+    if (this.autoPlayAnimationFrame) {
+      cancelAnimationFrame(this.autoPlayAnimationFrame);
+      this.autoPlayAnimationFrame = null;
+    }
   }
 
   createProgressBar(tooltip: HTMLDivElement): void {
@@ -196,7 +201,7 @@ export class HintoriumTour {
     wrapper.className = "hintorium-tour-progress-bar-wrapper";
 
     const tooltipInner = tooltip.querySelector(
-      `.${TOOLTIP_CONSTANTS.CSS_CLASSES.WRAPPER}`
+      `.${TOOLTIP_CONSTANTS.CSS_CLASSES.WRAPPER}`,
     );
     if (!tooltipInner) return;
 
@@ -216,7 +221,7 @@ export class HintoriumTour {
     wrapper.className = "hintorium-tour-nav";
 
     const tooltipInner = tooltip.querySelector(
-      `.${TOOLTIP_CONSTANTS.CSS_CLASSES.WRAPPER}`
+      `.${TOOLTIP_CONSTANTS.CSS_CLASSES.WRAPPER}`,
     );
     if (!tooltipInner) return;
 
@@ -238,23 +243,23 @@ export class HintoriumTour {
       ${
         !isLast
           ? `<button class="hintorium-tour-btn hintorium-tour-next">${I18n.t(
-              "hintorium.tour.next"
+              "hintorium.tour.next",
             )}</button>`
           : `<button class="hintorium-tour-btn hintorium-tour-done">${I18n.t(
-              "hintorium.tour.done"
+              "hintorium.tour.done",
             )}</button>`
       }
     </div>
   `;
 
     const btnPrev = wrapper.querySelector(
-      ".hintorium-tour-prev"
+      ".hintorium-tour-prev",
     ) as HTMLButtonElement | null;
     const btnNext = wrapper.querySelector(
-      ".hintorium-tour-next"
+      ".hintorium-tour-next",
     ) as HTMLButtonElement | null;
     const btnDone = wrapper.querySelector(
-      ".hintorium-tour-done"
+      ".hintorium-tour-done",
     ) as HTMLButtonElement | null;
 
     btnPrev?.addEventListener("click", this.prev.bind(this));
@@ -266,6 +271,7 @@ export class HintoriumTour {
 
   prev() {
     if (this.current > 0) {
+      this.clearAutoPlay();
       this.current--;
       this.showStep(this.current);
       this.saveProgress();
@@ -274,12 +280,14 @@ export class HintoriumTour {
 
   next() {
     if (this.current < this.steps.length - 1) {
+      this.clearAutoPlay();
       this.current++;
       this.showStep(this.current);
       this.saveProgress();
     }
   }
   finish() {
+    this.clearAutoPlay();
     if (this.activeTooltip) {
       this.activeTooltip.hide();
       this.activeTooltip.destroy();
@@ -293,7 +301,7 @@ export class HintoriumTour {
     if (this.storage) {
       this.storage.set(
         `${this.tourStorageKey}-${this.tourProgress}`,
-        this.current
+        this.current,
       );
     }
   }
