@@ -14,9 +14,7 @@ export function initScrollAnimations() {
   }, observerOptions);
 
   document
-    .querySelectorAll(
-      ".overview__content, .overview__item, .code-example, .footer"
-    )
+    .querySelectorAll(".overview__content, .overview__item, .code-example")
     .forEach((el) => {
       observer.observe(el);
     });

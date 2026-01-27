@@ -1,4 +1,4 @@
-import { DOCS_NAVIGATION } from "../config/docs-navigation";
+import { DOCS_NAVIGATION } from "../data/docs-navigation";
 import { isLinkActive } from "../helpers/link";
 
 export const DocsSidebar = () => {
@@ -17,7 +17,7 @@ export const DocsSidebar = () => {
             item.path,
             currentPath,
             currentHash,
-            true
+            true,
           );
 
           return /* HTML */ `

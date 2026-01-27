@@ -89,7 +89,7 @@ export class Router {
   private getParams(route: Route, path: string): RouteParams {
     const values = path.match(this.pathToRegex(route.path));
     const keys = Array.from(route.path.matchAll(/:(\w+)/g)).map(
-      (match) => match[1]
+      (match) => match[1],
     );
     const params: RouteParams = {};
 
@@ -147,9 +147,36 @@ export class Router {
   private handlePopState = (): void => {
     this.navigate(
       window.location.pathname + window.location.search + window.location.hash,
-      true
+      true,
     );
   };
+
+  private updateMetaTags(meta: Record<string, string> | undefined) {
+    if (!meta) return;
+
+    for (const key in meta) {
+      let metaEl: HTMLMetaElement | null;
+
+      if (key.startsWith("og:")) {
+        metaEl = document.head.querySelector(`meta[property="${key}"]`);
+      } else {
+        metaEl = document.head.querySelector(`meta[name="${key}"]`);
+      }
+
+      if (metaEl) {
+        metaEl.setAttribute("content", meta[key]);
+      } else {
+        metaEl = document.createElement("meta");
+        if (key.startsWith("og:")) {
+          metaEl.setAttribute("property", key);
+        } else {
+          metaEl.setAttribute("name", key);
+        }
+        metaEl.setAttribute("content", meta[key]);
+        document.head.appendChild(metaEl);
+      }
+    }
+  }
 
   public async navigate(pathWithQuery: string, replace = false): Promise<void> {
     if (this.isNavigating) return;
@@ -168,8 +195,9 @@ export class Router {
       const [path, search = ""] = pathAndSearch.split("?");
 
       const route = this.routes.find((r) =>
-        this.pathToRegex(r.path).test(path)
+        this.pathToRegex(r.path).test(path),
       );
+
       const query = this.getQueryParams(search);
 
       const context: RouteContext = {
@@ -196,7 +224,7 @@ export class Router {
       let element: HTMLElement;
       let title: string;
 
-      if (route) {
+      if (route && route.view) {
         element = route.view(context);
 
         if (route.layout) {
@@ -218,6 +246,8 @@ export class Router {
 
       await this.animateTransition(element);
       document.title = title;
+
+      this.updateMetaTags(route?.meta);
 
       window.scrollTo(0, 0);
       if (hash) {
@@ -242,7 +272,7 @@ export class Router {
 
     if (!this.appElement) {
       throw new Error(
-        `Element with selector "${this.routerMountSelector}" not found`
+        `Element with selector "${this.routerMountSelector}" not found`,
       );
     }
 
@@ -251,7 +281,7 @@ export class Router {
 
     this.navigate(
       window.location.pathname + window.location.search + window.location.hash,
-      true
+      true,
     );
   }
 

@@ -1,3 +1,4 @@
+import { partners } from "../data/partners";
 import { createIcon } from "../utils/icons";
 
 export const Hero = () => {
@@ -24,6 +25,8 @@ export const Hero = () => {
           <a
             href="https://github.com/kamil-engineer/Hintorium"
             class="button button--lg button--outline"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             ${createIcon("code", "button__image")} View on GitHub
           </a>
@@ -31,10 +34,12 @@ export const Hero = () => {
         <div class="hero__partners">
           <p class="hero__partners-title">Trusted by developers at</p>
           <ul class="hero__partners-list">
-            <li class="hero__partners-partner">TechCorp</li>
-            <li class="hero__partners-partner">DevStudio</li>
-            <li class="hero__partners-partner">WebFlow</li>
-            <li class="hero__partners-partner">Savely</li>
+            ${partners
+              .map(
+                (partner) =>
+                  `<li class="hero__partners-partner">${partner}</li>`,
+              )
+              .join("")}
           </ul>
         </div>
       </div>

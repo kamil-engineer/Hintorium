@@ -13,13 +13,19 @@ export const Footer = () => {
             <h4 class="footer__subtitle">Resources</h4>
             <ul class="footer__list">
               <li>
-                <a href="#" class="link link--footer">Documentation</a>
+                <a href="/docs" class="link link--footer">Documentation</a>
               </li>
               <li>
-                <a href="#" class="link link--footer">Examples</a>
+                <a href="/examples" class="link link--footer">Examples</a>
               </li>
               <li>
-                <a href="#" class="link link--footer">Changelog</a>
+                <a
+                  href="https://github.com/kamil-engineer/Hintorium/blob/main/CHANGELOG.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link link--footer"
+                  >Changelog</a
+                >
               </li>
             </ul>
           </div>
@@ -27,13 +33,31 @@ export const Footer = () => {
             <h4 class="footer__subtitle">Community</h4>
             <ul class="footer__list">
               <li>
-                <a href="#" class="link link--footer">GitHub Issues</a>
+                <a
+                  href="https://github.com/kamil-engineer/Hintorium/issues"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link link--footer"
+                  >GitHub Issues</a
+                >
               </li>
               <li>
-                <a href="#" class="link link--footer">Discussions</a>
+                <a
+                  href="https://github.com/kamil-engineer/Hintorium/blob/main/CODE_OF_CONDUCT.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link link--footer"
+                  >Code of conduct</a
+                >
               </li>
               <li>
-                <a href="#" class="link link--footer">Contributing</a>
+                <a
+                  href="https://github.com/kamil-engineer/Hintorium/blob/main/CONTRIBUTING.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="link link--footer"
+                  >Contributing</a
+                >
               </li>
             </ul>
           </div>

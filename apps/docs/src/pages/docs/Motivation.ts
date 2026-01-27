@@ -1,5 +1,6 @@
 import { DocsArticleActions } from "../../components/DocsArticleActions";
 import { dynamicTimeCalculation } from "../../logic/dynamic-time-calculation";
+
 import { createIcon } from "../../utils/icons";
 
 export const Motivation = () => {
@@ -40,9 +41,9 @@ export const Motivation = () => {
             </div>
             <h3 class="problem-card__title">Bundle Size Bloat</h3>
             <p class="problem-card__description">
-              Popular tooltip libraries like Tippy.js (~23KB) and Popper.js
-              (~20KB) are feature-rich but heavy. For a simple tooltip, you're
-              shipping megabytes of unnecessary code.
+              Popular tooltip libraries like Tippy.js and Popper.js are
+              feature-rich but heavy. For a simple tooltip, you're shipping
+              megabytes of unnecessary code.
             </p>
             <div class="problem-card__stat">
               <span class="stat__number">23KB+</span>
@@ -99,9 +100,6 @@ export const Motivation = () => {
             </p>
             <div class="problem-card__frameworks">
               <span class="framework-badge">React Plugin</span>
-              <span class="framework-badge">Vue Wrapper</span>
-              <span class="framework-badge">Svelte Port</span>
-              <span class="framework-badge">Angular Module</span>
             </div>
           </div>
         </div>
@@ -151,7 +149,7 @@ export const Motivation = () => {
             <div class="timeline__content">
               <h4 class="timeline__title">Hintorium is Born</h4>
               <p class="timeline__text">
-                After 6 months of iteration, we created Hintorium: a 5KB library
+                After 3 months of iteration, we created Hintorium—a lightweight
                 that does one thing exceptionally well—tooltips that work
                 everywhere.
               </p>
@@ -198,10 +196,6 @@ export const Motivation = () => {
                 </div>
               </header>
               <div class="principle__stats">
-                <div class="stat-item">
-                  <span class="stat-item__value">5KB</span>
-                  <span class="stat-item__label">Gzipped</span>
-                </div>
                 <div class="stat-item">
                   <span class="stat-item__value">&lt;1ms</span>
                   <span class="stat-item__label">Init time</span>
@@ -254,9 +248,6 @@ export const Motivation = () => {
                 <ul class="principle__frameworks">
                   <li class="framework-icon" title="Vanilla JS">JS</li>
                   <li class="framework-icon" title="React">⚛️</li>
-                  <li class="framework-icon" title="Vue">🅥</li>
-                  <li class="framework-icon" title="Svelte">🔥</li>
-                  <li class="framework-icon" title="Angular">🅰️</li>
                 </ul>
               </div>
             </div>

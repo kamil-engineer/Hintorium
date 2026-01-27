@@ -5,15 +5,6 @@
   background-color: rgb(var(--color-secondary), 0.3);
   padding: var(--py-12) var(--px-4);
 
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease-out;
-
-  &.animate {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   &__wrapper {
     max-width: 64rem;
     margin: 0 auto;

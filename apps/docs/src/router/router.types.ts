@@ -12,14 +12,16 @@ export type RouteContext = {
   hash: string;
 };
 
+export type MetaTags = Record<string, string>;
+
 export type Route = {
   path: string;
-  view: (context: RouteContext) => HTMLElement;
+  view?: (context: RouteContext) => HTMLElement;
   title?: string | ((context: RouteContext) => string | Promise<string>);
   beforeEnter?: (context: RouteContext) => boolean | Promise<boolean>;
   afterEnter?: (context: RouteContext) => void | Promise<void>;
   beforeLeave?: () => boolean | Promise<boolean>;
-  meta?: Record<string, any>;
+  meta?: MetaTags;
   layout?: (content: HTMLElement, context: RouteContext) => HTMLElement;
 };
 

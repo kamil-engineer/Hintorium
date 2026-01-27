@@ -1,4 +1,4 @@
-import { getAllDocPaths } from "../config/docs-navigation";
+import { getAllDocPaths } from "../data/docs-navigation";
 import { createDocRoute } from "../helpers/route";
 import Docs from "../pages/Docs";
 import { Accessibility } from "../pages/docs/Accessibility";
@@ -66,6 +66,18 @@ export const routes: Route[] = [
     path: paths.DOCS,
     view: Docs,
     title: "Documentation | Hintorium",
+    meta: {
+      description:
+        "Comprehensive documentation for Hintorium - the ultimate tooltips and inline hints library for building accessible and customizable UIs.",
+      "og:title": "Documentation | Hintorium",
+      "og:description":
+        "Learn how to use Hintorium: installation, API, styling, and advanced examples for building accessible and reusable tooltips and inline hints.",
+      "og:image": "/og-docs.png",
+      "twitter:title": "Documentation | Hintorium",
+      "twitter:description":
+        "Learn how to use Hintorium: installation, API, styling, and advanced examples for building accessible and reusable tooltips and inline hints.",
+      "twitter:image": "/og-docs.png",
+    },
   },
 
   ...getAllDocPaths().map(createDocRoute),
