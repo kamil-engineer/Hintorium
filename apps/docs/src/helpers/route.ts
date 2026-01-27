@@ -1,3 +1,4 @@
+import { metaTags } from "../config/meta-tags";
 import { getDocLabel } from "../data/docs-navigation";
 import { DocsLayout } from "../pages/Docs";
 import NotFound from "../pages/NotFound";
@@ -7,6 +8,7 @@ import { DOC_COMPONENTS } from "../router/routes";
 export function createDocRoute(path: string): Route {
   const component = DOC_COMPONENTS[path];
   const label = getDocLabel(path);
+  const meta = metaTags[path];
 
   if (!component) {
     console.warn(`No component found for path: ${path}`);
@@ -23,5 +25,6 @@ export function createDocRoute(path: string): Route {
     view: component,
     title: label ? `${label} | Hintorium` : "Documentation | Hintorium",
     layout: DocsLayout,
+    meta,
   };
 }

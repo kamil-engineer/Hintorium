@@ -24,6 +24,6 @@ export const overviews = [
     icon: "/dependency.svg",
     alt: "Dependency",
     title: "Zero Dependencies",
-    description: "Pure vanilla JavaScript, no external libraries required.",
+    description: "Pure vanilla TypeScript, no external libraries required.",
   },
 ];
