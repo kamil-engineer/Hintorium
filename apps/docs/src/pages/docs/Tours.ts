@@ -364,10 +364,10 @@ export const Tours = () => {
           </div>
         </div>
 
-        <div class="setup-example__code-block box-y">
+        <div class="setup-example__code-block">
           <div>
             <a
-              href="https://stackblitz.com/edit/vitejs-vite-eqvnddge?file=index.html&terminal=dev"
+              href="https://stackblitz.com/edit/vitejs-vite-hgzmvaty?file=src%2Fstyle.css,src%2Fmain.ts,index.html&terminal=dev"
               class="button button--lg button--primary"
               target="_blank"
             >

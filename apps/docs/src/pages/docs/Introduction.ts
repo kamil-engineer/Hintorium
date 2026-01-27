@@ -43,7 +43,7 @@ export function Introduction(): HTMLElement {
             <div class="intro-feature__content">
               <h3 class="intro-feature__title">Lightweight</h3>
               <p class="intro-feature__description">
-                Just ~5KB gzipped. Won't slow down your application.
+                Won't slow down your application.
               </p>
             </div>
           </div>
@@ -80,7 +80,7 @@ export function Introduction(): HTMLElement {
             <div class="intro-feature__content">
               <h3 class="intro-feature__title">Framework Agnostic</h3>
               <p class="intro-feature__description">
-                Works with vanilla JS, React, Vue, Svelte, or any framework.
+                Works with vanilla Typescript, React.
               </p>
             </div>
           </div>
@@ -165,7 +165,7 @@ export function Introduction(): HTMLElement {
             <div class="feature-item__content">
               <h3 class="feature-item__title">Zero Dependencies</h3>
               <p class="feature-item__description">
-                No jQuery, no Lodash, no nothing. Pure vanilla JavaScript means
+                No jQuery, no Lodash, no nothing. Pure vanilla Typescript means
                 fewer things to break and maintain.
               </p>
             </div>
@@ -325,7 +325,7 @@ export function Introduction(): HTMLElement {
                       Explore ${createIcon("rightArrow", "link--topic-icon")}
                     </a>
                   </li>
-                `
+                `,
               )
               .join("")}
           </ul>
