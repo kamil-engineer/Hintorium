@@ -10,6 +10,8 @@ export {
   type TooltipPosition,
 } from "./tooltip/types";
 
+export { type TooltipContentSource } from "./tooltip/content";
+
 export { I18n } from "./tooltip/i18n";
 
 export { Analytics } from "./tooltip/analytics";
