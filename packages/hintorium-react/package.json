@@ -35,7 +35,7 @@
     "react-dom": ">=16.8.0"
   },
   "dependencies": {
-    "hintorium-core": "*"
+    "hintorium-core": "^1.7.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",

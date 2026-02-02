@@ -1,9 +1,8 @@
 import { useEffect, useRef, useCallback } from "react";
-import { Tooltip } from "hintorium-core";
+import { Tooltip, TooltipContentSource } from "hintorium-core";
 import type { UseTooltipOptions } from "../types";
 import { useTooltipContext } from "../context/TooltipContext";
 import { useTooltipAnalytics } from "./useTooltipAnalytics";
-import { TooltipContentSource } from "hintorium-core/dist/types/tooltip/content";
 
 /**
  * Hook for creating a tooltip on any element

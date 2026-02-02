@@ -1,5 +1,4 @@
-import { TooltipOptions } from "hintorium-core";
-import { TooltipContentSource } from "hintorium-core/dist/types/tooltip/content";
+import { TooltipOptions, TooltipContentSource } from "hintorium-core";
 
 export type {
   TooltipOptions,
