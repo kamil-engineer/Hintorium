@@ -1,6 +1,6 @@
 {
   "name": "hintorium-react",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "React wrapper for Hintorium tooltip library",
   "type": "module",
   "main": "./dist/index.js",
