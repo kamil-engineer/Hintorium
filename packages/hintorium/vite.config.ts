@@ -10,10 +10,13 @@ export default defineConfig({
       fileName: (format) => `hintorium.${format}.js`,
       formats: ["es", "umd"],
     },
+    minify: "esbuild",
     rollupOptions: {
-      external: [],
+      external: ["marked"],
       output: {
-        globals: {},
+        globals: {
+          marked: "marked",
+        },
       },
     },
   },

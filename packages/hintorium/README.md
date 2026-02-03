@@ -1,4 +1,4 @@
-# Hintorium
+# Hintorium Core (Typescript)
 
 ![npm](https://img.shields.io/npm/dw/hintorium-core)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
@@ -25,23 +25,23 @@ yarn add hintorium-core
 Import the core script and styles in your app:
 
 ```ts
-import { initTooltips } from "hintorium-core";
-import "hintorium-core/dist/core.css";
+import { initTooltip } from "hintorium-core";
+import "hintorium-core/dist/hintorium-core.css";
 
-initTooltips({
-  theme: "dark",
-  animation: "fade",
-  delay: 150,
-});
+// Global setup
+initTooltip(|OPTIONAL CONFIGURATION|);
+
+// Manual setup
+new Tooltip(*ELEMENT*,*CONTENT*,|OPTIONAL CONFIGURATION|)
 ```
 
 Then, in your HTML:
 
 ```html
-<button data-tooltip="Save changes">💾 Save</button>
+<button data-hintorium-tooltip="Save changes">💾 Save</button>
 ```
 
-Hintorium automatically finds elements with `data-tooltip` attributes and applies positioning, animations, and themes.
+Hintorium automatically finds elements with `data-hintorium-tooltip` attributes and applies positioning, animations, and themes.
 
 ---
 
@@ -53,34 +53,46 @@ Available out of the box:
 **Animations:** `fade`, `slide`, `zoom`, `bounce`
 
 You can customize them with SCSS variables or extend them via plugin API.
+<br>
+Hintorium allows you to very easily modify styles to suit your project's needs, based on the CSS Variables syntax.
 
 ---
 
 ## ⚙️ Configuration
 
-| Option        | Type                                  | Default   | Description                      |
-| ------------- | ------------------------------------- | --------- | -------------------------------- |
-| `theme`       | `string`                              | `"light"` | Tooltip theme                    |
-| `delay`       | `number`                              | `150`     | Delay before showing tooltip     |
-| `animation`   | `string`                              | `"fade"`  | Entry/exit animation             |
-| `position`    | `"top" / "bottom" / "left" / "right"` | `"top"`   | Tooltip position                 |
-| `interactive` | `boolean`                             | `false`   | Allow hover/focus inside tooltip |
+| Option            | Type               | Default           | Description                                          |
+| ----------------- | ------------------ | ----------------- | ---------------------------------------------------- |
+| `theme`           | `TooltipTheme`     | `"dark"`          | Tooltip theme                                        |
+| `delay`           | `number`           | `300`             | Delay before showing tooltip                         |
+| `animation`       | `TooltipAnimation` | `"fade"`          | Entry/exit animation                                 |
+| `position`        | `TooltipPosition`  | `"top"`           | Tooltip position                                     |
+| `sticky`          | `boolean`          | `false`           | Allow sticky tooltip                                 |
+| `a11y`            | `object`           | `readonly object` | A11y configuration                                   |
+| `mobile`          | `object`           | `readonly object` | Mobile UX configuration                              |
+| `rtl`             | `boolean`          | `false`           | RTL setup                                            |
+| `isTour`          | `boolean`          | `false`           | Tooltip Tour configuration                           |
+| `onShow`          | `function`         | `undefined`       | Easily action on show tooltip setup                  |
+| `onInjectContent` | `function`         | `undefined`       | Easily action on inject/update content tooltip setup |
 
 ---
 
 ## 🧠 Accessibility
 
 - Fully ARIA-compliant
-- Keyboard accessible (`Tab`, `Esc`)
+- Keyboard accessible
 - Screen-reader support
 - High-contrast mode compatible
+- Mobile support
+- UX details as touch screens configurations, auto detections.
 
 ---
 
 ## 📘 Documentation
 
 👉 Full documentation, examples, and live demos available at  
-[https://hintorium.vercel.app](https://hintorium.vercel.app)
+<strong>Docs : </strong>[https://hintorium.vercel.app](https://hintorium.vercel.app)
+<br>
+<strong>Storybook (For Devs) : </strong>[https://hintorium-storybook.vercel.app](https://hintorium-storybook.vercel.app)
 
 ---
 
@@ -91,9 +103,10 @@ This library is part of the **Hintorium Monorepo**:
 ```
 .
 ├── apps/
-│   └── docs/           # documentation and examples
+│   └── docs/                 # documentation and examples
 └── packages/
-    └── hintorium/      # the core tooltip library
+    └── hintorium/            # the core tooltip library
+    └── hintorium-react/      # react plugin
 ```
 
 ---
