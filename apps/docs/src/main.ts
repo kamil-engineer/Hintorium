@@ -1,6 +1,6 @@
 import "./styles/main.scss";
 
-import "hintorium-core/dist/hintorium-core.css";
+import "hintorium-core/style.css";
 import { initTooltip } from "hintorium-core";
 
 import { setupSwipper } from "./logic/swipper";
