@@ -1,6 +1,6 @@
 {
   "name": "hintorium-core",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "type": "module",
   "module": "dist/hintorium.es.js",
   "types": "dist/types/index.d.ts",
@@ -12,7 +12,8 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/hintorium.es.js"
+      "import": "./dist/hintorium.es.js",
+      "types": "./dist/types/index.d.ts"
     },
     "./style.css": "./dist/hintorium-core.css"
   },
