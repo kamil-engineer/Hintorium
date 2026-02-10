@@ -1,5 +1,3 @@
-import "./style.css";
-
 export { initTooltip } from "./tooltip";
 export { InlineHint } from "./tooltip/inline-hint";
 export { HintoriumTour } from "./tooltip/tour";

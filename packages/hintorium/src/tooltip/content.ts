@@ -1,4 +1,3 @@
-import { marked } from "marked";
 import { I18n } from "./i18n";
 
 export type TooltipContentSource =
@@ -16,6 +15,8 @@ export class TooltipContent {
   private content: TooltipContentSource;
 
   private static cache = new Map<string, string>();
+
+  private static _marked: typeof import("marked") | null = null;
 
   constructor(content: TooltipContentSource) {
     this.content = content;
@@ -58,10 +59,22 @@ export class TooltipContent {
   }
 
   /**
+   * Lazy-load `marked` only when needed.
+   */
+  private static async getMarked(): Promise<typeof import("marked")> {
+    if (!TooltipContent._marked) {
+      const mod = await import("marked");
+      TooltipContent._marked = mod as unknown as typeof import("marked");
+    }
+    return TooltipContent._marked;
+  }
+
+  /**
    * Convert a string to HTML, treating it as Markdown
    * and then sanitizing it.
    */
   private async renderString(raw: string): Promise<string> {
+    const marked = await TooltipContent.getMarked();
     const htmlFromMarkdown = await marked.parse(raw);
     return this.sanitizeHTML(htmlFromMarkdown);
   }
@@ -70,7 +83,7 @@ export class TooltipContent {
    * Resolves dynamic tooltip content (callback, promise, or URL fetch).
    */
   private async resolveDynamicContent(
-    content: TooltipContentSource
+    content: TooltipContentSource,
   ): Promise<string | HTMLElement> {
     let result: string | HTMLElement;
 
@@ -129,7 +142,7 @@ export class TooltipContent {
       "meta",
     ];
     dangerousTags.forEach((tag) =>
-      temp.querySelectorAll(tag).forEach((el) => el.remove())
+      temp.querySelectorAll(tag).forEach((el) => el.remove()),
     );
 
     // Remove inline event handlers and risky attributes

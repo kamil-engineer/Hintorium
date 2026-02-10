@@ -21,7 +21,9 @@ import type { TooltipOptions } from "../types";
  * }
  * ```
  */
-export function useTooltipManager(options?: TooltipOptions) {
+export function useTooltipManager(
+  options?: TooltipOptions,
+): ReturnType<typeof initTooltip> | null {
   const managerRef = useRef<ReturnType<typeof initTooltip> | null>(null);
   const isInitialized = useRef(false);
 

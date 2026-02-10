@@ -1,13 +1,22 @@
 {
   "name": "hintorium-core",
-  "version": "1.7.0",
+  "version": "1.8.1",
   "type": "module",
-  "main": "dist/hintorium.umd.js",
   "module": "dist/hintorium.es.js",
   "types": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/hintorium.es.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./style.css": "./dist/hintorium-core.css"
+  },
   "scripts": {
     "build": "vite build && tsc",
     "preview": "vite preview",

@@ -42,39 +42,6 @@ npm run dev
 
 Then open [http://localhost:5173](http://localhost:5173).
 
----
-
-## 🔗 Linking the Library
-
-During development, docs import the **local** Hintorium package directly:
-
-```ts
-import { initTooltips } from "@hintorium/core";
-import "@hintorium/core/styles.scss";
-```
-
-The Vite alias in `vite.config.ts` maps `@hintorium/core` to the source folder:
-
-```ts
-resolve: {
-  alias: {
-    "@hintorium/core": path.resolve(__dirname, "../../packages/hintorium/src")
-  }
-}
-```
-
----
-
-## 🧱 Building for Production
-
-```bash
-npm run build --filter=docs
-```
-
-The built documentation will be output to `apps/docs/dist`  
-and can be deployed to GitHub Pages, Vercel, or Netlify.
-
----
 
 ## 🧾 License
 

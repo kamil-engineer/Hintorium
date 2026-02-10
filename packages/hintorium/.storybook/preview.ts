@@ -1,5 +1,7 @@
 import type { Preview, StoryFn } from "@storybook/html-vite";
 
+import "../src/style.css";
+
 export const decorators: ((Story: StoryFn) => HTMLElement)[] = [
   (Story) => {
     const wrapper = document.createElement("div");
